@@ -1,0 +1,9 @@
+<h2>Comments</h2>
+
+<%='No comments' if @post.comments.empty? %>
+
+<% @post.comments.each do |comment| %>
+  <strong><%= comment.commenter %></strong>
+  <p><%= comment.body %></p>
+  <p><%= link_to 'Delete', [comment.post, comment], method: :delete, data: { confirm: 'Are you sure?'} %></p>
+<% end %>

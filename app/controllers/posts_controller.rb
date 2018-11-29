@@ -8,7 +8,7 @@ class PostsController < ApplicationController
   end
 
   def edit
-    @post = Post.find(params[:id])
+    @post = find_post
   end
 
   def create
@@ -22,8 +22,7 @@ class PostsController < ApplicationController
   end
 
   def update
-    @post = Post.find(params[:id])
-
+    @post = find_post
     if @post.update(post_params)
       redirect_to @post
     else
@@ -32,18 +31,21 @@ class PostsController < ApplicationController
   end
 
   def show
-    @post = Post.find(params[:id])
+    @post = find_post
     @date = @post.created_at.strftime("%F %H:%M")
   end
 
   def destroy
-    @post = Post.find(params[:id])
-    @post.destroy
+    find_post.destroy
 
     redirect_to root_path
   end
 
   private
+
+  def find_post
+    Post.find(params[:id])
+  end
 
   def post_params
     params.require(:post).permit(:title, :body, :img)
