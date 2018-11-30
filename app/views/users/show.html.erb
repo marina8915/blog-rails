@@ -1,0 +1,10 @@
+<% User.find(current_user.id).posts.each do |post| %>
+  <h3><%= link_to post.title, post_path(post) %></h3>
+  <ul>
+    <li><%= link_to 'Edit', edit_post_path(post) %></li>
+    <li><%= link_to 'Delete', post_path(post), method: :delete, data: { confirm: 'Are you sure?'} %></li>
+  </ul>
+
+  <%= image_tag post.img, width:250 %>
+  <p><%= post.body.first(200) %> <%= link_to 'more', post_path(post) %></p>
+<% end %>
