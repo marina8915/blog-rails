@@ -19,7 +19,15 @@
         </ul>
       </div>
     </nav>
-    <%= image_tag post.img, width:250, class: 'img-thumbnail' %>
-    <p><%= post.body.first(200) %> <%= link_to 'more', post_path(post) %></p>
+
+    <% unless post.img.empty? %>
+      <%= image_tag post.img, width:250, class: 'img-thumbnail' %>
+    <% end %>
+
+    <p><%= post.body.first(400) %>
+      <% if post.body.size > 400 %>
+        <%= link_to 'more', post_path(post) %>
+      <% end %>
+    </p>
   <% end %>
 <% end %>
