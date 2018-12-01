@@ -1,6 +1,6 @@
-<%= form_with(model: @post, local: true) do |form| %>
+<%= form_with(model: @post, local: true, class: 'form-group') do |form| %>
   <% if @post.errors.any? %>
-    <div id="error_explanation">
+    <div id="error_explanation" class="alert alert-danger">
       <h2>
         <%= pluralize(@post.errors.count, 'error') %> prohibited
         this article from being saved:
@@ -15,20 +15,20 @@
 
   <p>
     <%= form.label :title %><br>
-    <%= form.text_field :title %>
+    <%= form.text_field :title, class: 'form-control' %>
   </p>
 
   <p>
     <%= form.label :body %><br>
-    <%= form.text_area :body %>
+    <%= form.text_area :body, class: 'form-control' %>
   </p>
 
   <p>
     <%= form.label :img, 'Link to image' %><br>
-    <%= form.text_field :img %>
+    <%= form.text_field :img, class: 'form-control' %>
   </p>
 
   <p>
-    <%= form.submit %>
+    <%= form.submit class: 'btn btn-outline-primary' %>
   </p>
 <% end %>

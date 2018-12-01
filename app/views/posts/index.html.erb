@@ -1,7 +1,7 @@
-<h1>Blog Rails</h1>
+<h2 class="text-center">Blog Rails</h2>
 
 <% @posts.each do |post| %>
-  <h3><%= link_to post.title, post_path(post) %></h3>
-  <%= image_tag post.img, width:250 %>
+  <h4><%= link_to post.title, post_path(post) %></h4>
+  <%= image_tag post.img, width:250, class: 'img-thumbnail' %>
   <p><%= post.body.first(200) %> <%= link_to 'more', post_path(post) %></p>
 <% end %>
