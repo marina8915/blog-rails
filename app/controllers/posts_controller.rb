@@ -34,12 +34,13 @@ class PostsController < ApplicationController
   def show
     @post = find_post
     @date = @post.created_at.strftime("%F %H:%M")
+    @user = User.find(@post.user_id).name
   end
 
   def destroy
     find_post.destroy
 
-    redirect_to root_path
+    redirect_to my_posts_path(current_user.id)
   end
 
   private

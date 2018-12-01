@@ -1,0 +1,13 @@
+<h2>My comments</h2>
+
+<% if @comments.empty? %>
+  <p>No comments</p>
+<% end %>
+
+<% @comments.each do |comment| %>
+  <h3><%= link_to comment.post.title, post_path(comment.post) %></h3><p>
+  <%= comment.body %></p>
+  <ul>
+    <li><%= link_to 'Delete', [comment.post, comment], method: :delete, data: { confirm: 'Are you sure?'} %></li>
+  </ul>
+<% end %>

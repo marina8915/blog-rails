@@ -5,26 +5,24 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
   <% if current_user %>
     <h2><%= current_user.name %></h2>
-    <%= link_to 'exit', logout_path, method: :delete %>
+    <ul>
+      <li><%= link_to 'New post', new_post_path %></li>
+      <li><%= link_to 'Profile', user_path(current_user.id) %></li>
+      <li><%= link_to 'Exit', logout_path, method: :delete %></li>
+    </ul>
   <% else %>
-    <%= link_to 'login', new_session_path %>
-    <%= link_to 'sign in', new_user_path %>
+    <%= link_to 'Sign in', new_session_path %>
+    <%= link_to 'Sign up', new_user_path %>
   <% end %>
 
-  <ul>
-    <li><%= link_to 'Home', root_path %></li>
-    <% if current_user %>
-      <li><%= link_to 'My posts', my_posts_path(current_user.id) %></li>
-      <li><%= link_to 'New post', new_post_path %></li>
-    <% end %>
-  </ul>
+  <%= link_to 'Blog', root_path %>
   <%= yield %>
   </body>
 </html>

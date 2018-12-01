@@ -1,12 +1,10 @@
 <h3><%= @post.title %></h3>
 
-<p><%= @date %></p>
-<p>Created by <%= User.find(@post.user_id).name %></p>
+<p>Created at <%= @date %></p>
+<p>Created by <%= @user %></p>
 
 <%= image_tag @post.img, width:250 %>
 <p><%= @post.body %></p>
 
 <%= render 'comments' %>
 <%= render 'add_comment' %>
-
-

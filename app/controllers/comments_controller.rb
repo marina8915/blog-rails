@@ -9,7 +9,7 @@ class CommentsController < ApplicationController
     @post = post
     @comment = @post.comments.find(params[:id])
     @comment.destroy
-    redirect_to @post
+    redirect_to my_comments_path(current_user.id)
   end
 
   private
