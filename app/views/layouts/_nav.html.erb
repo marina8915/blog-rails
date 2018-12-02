@@ -1,0 +1,11 @@
+<ul class="nav justify-content-center">
+  <li class="nav-item"><%= link_to 'Blog', root_path, class: 'nav-link text-light' %></li>
+  <% if current_user %>
+    <li class="nav-item"><%= link_to 'New post', new_post_path, class: 'nav-link text-light' %></li>
+    <li class="nav-item"><%= link_to current_user.name, user_path(current_user.id), class: 'nav-link text-light' %></li>
+    <li class="nav-item"><%= link_to 'Exit', logout_path, method: :delete, class: 'nav-link text-light' %></li>
+  <% else %>
+    <li class="nav-item"><%= link_to 'Log in', new_session_path, class: 'nav-link text-light' %></li>
+    <li class="nav-item"><%= link_to 'Sign up', new_user_path, class: 'nav-link text-light' %></li>
+  <% end %>
+</ul>

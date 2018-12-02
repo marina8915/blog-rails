@@ -3,6 +3,8 @@
 <%='No comments' if @post.comments.empty? %>
 
 <% @post.comments.each do |comment| %>
-  <strong><%= comment.commenter %></strong>
-  <p><%= comment.body %></p>
+  <div class="border rounded comment shadow-sm p-3 mb-5 bg-white">
+    <strong><%= comment.commenter %></strong>
+    <p><%= comment.body %></p>
+  </div>
 <% end %>

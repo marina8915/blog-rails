@@ -5,10 +5,9 @@
   <%= link_to 'New post', new_post_path %>
 <% else %>
   <% @posts.each do |post| %>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <h4><%= link_to post.title, post_path(post), class: 'navbar-brand' %></h4>
-
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <div class="border-bottom post">
+      <nav class="navbar navbar-expand-lg navbar-light">
+        <h4><%= link_to post.title, post_path(post), class: 'navbar-brand' %></h4>
         <ul class="navbar-nav mr-auto">
           <li class="nav-item">
             <%= link_to 'Edit', edit_post_path(post), class: 'nav-link' %>
@@ -17,17 +16,17 @@
             <%= link_to 'Delete', post_path(post), class: 'nav-link', method: :delete, data: { confirm: 'Are you sure?'} %>
           </li>
         </ul>
-      </div>
-    </nav>
+      </nav>
 
-    <% unless post.img.empty? %>
-      <%= image_tag post.img, width:250, class: 'img-thumbnail' %>
-    <% end %>
-
-    <p><%= post.body.first(400) %>
-      <% if post.body.size > 400 %>
-        <%= link_to 'more', post_path(post) %>
+      <% unless post.img.empty? %>
+        <%= image_tag post.img, width:250, class: 'img-thumbnail' %>
       <% end %>
-    </p>
+
+      <p><%= post.body.first(400) %>
+        <% if post.body.size > 400 %>
+          <%= link_to 'more', post_path(post) %>
+        <% end %>
+      </p>
+    </div>
   <% end %>
 <% end %>

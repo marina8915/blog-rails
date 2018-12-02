@@ -1,17 +1,19 @@
 <h2 class="text-center">Blog Rails</h2>
 
 <% @posts.each do |post| %>
-  <h4><%= link_to post.title, post_path(post) %></h4>
+  <div class="border-bottom post">
+    <h4><%= link_to post.title, post_path(post) %></h4>
 
-  <% unless post.img.empty? %>
-    <%= image_tag post.img, width:250, class: 'img-thumbnail'%>
-  <% end %>
-
-  <p>
-    <%= post.body.first(400) %>
-    <% if post.body.size > 400 %>
-      <%= link_to 'more', post_path(post) %>
+    <% unless post.img.empty? %>
+      <%= image_tag post.img, width:250, class: 'img-thumbnail'%>
     <% end %>
-  </p>
-  <p>Comments <%= post.comments.size %></p>
+
+    <p>
+      <%= post.body.first(400) %>
+      <% if post.body.size > 400 %>
+        <%= link_to 'more', post_path(post) %>
+      <% end %>
+    </p>
+    <p class="font-weight-bold">Comments <%= post.comments.size %></p>
+  </div>
 <% end %>

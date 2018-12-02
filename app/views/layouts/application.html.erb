@@ -1,28 +1,20 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>BlogRails</title>
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
+<head>
+  <title>BlogRails</title>
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-  </head>
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+</head>
 
-  <body>
-  <div class="container">
-    <ul class="nav justify-content-center">
-      <li class="nav-item"><%= link_to 'Blog', root_path, class: 'nav-link' %></li>
-      <% if current_user %>
-        <li class="nav-item"><%= link_to 'New post', new_post_path, class: 'nav-link' %></li>
-        <li class="nav-item"><%= link_to current_user.name, user_path(current_user.id), class: 'nav-link' %></li>
-        <li class="nav-item"><%= link_to 'Exit', logout_path, method: :delete, class: 'nav-link' %></li>
-      <% else %>
-        <li class="nav-item"><%= link_to 'Sign in', new_session_path, class: 'nav-link' %></li>
-        <li class="nav-item"><%= link_to 'Sign up', new_user_path, class: 'nav-link' %></li>
-      <% end %>
-    </ul>
-    <%= yield %>
-  </div>
-  </body>
+<body>
+<div class="container bg-primary">
+  <%= render 'layouts/nav' %>
+</div>
+<div class="container">
+  <%= yield %>
+</div>
+</body>
 </html>
