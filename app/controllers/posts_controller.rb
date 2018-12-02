@@ -38,9 +38,13 @@ class PostsController < ApplicationController
   end
 
   def destroy
-    find_post.destroy
+    if current_user.id == find_post.user_id
+      find_post.destroy
 
-    redirect_to my_posts_path(current_user.id)
+      redirect_to my_posts_path(current_user.id)
+    else
+      redirect_to root_path
+    end
   end
 
   private
