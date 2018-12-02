@@ -1,12 +1,10 @@
 <h4>Add a comment:</h4>
 <%= form_with(model: [ @post, @post.comments.build ], local: true, class: 'form-group') do |form| %>
   <p>
-    <%= form.label :commenter, 'Name' %><br>
-    <%= form.text_field :commenter, value: (current_user.name if current_user), class: 'form-control' %>
+    <%= form.text_field :commenter, class: 'form-control', type: ('hidden' if current_user), placeholder: 'Name' %>
   </p>
   <p>
-    <%= form.label :body, 'Comment' %><br>
-    <%= form.text_area :body, class: 'form-control' %>
+    <%= form.text_area :body, class: 'form-control', placeholder: 'Comment' %>
   </p>
   <p>
     <%= form.submit class: 'btn btn-outline-primary' %>

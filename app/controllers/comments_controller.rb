@@ -1,8 +1,13 @@
 class CommentsController < ApplicationController
   def create
     @post = post
-    @comment = @post.comments.create(comment_params)
-    redirect_to @post
+    if !current_user && check_comment_name
+      @comment = comment_create
+    elsif current_user
+      params[:comment][:commenter] = current_user.name
+      @comment = comment_create
+    end
+      redirect_to @post
   end
 
   def destroy
@@ -24,5 +29,13 @@ class CommentsController < ApplicationController
 
   def comment_params
     params.require(:comment).permit(:commenter, :body)
+  end
+
+  def check_comment_name
+    true unless User.find_by_name(params[:comment][:commenter])
+  end
+
+  def comment_create
+    @post.comments.create(comment_params)
   end
 end

@@ -5,6 +5,7 @@
 <% @post.comments.each do |comment| %>
   <div class="border rounded comment shadow-sm p-3 mb-5 bg-white">
     <strong><%= comment.commenter %></strong>
+    <p class="float-right"><%= comment.created_at.strftime("%F %H:%M") %></p>
     <p><%= comment.body %></p>
   </div>
 <% end %>
