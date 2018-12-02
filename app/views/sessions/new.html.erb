@@ -1,0 +1,6 @@
+<h3>Log In</h3>
+<%= form_tag sessions_path, class: 'form-group form-user' do %>
+  <p><%= text_field_tag :email, params[:email], class: 'form-control', placeholder: 'Email' %></p>
+  <p><%= password_field_tag :password, '', class:'form-control', placeholder: 'Password' %></p>
+  <%= submit_tag 'Sign In', :class => 'btn btn-outline-primary' %>
+<% end %>

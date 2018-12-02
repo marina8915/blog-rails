@@ -1,0 +1,20 @@
+<h3>My comments</h3>
+
+<% if @comments.empty? %>
+  <p>No comments</p>
+<% end %>
+
+<% @comments.each do |comment| %>
+  <div class="border rounded comment">
+    <nav class="navbar navbar-expand-lg navbar-light">
+      <h4><%= link_to comment.post.title, post_path(comment.post), class: 'navbar-brand' %></h4>
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <%= link_to 'Delete', [comment.post, comment], class: 'nav-link',
+                      method: :delete, data: { confirm: 'Are you sure?'} %>
+        </li>
+      </ul>
+    </nav>
+    <p><%= comment.body %></p>
+  </div>
+<% end %>

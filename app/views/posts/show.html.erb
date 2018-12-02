@@ -1,0 +1,10 @@
+<h3><%= @post.title %></h3>
+
+<p><%= @date %> <%= @user %></p>
+<% unless @post.img.empty? %>
+  <%= image_tag @post.img, width:350, class: 'img-thumbnail' %>
+<% end %>
+<p class="font-weight-normal"><%= @post.body %></p>
+
+<%= render 'comments' %>
+<%= render 'add_comment' %>

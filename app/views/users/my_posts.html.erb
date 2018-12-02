@@ -1,0 +1,32 @@
+<h3>My posts</h3>
+
+<% if @posts.empty? %>
+  <p>No posts</p>
+  <%= link_to 'New post', new_post_path %>
+<% else %>
+  <% @posts.each do |post| %>
+    <div class="border-bottom post">
+      <nav class="navbar navbar-expand-lg navbar-light">
+        <h4><%= link_to post.title, post_path(post), class: 'navbar-brand' %></h4>
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <%= link_to 'Edit', edit_post_path(post), class: 'nav-link' %>
+          </li>
+          <li class="nav-item">
+            <%= link_to 'Delete', post_path(post), class: 'nav-link', method: :delete, data: { confirm: 'Are you sure?'} %>
+          </li>
+        </ul>
+      </nav>
+
+      <% unless post.img.empty? %>
+        <%= image_tag post.img, width:250, class: 'img-thumbnail' %>
+      <% end %>
+
+      <p><%= post.body.first(400) %>
+        <% if post.body.size > 400 %>
+          <%= link_to 'more', post_path(post) %>
+        <% end %>
+      </p>
+    </div>
+  <% end %>
+<% end %>
