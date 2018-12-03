@@ -6,5 +6,6 @@
 <% end %>
 <p class="font-weight-normal"><%= @post.body %></p>
 
-<%= render 'comments' %>
-<%= render 'add_comment' %>
+<%= render 'comments/comments' %>
+<h4>Add a comment:</h4>
+<%= render 'comments/form' %>

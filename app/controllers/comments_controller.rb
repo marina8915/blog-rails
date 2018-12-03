@@ -1,17 +1,17 @@
 class CommentsController < ApplicationController
   def create
-    @post = post
+    @post = find_post
     if !current_user && check_comment_name
       @comment = comment_create
     elsif current_user
       params[:comment][:commenter] = current_user.name
       @comment = comment_create
     end
-      redirect_to @post
+    redirect_to @post
   end
 
   def destroy
-    @post = post
+    @post = find_post
     @comment = @post.comments.find(params[:id])
     if current_user.name == @comment.commenter
       @comment.destroy
@@ -23,12 +23,8 @@ class CommentsController < ApplicationController
 
   private
 
-  def post
+  def find_post
     Post.find(params[:post_id])
-  end
-
-  def comment_params
-    params.require(:comment).permit(:commenter, :body)
   end
 
   def check_comment_name
@@ -36,6 +32,6 @@ class CommentsController < ApplicationController
   end
 
   def comment_create
-    @post.comments.create(comment_params)
+    @post.comments.create(params.require(:comment).permit(:commenter, :body))
   end
 end
