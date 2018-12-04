@@ -1,11 +1,11 @@
 <h3>My posts</h3>
 
-<% if @posts.empty? %>
+<% unless @posts %>
   <p>No posts</p>
   <%= link_to 'New post', new_post_path %>
 <% else %>
   <% @posts.each do |post| %>
-    <div class="border-bottom post">
+    <div class="border-bottom post clearfix">
       <nav class="navbar navbar-expand-lg navbar-light">
         <h4><%= link_to post.title, post_path(post), class: 'navbar-brand' %></h4>
         <ul class="navbar-nav mr-auto">
@@ -18,8 +18,8 @@
         </ul>
       </nav>
 
-      <% if post.img.present? %>
-        <%= image_tag post.img, width: 250, class: 'img-thumbnail' %>
+      <% if post.img? %>
+        <%= image_tag post.img.url(:thumb), class: 'img-thumbnail thumb'%>
       <% end %>
 
       <p><%= post.body.first(400) %>

@@ -1,20 +1,22 @@
 @import 'bootstrap';
 
+/* header */
 .bg-header {
   background-color: #2E6CDF;
-  height: 100px!important;
+  height: 100px !important;
   padding-top: 30px;
   margin-bottom: 30px;
 }
 
 .navbar {
-  padding: 0!important;
+  padding: 0 !important;
   ul {
     height: 34px;
     margin-bottom: 10px;
   }
 }
 
+/* Forms */
 .form-group {
   width: 50% !important;
 }
@@ -23,11 +25,23 @@
   width: 30% !important;
 }
 
-.comment {
-  padding: 10px;
-  margin-bottom: 20px!important;
+/* Posts */
+.post, .post-info {
+  margin-bottom: 0.5em;
 }
 
-.post {
-  margin-bottom: 20px;
+.thumb {
+  float: left;
+  margin-right: 1em;
+  margin-bottom: 0.5em !important;
+}
+
+.img-thumbnail {
+  margin-bottom: 1em;
+}
+
+/* Comments*/
+.comment {
+  padding: 10px;
+  margin-bottom: 20px !important;
 }

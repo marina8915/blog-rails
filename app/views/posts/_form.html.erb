@@ -1,4 +1,4 @@
-<%= form_with(model: @post, local: true, class: 'form-group') do |form| %>
+<%= form_with(model: @post, html: { multipart: true }, local: true, class: 'form-group') do |form| %>
   <% if @post.errors.any? %>
     <div id="error_explanation" class="alert alert-danger">
       <h4><%= pluralize(@post.errors.count, 'error') %></h4>
@@ -21,8 +21,8 @@
   </p>
 
   <p>
-    <%= form.label :img, 'Link to image' %><br>
-    <%= form.text_field :img, class: 'form-control' %>
+    <%= form.label :img, 'Upload image' %><br>
+    <%= form.file_field :img %>
   </p>
 
   <p>

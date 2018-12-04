@@ -1,11 +1,11 @@
 <h2 class="text-center">Blog Rails</h2>
 
 <% @posts.each do |post| %>
-  <div class="border-bottom post">
+  <div class="post clearfix">
     <h4><%= link_to post.title, post_path(post) %></h4>
 
-    <% unless post.img.empty? %>
-      <%= image_tag post.img, width:250, class: 'img-thumbnail'%>
+    <% if post.img? %>
+      <%= image_tag post.img.url(:thumb), class: 'img-thumbnail thumb'%>
     <% end %>
 
     <p>
@@ -14,6 +14,8 @@
         <%= link_to 'more', post_path(post) %>
       <% end %>
     </p>
-    <p class="font-weight-bold">Comments <%= post.comments.size %></p>
+  </div>
+  <div class="clearfix border-bottom post-info">
+    <i class="float-right">Comments <%= post.comments.size %></i>
   </div>
 <% end %>
