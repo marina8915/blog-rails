@@ -1,6 +1,2 @@
 <h2>Edit post</h2>
-<% if current_user.id == @post.user_id %>
-  <%= render 'form' %>
-<% else %>
-  <p class="alert alert-danger w-25" >Access is denied.</p>
-<% end %>
+<%= render 'form' %>

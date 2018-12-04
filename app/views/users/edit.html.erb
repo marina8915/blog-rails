@@ -1,7 +1,3 @@
 <h2>Edit user</h2>
+<%= render 'form' %>
 
-<% if current_user.id == @user.id %>
-  <%= render 'form' %>
-<% else %>
-  <p class="alert alert-danger w-25" >Access is denied.</p>
-<% end %>

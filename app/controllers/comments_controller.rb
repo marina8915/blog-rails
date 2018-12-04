@@ -15,7 +15,7 @@ class CommentsController < ApplicationController
     @comment = @post.comments.find(params[:id])
     if current_user.name == @comment.commenter
       @comment.destroy
-      redirect_to my_comments_path(current_user.id)
+      redirect_to comments_user_path(current_user.id)
     else
       redirect_to root_path
     end

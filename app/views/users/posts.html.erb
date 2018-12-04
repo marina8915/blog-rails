@@ -18,8 +18,8 @@
         </ul>
       </nav>
 
-      <% unless post.img.empty? %>
-        <%= image_tag post.img, width:250, class: 'img-thumbnail' %>
+      <% if post.img.present? %>
+        <%= image_tag post.img, width: 250, class: 'img-thumbnail' %>
       <% end %>
 
       <p><%= post.body.first(400) %>

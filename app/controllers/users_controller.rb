@@ -1,10 +1,18 @@
 class UsersController < ApplicationController
-  def my_posts
-    @posts = find_user.posts
+  def posts
+    if current_user
+      @posts = User.find(current_user.id).posts
+    else
+      redirect_to root_path
+    end
   end
 
-  def my_comments
-    @comments = Comment.all.select { |comment| comment.commenter == current_user.name }
+  def comments
+    if current_user
+      @comments = Comment.all.select { |comment| comment.commenter == current_user.name }
+    else
+      redirect_to root_path
+    end
   end
 
   def new
@@ -12,7 +20,11 @@ class UsersController < ApplicationController
   end
 
   def edit
-    @user = find_user
+    find_user
+  end
+
+  def show
+    find_user
   end
 
   def create
@@ -27,10 +39,10 @@ class UsersController < ApplicationController
   end
 
   def update
-    @user = find_user
+    find_user
 
     if @user.update_attributes(user_params)
-      redirect_to root_path
+      redirect_to user_path(current_user.id)
     else
       render 'edit'
     end
@@ -39,7 +51,11 @@ class UsersController < ApplicationController
   private
 
   def find_user
-    User.find(params[:id])
+    if current_user
+      @user = User.find(current_user.id)
+    else
+      redirect_to root_path
+    end
   end
 
   def user_params

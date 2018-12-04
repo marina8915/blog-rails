@@ -6,9 +6,13 @@ Rails.application.routes.draw do
     resources :comments
   end
 
-  resources :users
-  get 'users/:id/my_posts' => 'users#my_posts', as: 'my_posts'
-  get 'users/:id/my_comments' => 'users#my_comments', as: 'my_comments'
+  resources :users do
+    member do
+      get 'posts'
+      get 'comments'
+    end
+  end
+
   resources :sessions
   delete 'logout' => 'sessions#destroy'
   root 'posts#index'
