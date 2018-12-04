@@ -14,7 +14,9 @@
                       method: :delete, data: { confirm: 'Are you sure?'} %>
         </li>
       </ul>
+      <p class="float-right"><%= comment.created_at.strftime("%F %H:%M") %></p>
     </nav>
+
     <p><%= comment.body %></p>
   </div>
 <% end %>

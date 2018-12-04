@@ -48,12 +48,12 @@ class PostsController < ApplicationController
     @post = find_post
     @date = @post.created_at.strftime("%F %H:%M")
     @user = User.find(@post.user_id).name
+    @comment = Comment.new
   end
 
   def destroy
     if current_user.id == find_post.user_id
       find_post.destroy
-
       redirect_to posts_user_path(current_user.id)
     else
       redirect_to root_path
