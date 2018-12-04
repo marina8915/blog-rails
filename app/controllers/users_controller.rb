@@ -9,7 +9,7 @@ class UsersController < ApplicationController
 
   def comments
     if current_user
-      @comments = Comment.all.select { |comment| comment.commenter == current_user.name }
+      @comments = User.find(current_user.id).comments
     else
       redirect_to root_path
     end
