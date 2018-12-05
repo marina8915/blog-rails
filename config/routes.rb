@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   resources :posts do
     resources :comments
   end
+  get ':name/posts' => 'posts#index', as: 'user_posts'
 
   resources :users do
     member do

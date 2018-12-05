@@ -1,6 +1,11 @@
 class PostsController < ApplicationController
   def index
-    @posts = Post.all
+    if params[:name]
+      @posts = User.find_by_name(params[:name]).posts
+    else
+      @posts = Post.all
+    end
+
   end
 
   def new
