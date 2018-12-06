@@ -16,6 +16,12 @@
   </p>
 
   <p>
+    <%= form.label :description %><br>
+    <%= tinymce %>
+    <%= form.text_area :description, class: 'tinymce', rows: '2' %>
+  </p>
+
+  <p>
     <%= form.label :body %><br>
     <%= tinymce %>
     <%= form.text_area :body, class: 'tinymce', rows: '5' %>
@@ -26,6 +32,12 @@
     <%= form.file_field :img %>
   </p>
 
+  <p>
+    <%= form.label :video, 'Link to video' %><br>
+    <%= form.text_field :video, class: 'form-control' %>
+  </p>
+
+  <p><%= form.check_box :publish %> Publish</p>
   <p>
     <%= form.submit class: 'btn btn-outline-primary' %>
   </p>

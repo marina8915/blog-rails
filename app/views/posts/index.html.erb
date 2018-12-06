@@ -2,21 +2,21 @@
 <h3 class="text-center"><%= params[:name] %></h3>
 
 <% @posts.each do |post| %>
-  <div class="post clearfix">
-    <h4><%= link_to post.title, post_path(post) %></h4>
+  <% if post.publish %>
+    <div class="post clearfix">
+      <h4><%= link_to post.title, post_path(post) %></h4>
 
-    <% if post.img? %>
-      <%= image_tag post.img.url(:thumb), class: 'img-thumbnail thumb'%>
-    <% end %>
-
-    <p>
-      <%= post.body.html_safe %>
-      <% if post.body.size > 400 %>
-        <%= link_to 'more', post_path(post) %>
+      <% if post.img? %>
+        <%= image_tag post.img.url(:thumb), class: 'img-thumbnail thumb'%>
       <% end %>
-    </p>
-  </div>
-  <div class="clearfix border-bottom post-info">
-    <i class="float-right">Comments <%= post.comments.size %></i>
-  </div>
+
+      <p>
+        <%= post.description.html_safe %>
+        <%= link_to 'more', post_path(post) %>
+      </p>
+    </div>
+    <div class="clearfix border-bottom post-info">
+      <i class="float-right">Comments <%= post.comments.size %></i>
+    </div>
+  <% end %>
 <% end %>

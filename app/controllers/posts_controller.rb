@@ -51,9 +51,13 @@ class PostsController < ApplicationController
 
   def show
     @post = find_post
-    @date = @post.created_at.strftime("%F %H:%M")
-    @user = User.find(@post.user_id).name
-    @comment = Comment.new
+    if @post.publish || @post.user_id == current_user.id
+      @date = @post.created_at.strftime("%F %H:%M")
+      @user = User.find(@post.user_id).name
+      @comment = Comment.new
+    else
+      redirect_to root_path
+    end
   end
 
   def destroy
@@ -72,6 +76,6 @@ class PostsController < ApplicationController
   end
 
   def post_params
-    params.require(:post).permit(:title, :body, :img)
+    params.require(:post).permit(:title, :description, :body, :img, :publish, :video)
   end
 end

@@ -15,6 +15,9 @@
           <li class="nav-item">
             <%= link_to 'Delete', post_path(post), class: 'nav-link', method: :delete, data: { confirm: 'Are you sure?'} %>
           </li>
+          <li class="nav-item">
+            <p class="<%= post.publish ? 'status-public': 'nav-link' %>">Status: <%= post.publish ? 'Published' : 'Not published' %></p>
+          </li>
         </ul>
       </nav>
 
@@ -22,10 +25,9 @@
         <%= image_tag post.img.url(:thumb), class: 'img-thumbnail thumb'%>
       <% end %>
 
-      <p><%= post.body.html_safe %>
-        <% if post.body.size > 400 %>
-          <%= link_to 'more', post_path(post) %>
-        <% end %>
+      <p>
+        <%= post.description.html_safe %>
+        <%= link_to 'more', post_path(post) %>
       </p>
     </div>
   <% end %>
