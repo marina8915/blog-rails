@@ -17,7 +17,8 @@
 
   <p>
     <%= form.label :body %><br>
-    <%= form.text_area :body, class: 'form-control', rows: '5'  %>
+    <%= tinymce %>
+    <%= form.text_area :body, class: 'tinymce', rows: '5' %>
   </p>
 
   <p>

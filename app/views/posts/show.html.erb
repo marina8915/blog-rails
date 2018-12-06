@@ -4,7 +4,7 @@
 <% if @post.img? %>
   <%= image_tag @post.img.url, width:350, class: 'img-thumbnail' %>
 <% end %>
-<p class="font-weight-normal"><%= @post.body %></p>
+<p class="font-weight-normal"><%= @post.body.html_safe %></p>
 
 <%= render 'comments/comments' %>
 <h4>Add a comment:</h4>

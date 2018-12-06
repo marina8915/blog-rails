@@ -30,6 +30,8 @@ gem 'mini_magick', '~> 4.8'
 
 # upload files
 gem 'carrierwave', '~> 1.0'
+#text redactor
+gem 'tinymce-rails'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

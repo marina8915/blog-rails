@@ -10,7 +10,7 @@
     <% end %>
 
     <p>
-      <%= post.body.first(400) %>
+      <%= post.body.html_safe %>
       <% if post.body.size > 400 %>
         <%= link_to 'more', post_path(post) %>
       <% end %>

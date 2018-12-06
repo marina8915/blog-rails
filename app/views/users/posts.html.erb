@@ -22,7 +22,7 @@
         <%= image_tag post.img.url(:thumb), class: 'img-thumbnail thumb'%>
       <% end %>
 
-      <p><%= post.body.first(400) %>
+      <p><%= post.body.html_safe %>
         <% if post.body.size > 400 %>
           <%= link_to 'more', post_path(post) %>
         <% end %>
