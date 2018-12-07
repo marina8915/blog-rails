@@ -1,9 +1,9 @@
 class PostsController < ApplicationController
   def index
     if params[:name]
-      @posts = User.find_by_name(params[:name]).posts
+      @posts = User.find_by_name(params[:name]).posts.search(params[:page])
     else
-      @posts = Post.all
+      @posts = Post.search(params[:page])
     end
 
   end
@@ -54,6 +54,7 @@ class PostsController < ApplicationController
     if @post.publish || @post.user_id == current_user.id
       @date = @post.created_at.strftime("%F %H:%M")
       @user = User.find(@post.user_id).name
+      @comments = @post.comments.search(params[:page])
       @comment = Comment.new
       @video = @post.video.split('/').last
     else

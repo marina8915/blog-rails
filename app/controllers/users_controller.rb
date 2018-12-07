@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   def posts
     if current_user
-      @posts = User.find(current_user.id).posts
+      @posts = User.find(current_user.id).posts.search(params[:page])
     else
       redirect_to root_path
     end
@@ -9,7 +9,7 @@ class UsersController < ApplicationController
 
   def comments
     if current_user
-      @comments = User.find(current_user.id).comments
+      @comments = User.find(current_user.id).comments.search(params[:page])
     else
       redirect_to root_path
     end

@@ -20,3 +20,7 @@
     <p><%= comment.body %></p>
   </div>
 <% end %>
+
+<div class="text-center">
+  <%= will_paginate @comments, container: false %>
+</div>

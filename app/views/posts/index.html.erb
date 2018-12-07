@@ -8,7 +8,7 @@
 
       <% if post.img? %>
         <%= image_tag post.img.url(:thumb), class: 'img-thumbnail thumb'%>
-      <% elsif post.video %>
+      <% elsif post.video? %>
         <iframe width="250" src="https://www.youtube.com/embed/<%= post.video.split('/').last %>" class="thumb"></iframe>
       <% end %>
 
@@ -22,3 +22,8 @@
     </div>
   <% end %>
 <% end %>
+
+<div class="text-center">
+  <%= will_paginate @posts, container: false %>
+</div>
+

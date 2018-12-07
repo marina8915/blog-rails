@@ -4,7 +4,7 @@
   <p>No posts</p>
   <%= link_to 'New post', new_post_path %>
 <% else %>
-  <% @posts.each do |post| %>
+    <% @posts.each do |post| %>
     <div class="border-bottom post clearfix">
       <nav class="navbar navbar-expand-lg navbar-light">
         <h4><%= link_to post.title, post_path(post), class: 'navbar-brand' %></h4>
@@ -23,7 +23,7 @@
 
       <% if post.img? %>
         <%= image_tag post.img.url(:thumb), class: 'img-thumbnail thumb'%>
-      <% elsif post.video %>
+      <% elsif post.video? %>
         <iframe width="250" src="https://www.youtube.com/embed/<%= post.video.split('/').last %>" class="thumb"></iframe>
       <% end %>
 
@@ -34,3 +34,7 @@
     </div>
   <% end %>
 <% end %>
+
+<div class="text-center">
+  <%= will_paginate @posts, container: false %>
+</div>

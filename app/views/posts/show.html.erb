@@ -5,11 +5,11 @@
   <%= image_tag @post.img.url, width:350, class: 'img-thumbnail' %>
 <% end %>
 <p class="font-weight-normal"><%= @post.body.html_safe %></p>
-<% if @post.video %>
+<% if @post.video? %>
   <iframe width="500" height="310" src="https://www.youtube.com/embed/<%= @video %>"
           frameborder="0" allowfullscreen></iframe>
 <% end %>
 
 <%= render 'comments/comments' %>
-<h4>Add a comment:</h4>
+<h5>Add a comment:</h5>
 <%= render 'comments/form' %>
