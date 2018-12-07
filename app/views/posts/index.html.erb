@@ -8,10 +8,8 @@
 
       <% if post.img? %>
         <%= image_tag post.img.url(:thumb), class: 'img-thumbnail thumb'%>
-      <% else %>
-        <% if post.video %>
-          <iframe width="300" src="https://www.youtube.com/embed/<%= post.video %>" class="thumb"></iframe>
-        <% end %>
+      <% elsif post.video %>
+        <iframe width="250" src="https://www.youtube.com/embed/<%= post.video.split('/').last %>" class="thumb"></iframe>
       <% end %>
 
       <p>

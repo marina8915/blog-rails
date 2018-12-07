@@ -6,7 +6,7 @@
 <% end %>
 <p class="font-weight-normal"><%= @post.body.html_safe %></p>
 <% if @post.video %>
-  <iframe width="500" height="310" src="https://www.youtube.com/embed/<%= @post.video %>"
+  <iframe width="500" height="310" src="https://www.youtube.com/embed/<%= @video %>"
           frameborder="0" allowfullscreen></iframe>
 <% end %>
 

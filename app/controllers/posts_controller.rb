@@ -55,6 +55,7 @@ class PostsController < ApplicationController
       @date = @post.created_at.strftime("%F %H:%M")
       @user = User.find(@post.user_id).name
       @comment = Comment.new
+      @video = @post.video.split('/').last
     else
       redirect_to root_path
     end

@@ -13,6 +13,5 @@ class Post < ApplicationRecord
 
   def change_data
     self.title = self.title.capitalize
-    self.video = self.video.split('/').last
   end
 end
