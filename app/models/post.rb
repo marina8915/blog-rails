@@ -3,6 +3,7 @@ class Post < ApplicationRecord
   has_many :comments, dependent: :destroy
   validates :title, presence: true, length: { minimum: 5 }
   validates_presence_of :user_id
+  validates_size_of :description, maximum: 500
 
   mount_uploader :img, ImageUploader
 
@@ -12,5 +13,6 @@ class Post < ApplicationRecord
 
   def change_data
     self.title = self.title.capitalize
+    self.video = self.video.split('/').last if self.video
   end
 end
