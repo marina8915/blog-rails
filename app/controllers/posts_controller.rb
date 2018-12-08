@@ -56,7 +56,9 @@ class PostsController < ApplicationController
       @user = User.find(@post.user_id).name
       @comments = @post.comments.search(params[:page])
       @comment = Comment.new
+      @rating = Rating.new
       @video = @post.video.split('/').last
+      calculate_rating(@post)
     else
       redirect_to root_path
     end
@@ -79,5 +81,13 @@ class PostsController < ApplicationController
 
   def post_params
     params.require(:post).permit(:title, :description, :body, :img, :publish, :video)
+  end
+
+  def calculate_rating(post)
+    if post.ratings.present?
+      @ratings = post.ratings.inject(0) { |m, k| m + k.rating } / @post.ratings.size
+    else
+      @ratings = 0
+    end
   end
 end

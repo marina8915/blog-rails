@@ -9,6 +9,8 @@
   <iframe width="500" height="310" src="https://www.youtube.com/embed/<%= @video %>"
           frameborder="0" allowfullscreen></iframe>
 <% end %>
+<%= render 'ratings/form' %>
+<div>Rating: <%= @ratings %> / <%= @post.ratings.size - 1 %></div>
 
 <%= render 'comments/comments' %>
 <h5>Add a comment:</h5>

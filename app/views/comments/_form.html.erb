@@ -9,11 +9,6 @@
       </ul>
     </div>
   <% end %>
-  <% if @errors %>
-    <div id="error_explanation" class="alert alert-danger">
-      <%= @errors %>
-    </div>
-  <% end %>
   <p>
     <%= form.text_field :commenter, class: 'form-control', type: ('hidden' if current_user), placeholder: 'Name' %>
   </p>
