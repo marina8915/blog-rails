@@ -5,6 +5,7 @@ Rails.application.routes.draw do
     resources :ratings
   end
   get ':name/posts' => 'posts#index', as: 'user_posts'
+  get 'order/:by' => 'posts#index', as: 'order'
 
   resources :users do
     member do

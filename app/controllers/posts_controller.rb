@@ -1,11 +1,13 @@
 class PostsController < ApplicationController
   def index
     if params[:name]
-      @posts = User.find_by_name(params[:name]).posts.search(params[:page])
+      @posts = User.find_by_name(params[:name]).posts
+    elsif params[:by]
+      order_by
     else
-      @posts = Post.search(params[:page])
+      @posts = Post.all
     end
-
+    @posts = @posts.search(params[:page])
   end
 
   def new
@@ -72,6 +74,23 @@ class PostsController < ApplicationController
       redirect_to posts_user_path(current_user.id)
     else
       redirect_to root_path
+    end
+  end
+
+  def order_by
+    case params[:by]
+    when 'last'
+      @posts = Post.order(created_at: :desc)
+    when 'old'
+      @posts = Post.order(:created_at)
+    when 'high'
+      @posts = Post.order(rating: :desc)
+    when 'low'
+      @posts = Post.order(:rating)
+    when 'many'
+      @posts = Post.order(views: :desc)
+    when 'less'
+      @posts = Post.order(:views)
     end
   end
 
