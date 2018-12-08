@@ -5,6 +5,7 @@ class RatingsController < ApplicationController
       params[:rating][:user_id] = current_user.id
       @rating = @post.ratings.create(params.require(:rating).permit(:rating, :user_id))
       if @rating.save
+        @post.update_columns(rating: calculate_rating(@post).round(2))
         redirect_to @post
       else
         render 'ratings/_form'
@@ -24,5 +25,13 @@ class RatingsController < ApplicationController
 
   def find_post
     Post.find(params[:post_id])
+  end
+
+  def calculate_rating(post)
+    if post.ratings.present?
+      @ratings = post.ratings.inject(0) { |m, k| m + k.rating.to_f } / @post.ratings.size
+    else
+      @ratings = 0
+    end
   end
 end

@@ -16,8 +16,11 @@
             <%= link_to 'Delete', post_path(post), class: 'nav-link', method: :delete, data: { confirm: 'Are you sure?'} %>
           </li>
           <li class="nav-item">
-            <p class="<%= post.publish ? 'status-public': 'nav-link' %>">Status: <%= post.publish ? 'Published' : 'Not published' %></p>
+            <p class="<%= post.publish ? 'padding': 'nav-link' %>">Status: <%= post.publish ? 'Published' : 'Not published' %></p>
           </li>
+          <li class="nav-item"><p class="padding">Rating: <%= post.rating %></p></li>
+          <li class="nav-item"><p class="padding">Comments: <%= post.comments.size %></p></li>
+
         </ul>
       </nav>
 
