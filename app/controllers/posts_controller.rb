@@ -78,20 +78,15 @@ class PostsController < ApplicationController
   end
 
   def order_by
-    case params[:by]
-    when 'last'
-      @posts = Post.order(created_at: :desc)
-    when 'old'
-      @posts = Post.order(:created_at)
-    when 'high'
-      @posts = Post.order(rating: :desc)
-    when 'low'
-      @posts = Post.order(:rating)
-    when 'many'
-      @posts = Post.order(views: :desc)
-    when 'less'
-      @posts = Post.order(:views)
-    end
+    sort = case params[:by]
+           when 'last' then 'created_at DESC'
+           when 'old' then 'created_at'
+           when 'high' then 'rating DESC'
+           when 'low' then 'rating'
+           when 'many' then 'views DESC'
+           when 'less' then 'views'
+           end
+    @posts = Post.order(sort)
   end
 
   private
