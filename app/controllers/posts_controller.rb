@@ -26,6 +26,7 @@ class PostsController < ApplicationController
       @post = Post.new(post_params)
       @post.user_id = current_user.id
       @post.rating = 0
+      @post.views = 0
 
       if @post.save
         redirect_to @post
@@ -59,6 +60,7 @@ class PostsController < ApplicationController
       @comment = Comment.new
       @rating = Rating.new
       @video = @post.video.split('/').last
+      @views = @post.update_columns(views: @post.views + 1)
     else
       redirect_to root_path
     end
@@ -80,6 +82,6 @@ class PostsController < ApplicationController
   end
 
   def post_params
-    params.require(:post).permit(:title, :description, :body, :img, :publish, :video, :rating)
+    params.require(:post).permit(:title, :description, :body, :img, :publish, :video, :rating, :views)
   end
 end

@@ -10,8 +10,8 @@
           frameborder="0" allowfullscreen></iframe>
 <% end %>
 <%= render 'ratings/form' %>
-<div>Rating: <%= @post.rating %> / <%= @post.ratings.size - 1 %></div>
-
+<p>Rating: <%= @post.rating %> / <%= @post.ratings.size - 1 %></p>
+<p>Views: <%= @post.views %></p>
 <%= render 'comments/comments' %>
 <h5>Add a comment:</h5>
 <%= render 'comments/form' %>

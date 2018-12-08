@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_08_143955) do
+ActiveRecord::Schema.define(version: 2018_12_08_164625) do
 
   create_table "comments", force: :cascade do |t|
     t.string "commenter"
@@ -35,6 +35,7 @@ ActiveRecord::Schema.define(version: 2018_12_08_143955) do
     t.boolean "publish"
     t.string "video"
     t.float "rating"
+    t.integer "views"
     t.index ["user_id"], name: "index_posts_on_user_id"
   end
 
