@@ -11,8 +11,11 @@
 
 <body>
 <%= render 'layouts/nav' %>
-<div class="container">
+<main class="container">
   <%= yield %>
-</div>
+</main>
+<footer class="padding text-center">
+  <%= link_to 'Github', 'https://github.com/marina8915/blog-rails' %>
+</footer>
 </body>
 </html>
