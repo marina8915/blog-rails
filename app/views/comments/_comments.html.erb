@@ -5,23 +5,24 @@
 <% @comments.each do |comment| %>
   <div class="border rounded comment shadow-sm p-3 mb-5 bg-white">
     <strong><%= comment.commenter %></strong>
-
-    <% if current_user %>
-      <%= form_with(model:  [ @comment, @comment.likes.build ], local: true, class: 'form-group form-row') do |form| %>
-          <%= form.text_field :comment_id, type: 'hidden', value: comment.id  %>
-          <%= form.check_box :like, checked: true, style: 'display: none' %>
-          <%= form.submit '+', class: 'btn btn-outline-primary' %>
-      <% end %>
-      <%= form_with(model: [ @comment, @comment.likes.build ], local: true, class: 'form-group form-row') do |form| %>
-          <%= form.text_field :comment_id, type: 'hidden', value: comment.id  %>
-          <%= form.check_box :like, checked: false, style: 'display: none' %>
-          <%= form.submit '-', class: 'btn btn-outline-primary' %>
-      <% end %>
-    <% end %>
-    <p><%= comment.plus %></p>
-    <p><%= comment.minus %></p>
     <p class="float-right"><%= comment.created_at.strftime("%F %H:%M") %></p>
     <p><%= comment.body %></p>
+    <div class="like">
+      <% if current_user %>
+        <%= form_with(model:  [ @comment, @comment.likes.build ], local: true) do |form| %>
+          <%= form.text_field :comment_id, type: 'hidden', value: comment.id  %>
+          <%= form.check_box :like, checked: true, style: 'display: none' %>
+          <%= form.submit '+', class: 'btn btn-outline-success' %>
+        <% end %>
+        <span class="text-success"> <%= comment.plus %></span>
+        <span class="text-danger"><%= comment.minus %></span>
+        <%= form_with(model: [ @comment, @comment.likes.build ], local: true) do |form| %>
+          <%= form.text_field :comment_id, type: 'hidden', value: comment.id  %>
+          <%= form.check_box :like, checked: false, style: 'display: none' %>
+          <%= form.submit '-', class: 'btn btn-outline-danger' %>
+        <% end %>
+      <% end %>
+    </div>
   </div>
 <% end %>
 

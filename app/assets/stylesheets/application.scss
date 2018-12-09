@@ -51,3 +51,14 @@ main {
   padding: 10px;
   margin-bottom: 20px !important;
 }
+
+/* LIKE */
+.like {
+  margin-bottom: 20px;
+  text-align: right;
+  form, span {
+    display: inline-block;
+    margin-right: 10px;
+    vertical-align: middle;
+  }
+}
