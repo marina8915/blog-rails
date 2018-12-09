@@ -18,9 +18,16 @@
     <%= f.label :email %><br />
     <%= f.text_field :email, class: 'form-control' %>
   </p>
-  <p>
-    <%= f.label :password %><br />
-    <%= f.password_field :password, class: 'form-control' %>
-  </p>
+  <% if current_user.nil? || current_user.role == 'user' %>
+    <p>
+      <%= f.label :password %><br />
+      <%= f.password_field :password, class: 'form-control' %>
+    </p>
+  <% end %>
+  <% if current_user %>
+    <% if current_user.role == 'admin' %>
+      <p><%= f.check_box :access %> Access</p>
+    <% end %>
+  <% end %>
   <%= f.submit class:'btn btn-outline-primary' %>
 <% end %>

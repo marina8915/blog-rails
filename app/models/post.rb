@@ -4,7 +4,7 @@ class Post < ApplicationRecord
   has_many :ratings, dependent: :destroy
   validates :title, presence: true, length: { minimum: 5 }
   validates_presence_of :user_id
-  validates_size_of :description, maximum: 500
+  validates_size_of :description, maximum: 1000
 
   mount_uploader :img, ImageUploader
 
