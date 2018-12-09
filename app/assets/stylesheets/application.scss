@@ -54,11 +54,17 @@ main {
 
 /* LIKE */
 .like {
-  margin-bottom: 20px;
   text-align: right;
   form, span {
     display: inline-block;
     margin-right: 10px;
     vertical-align: middle;
+    &:last-child {
+      margin-right: 0;
+    }
   }
+  .btn {
+    min-width: 40px;
+  }
+
 }
