@@ -5,7 +5,7 @@ class CommentsController < ApplicationController
     @post = find_post
     if !current_user && check_comment_name
       params[:comment][:user_id] = GUEST_ID
-    elsif current_user
+    elsif current_user.access
       params[:comment][:commenter] = current_user.name
       params[:comment][:user_id] = current_user.id
     end

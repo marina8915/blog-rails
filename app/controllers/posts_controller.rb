@@ -11,7 +11,7 @@ class PostsController < ApplicationController
   end
 
   def new
-    if current_user
+    if current_user.access
       @post = Post.new
     else
       redirect_to root_path
@@ -20,11 +20,11 @@ class PostsController < ApplicationController
 
   def edit
     @post = find_post
-    redirect_to root_path unless (current_user && current_user.id == @post.user_id)
+    redirect_to root_path unless (current_user.access && current_user.id == @post.user_id)
   end
 
   def create
-    if current_user
+    if current_user.access
       @post = Post.new(post_params)
       @post.user_id = current_user.id
       @post.rating = 0
@@ -42,7 +42,7 @@ class PostsController < ApplicationController
 
   def update
     @post = find_post
-    if current_user && current_user.id == @post.user_id
+    if current_user.access && current_user.id == @post.user_id
       if @post.update(post_params)
         redirect_to @post
       else
