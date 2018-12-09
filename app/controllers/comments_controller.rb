@@ -10,6 +10,7 @@ class CommentsController < ApplicationController
       params[:comment][:user_id] = current_user.id
     end
     @comment = comment_create
+    @comment[:plus] = @comment[:minus] = 0
     if @comment.save
       redirect_to @post
     else
@@ -39,6 +40,6 @@ class CommentsController < ApplicationController
   end
 
   def comment_create
-    @post.comments.create(params.require(:comment).permit(:commenter, :body, :user_id))
+    @post.comments.create(params.require(:comment).permit(:commenter, :body, :user_id, :plus, :minus))
   end
 end

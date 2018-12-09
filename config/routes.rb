@@ -5,6 +5,9 @@ Rails.application.routes.draw do
     resources :comments
     resources :ratings
   end
+  get 'comment/likes' => 'likes#create', as: 'comment_likes'
+  post 'comment/likes' => 'likes#create', as: 'comment_like'
+
   get ':name/posts' => 'posts#index', as: 'user_posts'
   get 'order/:by' => 'posts#index', as: 'order'
 
