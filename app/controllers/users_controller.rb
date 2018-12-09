@@ -1,10 +1,18 @@
 class UsersController < ApplicationController
-  def my_posts
-    @posts = find_user.posts
+  def posts
+    if current_user
+      @posts = User.find(current_user.id).posts.search(params[:page])
+    else
+      redirect_to root_path
+    end
   end
 
-  def my_comments
-    @comments = Comment.all.select { |comment| comment.commenter == current_user.name }
+  def comments
+    if current_user
+      @comments = User.find(current_user.id).comments.search(params[:page])
+    else
+      redirect_to root_path
+    end
   end
 
   def new
@@ -12,12 +20,17 @@ class UsersController < ApplicationController
   end
 
   def edit
-    @user = find_user
+    find_user
+  end
+
+  def show
+    find_user
   end
 
   def create
     @user = User.new(user_params)
-
+    @user.access = true
+    @user.role = 'user'
     if @user.save
       session[:user_id] = @user.id
       redirect_to root_path
@@ -27,10 +40,9 @@ class UsersController < ApplicationController
   end
 
   def update
-    @user = find_user
-
+    find_user
     if @user.update_attributes(user_params)
-      redirect_to root_path
+      redirect_to current_user.role == 'admin' ? admin_users_path : user_path(current_user.id)
     else
       render 'edit'
     end
@@ -39,10 +51,15 @@ class UsersController < ApplicationController
   private
 
   def find_user
-    User.find(params[:id])
+    if current_user
+      find_id = current_user.role == 'admin' ? params[:id] : current_user.id
+      @user = User.find(find_id)
+    else
+      redirect_to root_path
+    end
   end
 
   def user_params
-    params.require(:user).permit(:name, :email, :password)
+    params.require(:user).permit(:name, :email, :password, :access, :role)
   end
 end

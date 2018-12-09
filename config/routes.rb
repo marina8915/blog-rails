@@ -1,14 +1,23 @@
 Rails.application.routes.draw do
+  get 'admin/users'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-  get 'posts/index'
-
   resources :posts do
     resources :comments
+    resources :ratings
+  end
+  get 'comment/likes' => 'likes#create', as: 'comment_likes'
+  post 'comment/likes' => 'likes#create', as: 'comment_like'
+
+  get ':name/posts' => 'posts#index', as: 'user_posts'
+  get 'order/:by' => 'posts#index', as: 'order'
+
+  resources :users do
+    member do
+      get 'posts'
+      get 'comments'
+    end
   end
 
-  resources :users
-  get 'users/:id/my_posts' => 'users#my_posts', as: 'my_posts'
-  get 'users/:id/my_comments' => 'users#my_comments', as: 'my_comments'
   resources :sessions
   delete 'logout' => 'sessions#destroy'
   root 'posts#index'

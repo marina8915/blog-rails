@@ -1,10 +1,17 @@
 <h3><%= @post.title %></h3>
 
-<p><%= @date %> <%= @user %></p>
-<% unless @post.img.empty? %>
-  <%= image_tag @post.img, width:350, class: 'img-thumbnail' %>
+<p><%= @date %> <%= link_to @user, user_posts_path(@user) %></p>
+<% if @post.img? %>
+  <%= image_tag @post.img.url, width:350, class: 'img-thumbnail' %>
 <% end %>
-<p class="font-weight-normal"><%= @post.body %></p>
-
-<%= render 'comments' %>
-<%= render 'add_comment' %>
+<p class="font-weight-normal"><%= @post.body.html_safe %></p>
+<% if @post.video? %>
+  <iframe width="500" height="310" src="https://www.youtube.com/embed/<%= @video %>"
+          frameborder="0" allowfullscreen></iframe>
+<% end %>
+<%= render 'ratings/form' %>
+<p>Rating: <%= @post.rating %> / <%= @post.ratings.size - 1 %></p>
+<p>Views: <%= @post.views %></p>
+<%= render 'comments/comments' %>
+<h5>Add a comment:</h5>
+<%= render 'comments/form' %>

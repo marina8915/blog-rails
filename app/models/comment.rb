@@ -1,4 +1,7 @@
 class Comment < ApplicationRecord
   belongs_to :post
-  validates :commenter, :body, presence: true
+  belongs_to :user
+  has_many :likes, dependent: :destroy
+  validates_presence_of :commenter, :body
+  validates_presence_of :user, :message => 'exist, you can not use this name.'
 end

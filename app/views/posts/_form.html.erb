@@ -1,10 +1,7 @@
-<%= form_with(model: @post, local: true, class: 'form-group') do |form| %>
+<%= form_with(model: @post, html: { multipart: true }, local: true, class: 'form-group') do |form| %>
   <% if @post.errors.any? %>
     <div id="error_explanation" class="alert alert-danger">
-      <h2>
-        <%= pluralize(@post.errors.count, 'error') %> prohibited
-        this article from being saved:
-      </h2>
+      <h4><%= pluralize(@post.errors.count, 'error') %></h4>
       <ul>
         <% @post.errors.full_messages.each do |msg| %>
           <li><%= msg %></li>
@@ -19,15 +16,28 @@
   </p>
 
   <p>
-    <%= form.label :body %><br>
-    <%= form.text_area :body, class: 'form-control', rows: '5'  %>
+    <%= form.label :description %><br>
+    <%= tinymce %>
+    <%= form.text_area :description, class: 'tinymce', rows: '2' %>
   </p>
 
   <p>
-    <%= form.label :img, 'Link to image' %><br>
-    <%= form.text_field :img, class: 'form-control' %>
+    <%= form.label :body %><br>
+    <%= tinymce %>
+    <%= form.text_area :body, class: 'tinymce', rows: '5' %>
   </p>
 
+  <p>
+    <%= form.label :img, 'Upload image' %><br>
+    <%= form.file_field :img %>
+  </p>
+
+  <p>
+    <%= form.label :video, 'Link to video' %><br>
+    <%= form.text_field :video, class: 'form-control' %>
+  </p>
+
+  <p><%= form.check_box :publish %> Publish</p>
   <p>
     <%= form.submit class: 'btn btn-outline-primary' %>
   </p>

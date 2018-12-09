@@ -1,19 +1,30 @@
 <h2 class="text-center">Blog Rails</h2>
+<h3 class="text-center"><%= params[:name] %></h3>
 
+<%= render 'order' %>
 <% @posts.each do |post| %>
-  <div class="border-bottom post">
-    <h4><%= link_to post.title, post_path(post) %></h4>
+  <% if post.publish %>
+    <div class="post clearfix">
+      <h4><%= link_to post.title, post_path(post) %></h4>
 
-    <% unless post.img.empty? %>
-      <%= image_tag post.img, width:250, class: 'img-thumbnail'%>
-    <% end %>
-
-    <p>
-      <%= post.body.first(400) %>
-      <% if post.body.size > 400 %>
-        <%= link_to 'more', post_path(post) %>
+      <% if post.img? %>
+        <%= image_tag post.img.url(:thumb), class: 'img-thumbnail thumb'%>
+      <% elsif post.video? %>
+        <iframe width="250" src="https://www.youtube.com/embed/<%= post.video.split('/').last %>" class="thumb"></iframe>
       <% end %>
-    </p>
-    <p class="font-weight-bold">Comments <%= post.comments.size %></p>
-  </div>
+
+      <p>
+        <%= post.description.html_safe %>
+        <%= link_to 'more', post_path(post) %>
+      </p>
+    </div>
+    <div class="clearfix border-bottom post-info">
+      <i class="float-right">Comments <%= post.comments.size %> Rating <%= post.rating %> Views <%= post.views %></i>
+    </div>
+  <% end %>
 <% end %>
+
+<div class="text-center">
+  <%= will_paginate @posts, container: false %>
+</div>
+

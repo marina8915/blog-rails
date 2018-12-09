@@ -1,12 +1,25 @@
 @import 'bootstrap';
 
+/* header */
 .bg-header {
   background-color: #2E6CDF;
-  height: 80px!important;
+  height: 100px !important;
   padding-top: 30px;
   margin-bottom: 30px;
 }
 
+.navbar {
+  padding: 0 !important;
+  ul {
+    height: 34px;
+    margin-bottom: 10px;
+  }
+}
+
+/* Forms */
+main {
+  min-height: calc(100vh - 170px)
+}
 .form-group {
   width: 50% !important;
 }
@@ -15,11 +28,43 @@
   width: 30% !important;
 }
 
-.comment {
-  padding: 10px;
-  margin-bottom: 20px!important;
+/* Posts */
+.post, .post-info {
+  margin-bottom: 0.5em;
 }
 
-.post {
-  margin-bottom: 20px;
+.thumb {
+  float: left;
+  margin-right: 1em;
+  margin-bottom: 0.5em !important;
+}
+
+.img-thumbnail {
+  margin-bottom: 1em;
+}
+.padding {
+  padding: 0.5em;
+}
+
+/* Comments*/
+.comment {
+  padding: 10px;
+  margin-bottom: 20px !important;
+}
+
+/* LIKE */
+.like {
+  text-align: right;
+  form, span {
+    display: inline-block;
+    margin-right: 10px;
+    vertical-align: middle;
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+  .btn {
+    min-width: 40px;
+  }
+
 }

@@ -1,0 +1,21 @@
+<%= form_with(model: [ @post, @post.comments.build ], local: true, class: 'form-group') do |form| %>
+  <% if @comment.errors.any? %>
+    <div id="error_explanation" class="alert alert-danger">
+      <h4><%= pluralize(@comment.errors.count, 'error') %></h4>
+      <ul>
+        <% @comment.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <p>
+    <%= form.text_field :commenter, class: 'form-control', type: ('hidden' if current_user), placeholder: 'Name' %>
+  </p>
+  <p>
+    <%= form.text_area :body, class: 'form-control', placeholder: 'Comment' %>
+  </p>
+  <p>
+    <%= form.submit class: 'btn btn-outline-primary' %>
+  </p>
+<% end %>

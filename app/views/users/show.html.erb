@@ -1,19 +1,24 @@
-<h3><%= current_user.name %></h3>
-<p><%= current_user.email %></p>
+<h3><%= @user.name %></h3>
+<p><%= @user.email %></p>
 
 <ul class="nav flex-column">
   <li class="nav-item">
-    <%= link_to 'Change data', edit_user_path(current_user.id) %>
+    <%= link_to 'Change data', edit_user_path(@user.id) %>
   </li>
   <li class="nav-item">
-    <%= link_to 'My posts', my_posts_path(current_user.id) %>
+    <%= link_to 'My posts', posts_user_path(@user.id) %>
   </li>
   <li class="nav-item">
-    <%= link_to 'My comments', my_comments_path(current_user.id) %>
+    <%= link_to 'My comments', comments_user_path(@user.id) %>
   </li>
   <li class="nav-item">
     <%= link_to 'New post', new_post_path %>
   </li>
+  <% if current_user.role == 'admin' %>
+    <li class="nav-item">
+      <%= link_to 'Users', admin_users_path %>
+    </li>
+  <% end %>
   <li class="nav-item">
     <%= link_to 'Exit', logout_path, method: :delete %>
   </li>

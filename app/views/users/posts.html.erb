@@ -1,0 +1,43 @@
+<h3>My posts</h3>
+
+<% if @posts.empty? %>
+  <p>No posts</p>
+  <%= link_to 'New post', new_post_path %>
+<% else %>
+    <% @posts.each do |post| %>
+    <div class="border-bottom post clearfix">
+      <nav class="navbar navbar-expand-lg navbar-light">
+        <h4><%= link_to post.title, post_path(post), class: 'navbar-brand' %></h4>
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <%= link_to 'Edit', edit_post_path(post), class: 'nav-link' %>
+          </li>
+          <li class="nav-item">
+            <%= link_to 'Delete', post_path(post), class: 'nav-link', method: :delete, data: { confirm: 'Are you sure?'} %>
+          </li>
+          <li class="nav-item">
+            <p class="<%= post.publish ? 'padding': 'nav-link' %>">Status: <%= post.publish ? 'Published' : 'Not published' %></p>
+          </li>
+          <li class="nav-item"><p class="padding">Rating: <%= post.rating %></p></li>
+          <li class="nav-item"><p class="padding">Comments: <%= post.comments.size %></p></li>
+          <li class="nav-item"><p class="padding">Views: <%= post.views %></p></li>
+        </ul>
+      </nav>
+
+      <% if post.img? %>
+        <%= image_tag post.img.url(:thumb), class: 'img-thumbnail thumb'%>
+      <% elsif post.video? %>
+        <iframe width="250" src="https://www.youtube.com/embed/<%= post.video.split('/').last %>" class="thumb"></iframe>
+      <% end %>
+
+      <p>
+        <%= post.description.html_safe %>
+        <%= link_to 'more', post_path(post) %>
+      </p>
+    </div>
+  <% end %>
+<% end %>
+
+<div class="text-center">
+  <%= will_paginate @posts, container: false %>
+</div>
