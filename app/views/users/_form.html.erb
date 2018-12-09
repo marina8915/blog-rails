@@ -18,7 +18,7 @@
     <%= f.label :email %><br />
     <%= f.text_field :email, class: 'form-control' %>
   </p>
-  <% if current_user.nil? || current_user.role == 'user' %>
+  <% if current_user.nil? || current_user.id == params[:id].to_i %>
     <p>
       <%= f.label :password %><br />
       <%= f.password_field :password, class: 'form-control' %>
