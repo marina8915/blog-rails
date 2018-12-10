@@ -2,14 +2,14 @@ class RatingsController < ApplicationController
   def create
     @post = find_post
     if current_user
-      if current_user.id != @post.user_id
-        if check_user
-          save_rating
+      if current_user.access
+        if current_user.id != @post.user_id
+          check_user ? save_rating : (redirect_to @post, alert: 'You have already voted.')
         else
-          redirect_to @post, alert: 'You have already voted.'
+          redirect_to @post, alert: 'You can not vote for your posts.'
         end
       else
-        redirect_to @post, alert: 'You can not vote for your posts.'
+        redirect_to @post, alert: 'Access is denied.'
       end
     else
       redirect_to @post, alert: 'Login or Sign up.'

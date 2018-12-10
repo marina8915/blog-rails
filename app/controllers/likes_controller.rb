@@ -3,14 +3,14 @@ class LikesController < ApplicationController
     @comment = find_comment
     @post = Post.find(@comment.post_id)
     if current_user
-      if current_user.id != @comment.user_id
-        if check_user
-          save_like
+      if current_user.access
+        if current_user.id != @comment.user_id
+          check_user ? save_like : (redirect_to @post, alert: 'You have already voted.')
         else
-          redirect_to @post, alert: 'You have already voted.'
+          redirect_to @post, alert: 'You can not vote for your comments.'
         end
       else
-        redirect_to @post, alert: 'You can not vote for your comments.'
+        redirect_to @post, alert: 'Access is denied.'
       end
     else
       redirect_to @post, alert: 'Login or Sign up.'
