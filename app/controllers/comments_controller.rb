@@ -1,10 +1,7 @@
 class CommentsController < ApplicationController
-  GUEST_ID = 100
-
   def create
     @post = find_post
-    if !current_user && check_comment_name
-      params[:comment][:user_id] = GUEST_ID
+    if !current_user && check_commenter
       save_comment
     elsif current_user.access
       params[:comment][:commenter] = current_user.name
@@ -32,8 +29,9 @@ class CommentsController < ApplicationController
     Post.find(params[:post_id])
   end
 
-  def check_comment_name
-    true unless User.find_by_name(params[:comment][:commenter])
+  def check_commenter
+    @user = User.find_by_name(params[:comment][:commenter])
+    @user.present? ? false : true
   end
 
   def save_comment

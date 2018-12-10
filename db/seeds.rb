@@ -7,4 +7,3 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 User.create(name: 'Admin', email: 'admin@gmail.com', password: '1111aQ', role: 'admin', access: true)
-User.create(name: 'Guest', email: 'guest@gmail.com', password: '1111aQ', id: 100, role: 'guest', access: true)
