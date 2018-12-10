@@ -41,7 +41,7 @@ class RatingsController < ApplicationController
 
   def calculate_rating(post)
     if post.ratings.present?
-      @ratings = post.ratings.inject(0) { |m, k| m + k.rating.to_f } / @post.ratings.size
+      @ratings = post.ratings.inject(0) { |sum, mark| sum + mark.rating.to_f } / @post.ratings.size
     else
       @ratings = 0
     end
