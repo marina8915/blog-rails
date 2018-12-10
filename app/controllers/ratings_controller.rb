@@ -1,17 +1,18 @@
 class RatingsController < ApplicationController
   def create
     @post = find_post
-    if current_user && check_user
-      params[:rating][:user_id] = current_user.id
-      @rating = @post.ratings.create(params.require(:rating).permit(:rating, :user_id))
-      if @rating.save
-        @post.update_columns(rating: calculate_rating(@post).round(2))
-        redirect_to @post
+    if current_user
+      if current_user.id != @post.user_id
+        if check_user
+          save_rating
+        else
+          redirect_to @post, alert: 'You have already voted.'
+        end
       else
-        render 'ratings/_form'
+        redirect_to @post, alert: 'You can not vote for your posts.'
       end
     else
-      redirect_to @post
+      redirect_to @post, alert: 'Login or Sign up.'
     end
   end
 
@@ -25,6 +26,17 @@ class RatingsController < ApplicationController
 
   def find_post
     Post.find(params[:post_id])
+  end
+
+  def save_rating
+    params[:rating][:user_id] = current_user.id
+    @rating = @post.ratings.create(params.require(:rating).permit(:rating, :user_id))
+    if @rating.save
+      @post.update_columns(rating: calculate_rating(@post).round(2))
+      redirect_to @post
+    else
+      render 'ratings/_form'
+    end
   end
 
   def calculate_rating(post)
