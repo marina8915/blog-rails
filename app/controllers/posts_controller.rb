@@ -14,42 +14,40 @@ class PostsController < ApplicationController
     if current_user.access
       @post = Post.new
     else
-      redirect_to root_path
+      redirect_to root_path, alert: 'Access is denied.'
     end
   end
 
   def edit
     @post = find_post
-    redirect_to root_path unless (current_user.access && current_user.id == @post.user_id)
+    redirect_to root_path, alert: 'Access is denied.' unless check_access
   end
 
   def create
     if current_user.access
       @post = Post.new(post_params)
       @post.user_id = current_user.id
-      @post.rating = 0
-      @post.views = 0
-
+      @post.rating = @post.views = 0
       if @post.save
         redirect_to @post
       else
         render 'new'
       end
     else
-      redirect_to root_path
+      redirect_to root_path, alert: 'Access is denied.'
     end
   end
 
   def update
     @post = find_post
-    if current_user.access && current_user.id == @post.user_id
+    if check_access
       if @post.update(post_params)
         redirect_to @post
       else
         render 'edit'
       end
     else
-      redirect_to root_path
+      redirect_to root_path, alert: 'Access is denied.'
     end
   end
 
@@ -64,7 +62,7 @@ class PostsController < ApplicationController
       @video = @post.video.split('/').last
       @views = @post.update_columns(views: @post.views + 1)
     else
-      redirect_to root_path
+      redirect_to root_path, alert: 'Access is denied.'
     end
   end
 
@@ -73,7 +71,7 @@ class PostsController < ApplicationController
       find_post.destroy
       redirect_to posts_user_path(current_user.id)
     else
-      redirect_to root_path
+      redirect_to root_path, alert: 'Access is denied.'
     end
   end
 
@@ -97,5 +95,9 @@ class PostsController < ApplicationController
 
   def post_params
     params.require(:post).permit(:title, :description, :body, :img, :publish, :video, :rating, :views)
+  end
+
+  def check_access
+    current_user.access && current_user.id == @post.user_id
   end
 end

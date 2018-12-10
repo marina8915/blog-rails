@@ -2,6 +2,8 @@
 <h3 class="text-center"><%= params[:name] %></h3>
 
 <%= render 'order' %>
+<%= render 'alert' %>
+
 <% @posts.each do |post| %>
   <% if post.publish %>
     <div class="post clearfix">
