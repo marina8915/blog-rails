@@ -3,13 +3,7 @@ class PostsController < ApplicationController
 
   def index
     if params[:name]
-      @user = User.find_by_name(params[:name])
-      if @user
-        @posts = @user.posts
-        @posts = @posts.order(order_by) if params[:by]
-      else
-        redirect_to root_path, alert: 'User not found.'
-      end
+      user_posts
     elsif params[:by]
       @posts = Post.order(order_by)
     else
@@ -19,15 +13,11 @@ class PostsController < ApplicationController
   end
 
   def new
-    if current_user.access
-      @post = Post.new
-    else
-      redirect_to root_path, alert: 'Access is denied.'
-    end
+    current_user.access ? @post = Post.new : redirect_access(root_path)
   end
 
   def edit
-    redirect_to root_path, alert: 'Access is denied.' unless check_access
+    redirect_access(root_path) unless check_access
   end
 
   def create
@@ -37,7 +27,7 @@ class PostsController < ApplicationController
       @post.rating = @post.views = 0
       @post.save ? (redirect_to @post) : (render 'new')
     else
-      redirect_to root_path, alert: 'Access is denied.'
+      redirect_access(root_path)
     end
   end
 
@@ -45,7 +35,7 @@ class PostsController < ApplicationController
     if check_access
       @post.update(post_params) ? (redirect_to @post) : (render 'edit')
     else
-      redirect_to root_path, alert: 'Access is denied.'
+      redirect_access(root_path)
     end
   end
 
@@ -59,7 +49,7 @@ class PostsController < ApplicationController
       @video = @post.video.split('/').last
       @views = @post.update_columns(views: @post.views + 1)
     else
-      redirect_to root_path, alert: 'Access is denied.'
+      redirect_access(root_path)
     end
   end
 
@@ -68,7 +58,7 @@ class PostsController < ApplicationController
       @post.destroy
       redirect_to posts_user_path(current_user.id)
     else
-      redirect_to root_path, alert: 'Access is denied.'
+      redirect_access(root_path)
     end
   end
 
@@ -96,5 +86,14 @@ class PostsController < ApplicationController
 
   def check_access
     current_user.access && current_user.id == @post.user_id
+  end
+
+  def user_posts
+    if User.find_by_name(params[:name])
+      @posts = @user.posts
+      @posts = @posts.order(order_by) if params[:by]
+    else
+      redirect_to root_path, alert: 'User not found.'
+    end
   end
 end

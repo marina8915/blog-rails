@@ -1,15 +1,15 @@
 class RatingsController < ApplicationController
   def create
-    @post = find_post
+    @post = Post.find(params[:post_id])
     if current_user
       if current_user.access
         if current_user.id != @post.user_id
-          check_user ? save_rating : (redirect_to @post, alert: 'You have already voted.')
+          check_user
         else
           redirect_to @post, alert: 'You can not vote for your posts.'
         end
       else
-        redirect_to @post, alert: 'Access is denied.'
+        redirect_access(@post)
       end
     else
       redirect_to @post, alert: 'Login or Sign up.'
@@ -19,13 +19,11 @@ class RatingsController < ApplicationController
   private
 
   def check_user
-    @post = find_post
-    @rating = @post.ratings.find_by_user_id(current_user.id)
-    @rating.nil?
-  end
-
-  def find_post
-    Post.find(params[:post_id])
+    if @post.ratings.find_by_user_id(current_user.id).nil?
+      save_rating
+    else
+      redirect_to @post, alert: 'You have already voted.'
+    end
   end
 
   def save_rating
@@ -40,10 +38,10 @@ class RatingsController < ApplicationController
   end
 
   def calculate_rating(post)
-    if post.ratings.present?
-      @ratings = post.ratings.inject(0) { |sum, mark| sum + mark.rating.to_f } / @post.ratings.size
-    else
-      @ratings = 0
-    end
+    @ratings = if post.ratings.present?
+                 post.ratings.inject(0) { |sum, mark| sum + mark.rating.to_f } / @post.ratings.size
+               else
+                 0
+               end
   end
 end

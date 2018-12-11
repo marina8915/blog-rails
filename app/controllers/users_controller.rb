@@ -1,9 +1,11 @@
 class UsersController < ApplicationController
+  before_action :find_user, only: [:show, :edit, :update]
+
   def posts
     if current_user
       @posts = current_user.posts.search(params[:page])
     else
-      redirect_to root_path, alert: 'Access is denied.'
+      redirect_access(root_path)
     end
   end
 
@@ -11,20 +13,12 @@ class UsersController < ApplicationController
     if current_user
       @comments = current_user.comments.search(params[:page])
     else
-      redirect_to root_path, alert: 'Access is denied.'
+      redirect_access(root_path)
     end
   end
 
   def new
     @user = User.new
-  end
-
-  def edit
-    find_user
-  end
-
-  def show
-    find_user
   end
 
   def create
@@ -40,7 +34,6 @@ class UsersController < ApplicationController
   end
 
   def update
-    find_user
     if @user.update_attributes(user_params)
       redirect_to current_user.role == 'admin' ? admin_users_path : user_path(current_user.id)
     else

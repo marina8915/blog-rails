@@ -1,6 +1,7 @@
 class CommentsController < ApplicationController
+  before_action :find_post, only: [:create, :destroy]
+
   def create
-    @post = find_post
     if !current_user && check_commenter
       save_comment
     elsif current_user.access
@@ -8,25 +9,24 @@ class CommentsController < ApplicationController
       params[:comment][:user_id] = current_user.id
       save_comment
     else
-      redirect_to @post, alert: 'Access is denied.'
+      redirect_access(@post)
     end
   end
 
   def destroy
-    @post = find_post
     @comment = @post.comments.find(params[:id])
     if current_user.id == @comment.user_id
       @comment.destroy
       redirect_to comments_user_path(current_user.id)
     else
-      redirect_to root_path, alert: 'Access is denied.'
+      redirect_access(root_path)
     end
   end
 
   private
 
   def find_post
-    Post.find(params[:post_id])
+    @post = Post.find(params[:post_id])
   end
 
   def check_commenter
@@ -37,10 +37,6 @@ class CommentsController < ApplicationController
   def save_comment
     @comment = @post.comments.create(params.require(:comment).permit(:commenter, :body, :user_id))
     @comment[:plus] = @comment[:minus] = 0
-    if @comment.save
-      redirect_to @post
-    else
-      render '_form'
-    end
+    @comment.save ? (redirect_to @post) : (render '_form')
   end
 end
