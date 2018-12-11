@@ -9,6 +9,8 @@ Rails.application.routes.draw do
   post 'comment/likes' => 'likes#create', as: 'comment_like'
 
   get ':name/posts' => 'posts#index', as: 'user_posts'
+  get ':name/posts/order/:by' => 'posts#index', as: 'order_user'
+
   get 'order/:by' => 'posts#index', as: 'order'
 
   resources :users do

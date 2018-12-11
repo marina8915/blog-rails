@@ -2,8 +2,11 @@ class PostsController < ApplicationController
   def index
     if params[:name]
       @posts = User.find_by_name(params[:name]).posts
+      if params[:by]
+        @posts = @posts.order(order_by)
+      end
     elsif params[:by]
-      order_by
+      @posts = Post.order(order_by)
     else
       @posts = Post.all
     end
@@ -76,15 +79,14 @@ class PostsController < ApplicationController
   end
 
   def order_by
-    sort = case params[:by]
-           when 'last' then 'created_at DESC'
-           when 'old' then 'created_at'
-           when 'high' then 'rating DESC'
-           when 'low' then 'rating'
-           when 'many' then 'views DESC'
-           when 'less' then 'views'
-           end
-    @posts = Post.order(sort)
+    case params[:by]
+    when 'last' then 'created_at DESC'
+    when 'old' then 'created_at'
+    when 'high' then 'rating DESC'
+    when 'low' then 'rating'
+    when 'many' then 'views DESC'
+    when 'less' then 'views'
+    end
   end
 
   private
