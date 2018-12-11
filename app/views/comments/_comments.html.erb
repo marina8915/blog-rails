@@ -1,4 +1,4 @@
-<h5>Comments</h5>
+<h5 id="comments">Comments</h5>
 
 <%='No comments' if @comments.empty? %>
 
@@ -7,6 +7,7 @@
     <strong><%= comment.commenter %></strong>
     <p class="float-right"><%= comment.created_at.strftime("%F %H:%M") %></p>
     <p><%= comment.body %></p>
+
     <div class="like">
       <%= form_with(model:  [ @comment, @comment.likes.build ], local: true) do |form| %>
         <%= form.text_field :comment_id, type: 'hidden', value: comment.id  %>

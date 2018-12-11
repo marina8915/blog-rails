@@ -1,9 +1,12 @@
 <% if params[:name] %>
   <p class="text-center">
     Sort
-    by Date: <%= link_to 'last', order_user_path(params[:name],'last') %> <%= link_to 'old', order_user_path(params[:name],'old') %>
-    by Rating: <%= link_to 'high', order_user_path(params[:name],'high') %> <%= link_to'low', order_user_path(params[:name],'low') %>
-    by Views: <%= link_to 'many', order_user_path(params[:name],'many') %> <%= link_to 'less', order_user_path(params[:name],'less') %>
+    by Date: <%= link_to 'last', order_user_path(params[:name],'last') %>
+    <%= link_to 'old', order_user_path(params[:name],'old') %>
+    by Rating: <%= link_to 'high', order_user_path(params[:name],'high') %>
+    <%= link_to'low', order_user_path(params[:name],'low') %>
+    by Views: <%= link_to 'many', order_user_path(params[:name],'many') %>
+    <%= link_to 'less', order_user_path(params[:name],'less') %>
   </p>
   <% else %>
   <p class="text-center">

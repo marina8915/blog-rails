@@ -13,13 +13,18 @@
             <%= link_to 'Edit', edit_post_path(post), class: 'nav-link' %>
           </li>
           <li class="nav-item">
-            <%= link_to 'Delete', post_path(post), class: 'nav-link', method: :delete, data: { confirm: 'Are you sure?'} %>
+            <%= link_to 'Delete', post_path(post), class: 'nav-link', method: :delete,
+                        data: { confirm: 'Are you sure?'} %>
           </li>
           <li class="nav-item">
-            <p class="<%= post.publish ? 'padding': 'nav-link' %>">Status: <%= post.publish ? 'Published' : 'Not published' %></p>
+            <p class="<%= post.publish ? 'padding': 'nav-link' %>">
+              Status: <%= post.publish ? 'Published' : 'Not published' %>
+            </p>
           </li>
           <li class="nav-item"><p class="padding">Rating: <%= post.rating %></p></li>
-          <li class="nav-item"><p class="padding">Comments: <%= post.comments.size %></p></li>
+          <li class="nav-item"><p class="padding">
+            <%= link_to "Comments #{post.comments.size}", "#{post_path(post)}#comments"%>
+          </p></li>
           <li class="nav-item"><p class="padding">Views: <%= post.views %></p></li>
         </ul>
       </nav>
@@ -27,7 +32,10 @@
       <% if post.img? %>
         <%= image_tag post.img.url(:thumb), class: 'img-thumbnail thumb'%>
       <% elsif post.video? %>
-        <iframe width="250" src="https://www.youtube.com/embed/<%= post.video.split('/').last %>" class="thumb"></iframe>
+        <iframe width="250"
+                src="https://www.youtube.com/embed/<%= post.video.split('/').last %>"
+                class="thumb">
+        </iframe>
       <% end %>
 
       <p>

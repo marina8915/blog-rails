@@ -12,7 +12,10 @@
       <% if post.img? %>
         <%= image_tag post.img.url(:thumb), class: 'img-thumbnail thumb'%>
       <% elsif post.video? %>
-        <iframe width="250" src="https://www.youtube.com/embed/<%= post.video.split('/').last %>" class="thumb"></iframe>
+        <iframe width="250"
+                src="https://www.youtube.com/embed/<%= post.video.split('/').last %>"
+                class="thumb">
+        </iframe>
       <% end %>
 
       <p>
@@ -21,7 +24,11 @@
       </p>
     </div>
     <div class="clearfix border-bottom post-info">
-      <i class="float-right">Comments <%= post.comments.size %> Rating <%= post.rating %> Views <%= post.views %></i>
+      <i class="float-right">
+        <%= link_to "Comments #{post.comments.size}", "#{post_path(post)}#comments"%>
+        Rating <%= post.rating %>
+        Views <%= post.views %>
+      </i>
     </div>
   <% end %>
 <% end %>
