@@ -86,6 +86,7 @@ class PostsController < ApplicationController
     when 'low' then 'rating'
     when 'many' then 'views DESC'
     when 'less' then 'views'
+    else redirect_to root_path
     end
   end
 

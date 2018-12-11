@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   def posts
     if current_user
-      @posts = User.find(current_user.id).posts.search(params[:page])
+      @posts = current_user.posts.search(params[:page])
     else
       redirect_to root_path, alert: 'Access is denied.'
     end
@@ -9,7 +9,7 @@ class UsersController < ApplicationController
 
   def comments
     if current_user
-      @comments = User.find(current_user.id).comments.search(params[:page])
+      @comments = current_user.comments.search(params[:page])
     else
       redirect_to root_path, alert: 'Access is denied.'
     end
