@@ -1,16 +1,21 @@
 class PostsController < ApplicationController
+  before_action :find_post, only: [:edit, :update, :show, :destroy]
+
   def index
     if params[:name]
-      @posts = User.find_by_name(params[:name]).posts
-      if params[:by]
-        @posts = @posts.order(order_by)
+      @user = User.find_by_name(params[:name])
+      if @user
+        @posts = @user.posts
+        @posts = @posts.order(order_by) if params[:by]
+      else
+        redirect_to root_path, alert: 'User not found.'
       end
     elsif params[:by]
       @posts = Post.order(order_by)
     else
       @posts = Post.all
     end
-    @posts = @posts.search(params[:page])
+    @posts = @posts.search(params[:page]) if @posts
   end
 
   def new
@@ -22,7 +27,6 @@ class PostsController < ApplicationController
   end
 
   def edit
-    @post = find_post
     redirect_to root_path, alert: 'Access is denied.' unless check_access
   end
 
@@ -31,31 +35,21 @@ class PostsController < ApplicationController
       @post = Post.new(post_params)
       @post.user_id = current_user.id
       @post.rating = @post.views = 0
-      if @post.save
-        redirect_to @post
-      else
-        render 'new'
-      end
+      @post.save ? (redirect_to @post) : (render 'new')
     else
       redirect_to root_path, alert: 'Access is denied.'
     end
   end
 
   def update
-    @post = find_post
     if check_access
-      if @post.update(post_params)
-        redirect_to @post
-      else
-        render 'edit'
-      end
+      @post.update(post_params) ? (redirect_to @post) : (render 'edit')
     else
       redirect_to root_path, alert: 'Access is denied.'
     end
   end
 
   def show
-    @post = find_post
     if @post.publish || @post.user_id == current_user.id
       @date = @post.created_at.strftime("%F %H:%M")
       @user = User.find(@post.user_id).name
@@ -70,8 +64,8 @@ class PostsController < ApplicationController
   end
 
   def destroy
-    if current_user.id == find_post.user_id
-      find_post.destroy
+    if current_user.id == @post.user_id
+      @post.destroy
       redirect_to posts_user_path(current_user.id)
     else
       redirect_to root_path, alert: 'Access is denied.'
@@ -93,7 +87,7 @@ class PostsController < ApplicationController
   private
 
   def find_post
-    Post.find(params[:id])
+    @post = Post.find(params[:id])
   end
 
   def post_params
