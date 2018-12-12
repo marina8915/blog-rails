@@ -73,6 +73,9 @@ main {
 .comment {
   padding: 10px;
   margin-bottom: 20px !important;
+  li {
+    padding: 0.5em;
+  }
 }
 
 /* LIKE */
@@ -91,3 +94,7 @@ main {
   }
 }
 
+/* USERS */
+.users li {
+  padding: 0.5em;
+}
