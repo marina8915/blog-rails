@@ -64,12 +64,12 @@ class PostsController < ApplicationController
 
   def order_by
     case params[:by]
-    when 'last' then 'created_at DESC'
-    when 'old' then 'created_at'
-    when 'high' then 'rating DESC'
-    when 'low' then 'rating'
-    when 'many' then 'views DESC'
-    when 'less' then 'views'
+    when 'date_desc' then 'created_at DESC'
+    when 'date' then 'created_at'
+    when 'rating_desc' then 'rating DESC'
+    when 'rating' then 'rating'
+    when 'views_desc' then 'views DESC'
+    when 'views' then 'views'
     else redirect_to root_path
     end
   end

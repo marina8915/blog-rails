@@ -23,22 +23,22 @@
         <%= link_to 'more', post_path(post) %>
       </p>
 
-      <div class="clearfix post-info float-right row">
-        <div class="col-auto">
+      <ul class="clearfix post-info float-right navbar-nav">
+        <li>
           <%= link_to "#{post_path(post)}#comments" do %>
             <i class="glyphicon glyphicon-comment"></i>
             <%= post.comments.size %>
           <% end %>
-        </div>
-        <div class="col-auto">
+        </li>
+        <li>
           <i class="glyphicon glyphicon-star"></i>
           <%= post.rating %>
-        </div>
-        <div class="col-auto">
+        </li>
+        <li>
           <i class="glyphicon glyphicon-eye-open"></i>
           <%= post.views %>
-        </div>
-      </div>
+        </li>
+      </ul>
     </div>
   <% end %>
 <% end %>

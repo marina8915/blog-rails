@@ -1,49 +1,51 @@
-<% if params[:name] %>
-  <p class="text-center">
-    Sort by Date:
-    <%= link_to order_user_path(params[:name], 'last') do %>
-      <i class="glyphicon glyphicon-sort-by-attributes"></i>
-    <% end %>
-    <%= link_to order_user_path(params[:name], 'old') do %>
-      <i class="glyphicon glyphicon-sort-by-attributes-alt"></i>
-    <% end %>
-    by Rating:
-    <%= link_to order_user_path(params[:name], 'high') do %>
-      <i class="glyphicon glyphicon-sort-by-order-alt"></i>
-    <% end %>
-    <%= link_to order_user_path(params[:name], 'low') do %>
-      <i class="glyphicon glyphicon-sort-by-order"></i>
-    <% end %>
-    by Views:
-    <%= link_to order_user_path(params[:name],'many') do %>
-      <i class="glyphicon glyphicon-sort-by-order-alt"></i>
-    <% end %>
-    <%= link_to order_user_path(params[:name], 'less') do %>
-      <i class="glyphicon glyphicon-sort-by-order"></i>
-    <% end %>
-  </p>
-<% else %>
-  <p class="text-center">
-    Sort by Date:
-    <%= link_to order_path('last') do %>
-      <i class="glyphicon glyphicon-sort-by-attributes"></i>
-    <% end %>
-    <%= link_to order_path('old') do %>
-      <i class="glyphicon glyphicon-sort-by-attributes-alt"></i>
-    <% end %>
-    by Rating:
-    <%= link_to order_path('high') do %>
-      <i class="glyphicon glyphicon-sort-by-order-alt"></i>
-    <% end %>
-    <%= link_to order_path('low') do %>
-      <i class="glyphicon glyphicon-sort-by-order"></i>
-    <% end %>
-    by Views:
-    <%= link_to order_path('many') do %>
-      <i class="glyphicon glyphicon-sort-by-order-alt"></i>
-    <% end %>
-    <%= link_to order_path('less') do %>
-      <i class="glyphicon glyphicon-sort-by-order"></i>
-    <% end %>
-  </p>
-<% end %>
+<div class="order">
+  <% if params[:name] %>
+    <p class="text-center">
+      Sort by Date:
+      <%= link_to order_user_path(params[:name], 'date_desc') do %>
+        <i class="glyphicon glyphicon-arrow-down"></i>
+      <% end %>
+      <%= link_to order_user_path(params[:name], 'date') do %>
+        <i class="glyphicon glyphicon-arrow-up"></i>
+      <% end %>
+      by Rating:
+      <%= link_to order_user_path(params[:name], 'rating_desc') do %>
+        <i class="glyphicon glyphicon-arrow-down"></i>
+      <% end %>
+      <%= link_to order_user_path(params[:name], 'rating') do %>
+        <i class="glyphicon glyphicon-arrow-up"></i>
+      <% end %>
+      by Views:
+      <%= link_to order_user_path(params[:name],'views_desc') do %>
+        <i class="glyphicon glyphicon-arrow-down"></i>
+      <% end %>
+      <%= link_to order_user_path(params[:name], 'views') do %>
+        <i class="glyphicon glyphicon-arrow-up"></i>
+      <% end %>
+    </p>
+  <% else %>
+    <p class="text-center">
+      Sort by Date:
+      <%= link_to order_path('date_desc') do %>
+        <i class="glyphicon glyphicon-arrow-down"></i>
+      <% end %>
+      <%= link_to order_path('date') do %>
+        <i class="glyphicon glyphicon-arrow-up"></i>
+      <% end %>
+      by Rating:
+      <%= link_to order_path('rating_desc') do %>
+        <i class="glyphicon glyphicon-arrow-down"></i>
+      <% end %>
+      <%= link_to order_path('rating') do %>
+        <i class="glyphicon glyphicon-arrow-up"></i>
+      <% end %>
+      by Views:
+      <%= link_to order_path('views_desc') do %>
+        <i class="glyphicon glyphicon-arrow-down"></i>
+      <% end %>
+      <%= link_to order_path('views') do %>
+        <i class="glyphicon glyphicon-arrow-up"></i>
+      <% end %>
+    </p>
+  <% end %>
+</div>

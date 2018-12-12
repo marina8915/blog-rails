@@ -37,11 +37,26 @@ main {
   .form-user {
     width: 30% !important;
   }
+  .order {
+    a:hover {
+      text-decoration: none;
+    }
+  }
 }
 
 /* Posts */
-.post, .post-info {
+.post {
   margin-bottom: 0.5em;
+}
+
+.post-info {
+  margin-bottom: 0.5em;
+  li {
+    padding: 0.5em;
+    a:hover {
+      text-decoration: none;
+    }
+  }
 }
 
 .thumb {
@@ -52,10 +67,6 @@ main {
 
 .img-thumbnail {
   margin-bottom: 1em;
-}
-
-.padding {
-  padding: 0.5em;
 }
 
 /* Comments*/
