@@ -1,9 +1,17 @@
 <ul class="nav justify-content-center bg-header">
   <li class="nav-item"><%= link_to 'Blog', root_path, class: 'nav-link text-light' %></li>
   <% if current_user %>
-    <li class="nav-item"><%= link_to 'New post', new_post_path, class: 'nav-link text-light' %></li>
-    <li class="nav-item"><%= link_to current_user.name, user_path(current_user.id),
-                                     class: 'nav-link text-light' %></li>
+    <li class="nav-item">
+      <%= link_to new_post_path, class: 'nav-link text-light' do %>
+        <i class="glyphicon glyphicon-plus"></i> New post
+      <% end %>
+    </li>
+    <li class="nav-item">
+      <%= link_to user_path(current_user.id), class: 'nav-link text-light' do %>
+        <i class="glyphicon glyphicon-user"></i>
+        <%= current_user.name %>
+      <% end %>
+    </li>
     <li class="nav-item"><%= link_to 'Exit', logout_path, method: :delete,
                                      class: 'nav-link text-light' %></li>
   <% else %>

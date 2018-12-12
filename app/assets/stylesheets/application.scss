@@ -1,4 +1,5 @@
 @import 'bootstrap';
+@import 'bootstrap/glyphicons';
 
 /* header */
 .bg-header {
@@ -15,17 +16,27 @@
     margin-bottom: 10px;
   }
 }
+.navbar-nav {
+  flex-direction: row !important;
+  .nav-link {
+    padding-right: 10px !important;
+  }
+}
 
 /* Forms */
 main {
-  min-height: calc(100vh - 170px)
-}
-.form-group {
-  width: 50% !important;
-}
+  min-height: calc(100vh - 170px);
+  .form-group {
+    width: 75% !important;
+  }
+  i {
+    vertical-align: middle;
+    padding-right: 2px;
+  }
 
-.form-user {
-  width: 30% !important;
+  .form-user {
+    width: 30% !important;
+  }
 }
 
 /* Posts */
@@ -42,6 +53,7 @@ main {
 .img-thumbnail {
   margin-bottom: 1em;
 }
+
 .padding {
   padding: 0.5em;
 }
