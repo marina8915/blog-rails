@@ -89,7 +89,7 @@ class PostsController < ApplicationController
   end
 
   def user_posts
-    if User.find_by_name(params[:name])
+    if @user = User.find_by_name(params[:name])
       @posts = @user.posts
       @posts = @posts.order(order_by) if params[:by]
     else

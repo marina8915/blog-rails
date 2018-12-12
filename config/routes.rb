@@ -2,11 +2,10 @@ Rails.application.routes.draw do
   get 'admin/users'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   resources :posts do
-    resources :comments
-    resources :ratings
+    resources :comments, only: [:create, :destroy]
+    resources :ratings, only: [:create]
   end
-  get 'comment/likes' => 'likes#create', as: 'comment_likes'
-  post 'comment/likes' => 'likes#create', as: 'comment_like'
+  post 'comment/likes' => 'likes#create', as: 'comment_likes'
 
   get ':name/posts' => 'posts#index', as: 'user_posts'
   get ':name/posts/order/:by' => 'posts#index', as: 'order_user'
@@ -20,7 +19,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :sessions
+  resources :sessions, only: [:new, :create]
   delete 'logout' => 'sessions#destroy'
   root 'posts#index'
 end
