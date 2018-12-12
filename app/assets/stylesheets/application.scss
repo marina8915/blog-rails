@@ -1,5 +1,6 @@
 @import 'bootstrap';
 @import 'bootstrap/glyphicons';
+@import 'fontawesome-stars';
 
 /* header */
 .bg-header {
@@ -33,7 +34,6 @@ main {
     vertical-align: middle;
     padding-right: 2px;
   }
-
   .form-user {
     width: 30% !important;
   }
@@ -78,5 +78,5 @@ main {
   .btn {
     min-width: 40px;
   }
-
 }
+
