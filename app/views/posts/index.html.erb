@@ -6,7 +6,7 @@
 
 <% @posts.each do |post| %>
   <% if post.publish %>
-    <div class="post clearfix">
+    <div class="post clearfix border-bottom">
       <h4><%= link_to post.title, post_path(post) %></h4>
 
       <% if post.img? %>
@@ -22,16 +22,23 @@
         <%= post.description.html_safe %>
         <%= link_to 'more', post_path(post) %>
       </p>
-    </div>
-    <div class="clearfix border-bottom post-info">
-      <i class="float-right">
-        <%= link_to "#{post_path(post)}#comments" do %>
-          <i class="glyphicon glyphicon-comment"></i>
-          <%= "Comments #{post.comments.size}" %>
-        <% end %>
-        Rating <%= post.rating %>
-        Views <%= post.views %>
-      </i>
+
+      <div class="clearfix post-info float-right row">
+        <div class="col-auto">
+          <%= link_to "#{post_path(post)}#comments" do %>
+            <i class="glyphicon glyphicon-comment"></i>
+            <%= post.comments.size %>
+          <% end %>
+        </div>
+        <div class="col-auto">
+          <i class="glyphicon glyphicon-star"></i>
+          <%= post.rating %>
+        </div>
+        <div class="col-auto">
+          <i class="glyphicon glyphicon-eye-open"></i>
+          <%= post.views %>
+        </div>
+      </div>
     </div>
   <% end %>
 <% end %>

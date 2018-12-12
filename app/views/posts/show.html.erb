@@ -9,7 +9,7 @@
   <iframe width="500" height="310" src="https://www.youtube.com/embed/<%= @video %>"
           frameborder="0" allowfullscreen></iframe>
 <% end %>
-<div class="form-row">
+<div class="row">
   <div class="col-auto"> Vote: <%= render 'ratings/form' %></div>
   <div class="col-auto">Rating: <%= @post.rating %> / <%= @post.ratings.size - 1 %></div>
   <div class="col-auto">Views: <%= @post.views %></div>

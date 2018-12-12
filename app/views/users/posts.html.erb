@@ -21,14 +21,20 @@
               Status: <%= post.publish ? 'Published' : 'Not published' %>
             </p>
           </li>
-          <li class="nav-item padding">Rating: <%= post.rating %></li>
+          <li class="nav-item padding">
+            <i class="glyphicon glyphicon-star"></i>
+            <%= post.rating %>
+          </li>
           <li class="nav-item padding">
             <%= link_to "#{post_path(post)}#comments" do %>
               <i class="glyphicon glyphicon-comment"></i>
-              <%= "Comments #{post.comments.size}" %>
+              <%= post.comments.size %>
             <% end %>
           </li>
-          <li class="nav-item"><p class="padding">Views: <%= post.views %></p></li>
+          <li class="nav-item padding">
+            <i class="glyphicon glyphicon-eye-open"></i>
+            <%= post.views %>
+          </li>
         </ul>
       </nav>
 
