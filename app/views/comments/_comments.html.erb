@@ -4,8 +4,20 @@
 
 <% @comments.each do |comment| %>
   <div class="border rounded comment shadow-sm p-3 mb-5 bg-white">
+    <% if check_access(comment) %>
+      <div class="action float-right">
+        <%= link_to edit_post_comment_path(comment.post, comment) do %>
+          <i class="glyphicon glyphicon-pencil"></i>
+        <% end %>
+        <%= link_to [comment.post, comment],
+                    method: :delete, data: { confirm: 'Are you sure?'} do %>
+          <i class="glyphicon glyphicon-remove"></i>
+        <% end %>
+      </div>
+    <% end %>
+
     <strong><%= comment.commenter %></strong>
-    <p class="float-right"><%= comment.created_at.strftime("%F %H:%M") %></p>
+    <p class="date float-right"><%= comment.created_at.strftime("%F %H:%M") %></p>
     <p><%= comment.body %></p>
 
     <div class="like">

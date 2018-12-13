@@ -11,5 +11,9 @@ class ApplicationController < ActionController::Base
     redirect_to path, alert: 'Access is denied.'
   end
 
-  helper_method :current_user, :redirect_access
+  def check_access(item)
+    current_user.access && current_user.id == item.user_id
+  end
+
+  helper_method :current_user, :redirect_access, :check_access
 end

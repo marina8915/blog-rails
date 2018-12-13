@@ -1,5 +1,6 @@
 class CommentsController < ApplicationController
-  before_action :find_post, only: [:create, :destroy]
+  before_action :find_post, only: [:create, :edit, :update, :destroy]
+  before_action :find_comment, only: [:edit, :update]
 
   def create
     if !current_user && check_commenter
@@ -13,11 +14,28 @@ class CommentsController < ApplicationController
     end
   end
 
+  def edit
+    redirect_access(root_path) unless check_access(@comment)
+  end
+
+  def update
+    if check_access(@comment)
+      if @comment.update(params.require(:comment).permit(:body))
+        redirect_to comments_user_path(current_user.id), notice: 'Comment updated.'
+      else
+        render 'edit'
+      end
+    else
+      redirect_access(root_path)
+    end
+  end
+
+
   def destroy
     @comment = @post.comments.find(params[:id])
     if current_user.id == @comment.user_id
       @comment.destroy
-      redirect_to comments_user_path(current_user.id)
+      redirect_to comments_user_path(current_user.id), notice: 'Comment deleted.'
     else
       redirect_access(root_path)
     end
@@ -29,6 +47,10 @@ class CommentsController < ApplicationController
     @post = Post.find(params[:post_id])
   end
 
+  def find_comment
+    @comment = Comment.find(params[:id])
+  end
+
   def check_commenter
     @user = User.find_by_name(params[:comment][:commenter])
     @user.present? ? false : true
@@ -37,6 +59,6 @@ class CommentsController < ApplicationController
   def save_comment
     @comment = @post.comments.create(params.require(:comment).permit(:commenter, :body, :user_id))
     @comment[:plus] = @comment[:minus] = 0
-    @comment.save ? (redirect_to @post) : (render '_form')
+    @comment.save ? (redirect_to @post, notice: 'Comment created.') : (render '_form')
   end
 end

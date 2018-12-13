@@ -34,7 +34,8 @@ main {
   .form-user {
     width: 30% !important;
   }
-  .order {
+  .order,
+  .action {
     a:hover {
       text-decoration: none;
     }
@@ -72,6 +73,9 @@ main {
   margin-bottom: 20px !important;
   li {
     padding: 0.5em;
+  }
+  .date {
+    padding-right: 10px;
   }
 }
 

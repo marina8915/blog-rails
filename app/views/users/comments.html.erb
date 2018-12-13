@@ -1,4 +1,5 @@
 <h3>My comments</h3>
+<%= render 'posts/notice' %>
 
 <% if @comments.empty? %>
   <p>No comments</p>
@@ -8,10 +9,17 @@
   <div class="border rounded comment">
     <nav class="navbar navbar-expand-lg navbar-light">
       <h4><%= link_to comment.post.title, post_path(comment.post), class: 'navbar-brand' %></h4>
-      <ul class="navbar-nav mr-auto">
+      <ul class="navbar-nav mr-auto action">
+        <li>
+          <%= link_to edit_post_comment_path(comment.post, comment) do %>
+            <i class="glyphicon glyphicon-pencil"></i>
+          <% end %>
+        </li>
         <li class="nav-item">
-          <%= link_to 'Delete', [comment.post, comment],
-                      method: :delete, data: { confirm: 'Are you sure?'} %>
+          <%= link_to [comment.post, comment],
+                      method: :delete, data: { confirm: 'Are you sure?'} do %>
+            <i class="glyphicon glyphicon-remove"></i>
+          <% end %>
         </li>
         <li>
           <i class="glyphicon glyphicon-heart"></i>
