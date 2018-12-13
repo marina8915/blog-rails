@@ -7,7 +7,18 @@
 <% @posts.each do |post| %>
   <% if post.publish %>
     <div class="post clearfix border-bottom">
-      <h4><%= link_to post.title, post_path(post) %></h4>
+      <h3><%= link_to post.title, post_path(post) %></h3>
+
+      <% if check_access(post) %>
+        <div class="navbar-nav mr-auto action">
+          <%= link_to edit_post_path(post) do %>
+            <i class="glyphicon glyphicon-pencil"></i>
+          <% end %>
+          <%= link_to post_path(post), method: :delete, data: { confirm: 'Are you sure?'} do %>
+            <i class="glyphicon glyphicon-remove"></i>
+          <% end %>
+        </div>
+      <% end %>
 
       <% if post.img? %>
         <%= image_tag post.img.url(:thumb), class: 'img-thumbnail thumb'%>

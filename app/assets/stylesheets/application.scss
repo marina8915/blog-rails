@@ -36,6 +36,7 @@ main {
   }
   .order,
   .action {
+    padding-left: 10px;
     a:hover {
       text-decoration: none;
     }
@@ -45,6 +46,11 @@ main {
 /* Posts */
 .post {
   margin-bottom: 0.5em;
+  h3,
+  .action {
+    display: inline-block;
+    vertical-align: middle;
+  }
 }
 
 .post-info {

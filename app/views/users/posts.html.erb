@@ -1,4 +1,5 @@
 <h3>My posts</h3>
+<%= render 'posts/notice' %>
 
 <% if @posts.empty? %>
   <p>No posts</p>
@@ -10,30 +11,18 @@
         <h4><%= link_to post.title, post_path(post), class: 'navbar-brand' %></h4>
         <ul class="navbar-nav mr-auto post-info">
           <li class="nav-item">
-            <%= link_to 'Edit', edit_post_path(post) %>
-          </li>
-          <li class="nav-item">
-            <%= link_to 'Delete', post_path(post), method: :delete,
-                        data: { confirm: 'Are you sure?'} %>
-          </li>
-          <li class="nav-item">
-            <p class="<%= post.publish ? 'padding': 'nav-link' %>">
-              Status: <%= post.publish ? 'Published' : 'Not published' %>
+            <p class="<%= post.publish ? 'text-success': 'text-black-50' %> glyphicon glyphicon-ok">
             </p>
           </li>
           <li class="nav-item">
-            <i class="glyphicon glyphicon-star"></i>
-            <%= post.rating %>
-          </li>
-          <li class="nav-item">
-            <%= link_to "#{post_path(post)}#comments" do %>
-              <i class="glyphicon glyphicon-comment"></i>
-              <%= post.comments.size %>
+            <%= link_to edit_post_path(post) do %>
+              <i class="glyphicon glyphicon-pencil"></i>
             <% end %>
           </li>
           <li class="nav-item">
-            <i class="glyphicon glyphicon-eye-open"></i>
-            <%= post.views %>
+            <%= link_to post_path(post), method: :delete, data: { confirm: 'Are you sure?'} do %>
+              <i class="glyphicon glyphicon-remove"></i>
+            <% end %>
           </li>
         </ul>
       </nav>
@@ -51,6 +40,23 @@
         <%= post.description.html_safe %>
         <%= link_to 'more', post_path(post) %>
       </p>
+
+      <ul class="navbar-nav mr-auto post-info float-right">
+        <li class="nav-item">
+          <i class="glyphicon glyphicon-star"></i>
+          <%= post.rating %>
+        </li>
+        <li class="nav-item">
+          <%= link_to "#{post_path(post)}#comments" do %>
+            <i class="glyphicon glyphicon-comment"></i>
+            <%= post.comments.size %>
+          <% end %>
+        </li>
+        <li class="nav-item">
+          <i class="glyphicon glyphicon-eye-open"></i>
+          <%= post.views %>
+        </li>
+      </ul>
     </div>
   <% end %>
 <% end %>

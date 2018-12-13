@@ -17,7 +17,7 @@ class PostsController < ApplicationController
   end
 
   def edit
-    redirect_access(root_path) unless check_access
+    redirect_access(root_path) unless check_access(@post)
   end
 
   def create
@@ -25,15 +25,15 @@ class PostsController < ApplicationController
       @post = Post.new(post_params)
       @post.user_id = current_user.id
       @post.rating = @post.views = 0
-      @post.save ? (redirect_to @post) : (render 'new')
+      @post.save ? (redirect_to @post, notice: 'Post created.') : (render 'new')
     else
       redirect_access(root_path)
     end
   end
 
   def update
-    if check_access
-      @post.update(post_params) ? (redirect_to @post) : (render 'edit')
+    if check_access(@post)
+      @post.update(post_params) ? (redirect_to @post, notice: 'Post update.') : (render 'edit')
     else
       redirect_access(root_path)
     end
@@ -56,7 +56,7 @@ class PostsController < ApplicationController
   def destroy
     if current_user.id == @post.user_id
       @post.destroy
-      redirect_to posts_user_path(current_user.id)
+      redirect_to posts_user_path(current_user.id), notice: 'Post deleted.'
     else
       redirect_access(root_path)
     end
@@ -82,10 +82,6 @@ class PostsController < ApplicationController
 
   def post_params
     params.require(:post).permit(:title, :description, :body, :img, :publish, :video, :rating, :views)
-  end
-
-  def check_access
-    current_user.access && current_user.id == @post.user_id
   end
 
   def user_posts
