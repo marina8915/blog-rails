@@ -1,0 +1,19 @@
+<div id="like" class="<%= comment.plus - comment.minus >= 0 ? 'text-success' : 'text-danger' %> likes">
+  <p id="result"><%= comment.plus - comment.minus %></p>
+  <div id="info" class="info">
+    <p class="text-success"> <%= comment.plus %></p>
+    <p class="text-danger"><%= -comment.minus %></p>
+  </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function(){
+        $("#like").hover(function() {
+            $("#info").show();
+            $("#result").hide();
+        }, function() {
+            $("#info").hide();
+            $("#result").show();
+        });
+    });
+</script>

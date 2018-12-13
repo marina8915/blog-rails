@@ -55,6 +55,4 @@
   <% end %>
 <% end %>
 
-<div class="text-center">
-  <%= will_paginate @posts, container: false %>
-</div>
+<%= will_paginate @posts, list_classes: %w(pagination justify-content-center) %>

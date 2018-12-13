@@ -1,44 +1,47 @@
-<%= form_with(model: @post, html: { multipart: true }, local: true, class: 'form-group') do |form| %>
-  <% if @post.errors.any? %>
-    <div id="error_explanation" class="alert alert-danger">
-      <h4><%= pluralize(@post.errors.count, 'error') %></h4>
-      <ul>
-        <% @post.errors.full_messages.each do |msg| %>
-          <li><%= msg %></li>
-        <% end %>
-      </ul>
+<div class="row justify-content-center align-items-center h-100">
+  <%= form_with(model: @post, html: { multipart: true }, local: true) do |form| %>
+    <% if @post.errors.any? %>
+      <div id="error_explanation" class="alert alert-danger">
+        <h4><%= pluralize(@post.errors.count, 'error') %></h4>
+        <ul>
+          <% @post.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="form-group">
+      <%= form.label :title %><br>
+      <%= form.text_field :title, class: 'form-control' %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :description %><br>
+      <%= tinymce %>
+      <%= form.text_area :description, class: 'tinymce', rows: '2' %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :body %><br>
+      <%= tinymce %>
+      <%= form.text_area :body, class: 'tinymce', rows: '5' %>
+    </div>
+
+    <div class="form-group custom-file">
+      <%= form.label :img, 'Upload image', class: 'custom-file-label'%><br>
+      <%= form.file_field :img, class: 'custom-file-input' %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :video, 'Link to video' %><br>
+      <%= form.text_field :video, class: 'form-control' %>
+    </div>
+    <div class="form-group">
+      <%= form.check_box :publish %> Publish
+    </div>
+    <div class="form-group">
+      <%= form.submit class: 'btn btn-outline-primary' %>
     </div>
   <% end %>
-
-  <p>
-    <%= form.label :title %><br>
-    <%= form.text_field :title, class: 'form-control' %>
-  </p>
-
-  <p>
-    <%= form.label :description %><br>
-    <%= tinymce %>
-    <%= form.text_area :description, class: 'tinymce', rows: '2' %>
-  </p>
-
-  <p>
-    <%= form.label :body %><br>
-    <%= tinymce %>
-    <%= form.text_area :body, class: 'tinymce', rows: '5' %>
-  </p>
-
-  <p>
-    <%= form.label :img, 'Upload image' %><br>
-    <%= form.file_field :img %>
-  </p>
-
-  <p>
-    <%= form.label :video, 'Link to video' %><br>
-    <%= form.text_field :video, class: 'form-control' %>
-  </p>
-
-  <p><%= form.check_box :publish %> Publish</p>
-  <p>
-    <%= form.submit class: 'btn btn-outline-primary' %>
-  </p>
-<% end %>
+</div>

@@ -34,6 +34,8 @@ gem 'carrierwave', '~> 1.0'
 gem 'tinymce-rails'
 # gem for pagination
 gem 'will_paginate', '>= 3.1'
+gem 'will_paginate-bootstrap4'
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 

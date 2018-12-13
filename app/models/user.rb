@@ -15,6 +15,5 @@ class User < ApplicationRecord
 
   def change_data
     self.email = self.email.downcase
-    self.name = self.name.downcase
   end
 end

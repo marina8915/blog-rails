@@ -27,9 +27,6 @@
 /* Forms */
 main {
   min-height: calc(100vh - 170px);
-  .form-group {
-    width: 75% !important;
-  }
   i {
     vertical-align: middle;
     padding-right: 2px;
@@ -81,9 +78,8 @@ main {
 /* LIKE */
 .like {
   text-align: right;
-  form, span {
+  form {
     display: inline-block;
-    margin-right: 10px;
     vertical-align: middle;
     &:last-child {
       margin-right: 0;
@@ -91,6 +87,22 @@ main {
   }
   .btn {
     min-width: 40px;
+  }
+  div {
+    display: inline-block;
+  }
+}
+
+.likes {
+  width: 30px;
+  text-align: center;
+  display: inline-block;
+  .info {
+    display: none;
+  }
+  p {
+    display: inline-block;
+    margin: 0;
   }
 }
 
