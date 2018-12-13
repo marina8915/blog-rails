@@ -12,7 +12,11 @@ class ApplicationController < ActionController::Base
   end
 
   def check_access(item)
-    current_user.access && current_user.id == item.user_id
+    if current_user
+      current_user.access && current_user.id == item.user_id
+    else
+      false
+    end
   end
 
   helper_method :current_user, :redirect_access, :check_access
