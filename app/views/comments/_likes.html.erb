@@ -1,6 +1,6 @@
-<div id="like" class="<%= comment.plus - comment.minus >= 0 ? 'text-success' : 'text-danger' %> likes">
-  <p id="result"><%= comment.plus - comment.minus %></p>
-  <div id="info" class="info">
+<div class="<%= comment.plus - comment.minus >= 0 ? 'text-success' : 'text-danger' %> likes">
+  <p class="result"><%= comment.plus - comment.minus %></p>
+  <div class="info">
     <p class="text-success"> <%= comment.plus %></p>
     <p class="text-danger"><%= -comment.minus %></p>
   </div>
@@ -8,12 +8,12 @@
 
 <script type="text/javascript">
     $(document).ready(function(){
-        $("#like").hover(function() {
-            $("#info").show();
-            $("#result").hide();
+        $(".likes").hover(function() {
+            $(".info", this).show();
+            $(".result", this).hide();
         }, function() {
-            $("#info").hide();
-            $("#result").show();
+            $(".info", this).hide();
+            $(".result", this).show();
         });
     });
 </script>
