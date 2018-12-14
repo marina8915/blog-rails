@@ -18,15 +18,8 @@ class LikesController < ApplicationController
     end
   end
 
-  def show
-    if current_user
-      @like = @comment.likes.find(current_user.id)
-      @like = @like.nil? ? 0 : @like
-    end
-  end
-
   def destroy
-    @like = @comment.likes.find(params[:id])
+    @like = Like.find(params[:id])
     if current_user.id == @like.user_id
       change_like(@like.like, 'minus')
       @like.destroy
