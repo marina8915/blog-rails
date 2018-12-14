@@ -73,7 +73,7 @@ class LikesController < ApplicationController
       else
         @comment.update_columns(minus: @comment.minus + 1)
       end
-      redirect_to @post, notice: 'You mark saved.'
+      redirect_to @post, notice: 'Your mark saved.'
     else
       redirect_to @post, alert: 'Wrong value'
     end

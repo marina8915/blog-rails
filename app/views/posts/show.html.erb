@@ -1,7 +1,7 @@
 <div class="post">
   <h3><%= @post.title %></h3>
   <% if check_access(@post) %>
-    <div class="action" style="display: inline-block">
+    <div class="action">
       <%= link_to edit_post_path(@post) do %>
         <i class="glyphicon glyphicon-pencil"></i>
       <% end %>
@@ -24,6 +24,18 @@
 
   <div class="row">
     <div class="col-auto"> Vote: <%= render 'ratings/form' %></div>
+    <div class="col-auto action">
+      <% if current_user %>
+        <% if @rating = @post.ratings.find_by_user_id(current_user.id) %>
+          <p class="user-mark">
+            You mark: <%= @rating.rating %>
+            <%= link_to [@post, @rating], method: :delete, data: { confirm: 'Are you sure?'} do %>
+              <i class="glyphicon glyphicon-remove"></i>
+            <% end %>
+          </p>
+        <% end %>
+      <% end %>
+    </div>
     <div class="col-auto">Rating: <%= @post.rating %> / <%= @post.ratings.size - 1 %></div>
     <div class="col-auto">Views: <%= @post.views %></div>
   </div>

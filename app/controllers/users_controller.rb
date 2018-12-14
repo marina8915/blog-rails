@@ -27,7 +27,7 @@ class UsersController < ApplicationController
     @user.role = 'user'
     if @user.save
       session[:user_id] = @user.id
-      redirect_to root_path
+      redirect_to root_path, notice: "Welcome, #{current_user.name}"
     else
       render 'new'
     end
