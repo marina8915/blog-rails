@@ -1,7 +1,8 @@
 class LikesController < ApplicationController
+  before_action :find_comment, only: [:create, :show, :destroy]
+  before_action :find_post, only: [:create, :destroy]
+
   def create
-    @comment = Comment.find(params[:like][:comment_id])
-    @post = Post.find(@comment.post_id)
     if current_user
       if current_user.access
         if current_user.id != @comment.user_id
@@ -17,31 +18,82 @@ class LikesController < ApplicationController
     end
   end
 
+  def show
+    if current_user
+      @like = @comment.likes.find(current_user.id)
+      @like = @like.nil? ? 0 : @like
+    end
+  end
+
+  def destroy
+    @like = @comment.likes.find(params[:id])
+    if current_user.id == @like.user_id
+      change_like(@like.like, 'minus')
+      @like.destroy
+      redirect_to @post, notice: 'Mark deleted.'
+    else
+      redirect_access(@post)
+    end
+  end
+
   private
 
+  def find_post
+    @post = Post.find(@comment.post_id)
+  end
+
+  def find_comment
+    if params[:like]
+      @comment = Comment.find(params[:like][:comment_id])
+    else
+      @comment = Comment.find(params[:comment_id])
+    end
+  end
+
   def check_user
-    if @comment.likes.find_by_user_id(current_user.id).nil?
+    @like = @comment.likes.find_by_user_id(current_user.id)
+    if @like.nil?
       save_like
     else
-      redirect_to @post, alert: 'You have already voted.'
+      change_like(@like.like, 'minus')
+      change_like(params[:like][:like], 'plus')
+      @like.update_columns(like: params[:like][:like])
+      redirect_to @post, notice: 'You mark changed.'
     end
   end
 
   def save_like
     params[:like][:user_id] = current_user.id
     @like = @comment.likes.create(params.require(:like).permit(:like, :user_id))
+    save_result
+  end
+
+  def save_result
     if @like.save
-      case params[:like][:like]
-      when '1'
+      if params[:like][:like] == '1'
         @comment.update_columns(plus: @comment.plus + 1)
-      when '0'
-        @comment.update_columns(minus: @comment.minus + 1)
       else
-        alert = 'Wrong value'
+        @comment.update_columns(minus: @comment.minus + 1)
       end
+      redirect_to @post, notice: 'You mark saved.'
     else
-      alert = 'Wrong value'
+      redirect_to @post, alert: 'Wrong value'
     end
-    redirect_to @post, alert: alert
+  end
+
+  def change_like(like, action)
+    if action == 'plus'
+      if like == '1'
+        @comment.update_columns(plus: @comment.plus + 1)
+      else
+        @comment.update_columns(minus: @comment.minus + 1)
+      end
+    elsif action == 'minus'
+      if like
+        @comment.update_columns(plus: @comment.plus - 1)
+      else
+        @comment.update_columns(minus: @comment.minus - 1)
+      end
+    end
   end
 end

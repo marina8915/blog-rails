@@ -83,6 +83,16 @@ main {
   .date {
     padding-right: 10px;
   }
+  .user-mark {
+    padding-top: 5px;
+    margin: 0;
+    a{
+      vertical-align: middle;
+      &:hover {
+        text-decoration: none;
+      }
+    }
+  }
 }
 
 /* LIKE */

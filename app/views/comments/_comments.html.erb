@@ -34,6 +34,17 @@
         <%= form.check_box :like, checked: false, style: 'display: none' %>
         <%= form.submit '-', class: 'btn btn-outline-danger' %>
       <% end %>
+
+      <% if current_user %>
+        <% if @like = comment.likes.find_by_user_id(current_user.id) %>
+          <p class="user-mark">
+            You mark: <%= @like.like ? 1 : -1 %>
+            <%= link_to delete_like_path(comment.id, @like.id), method: :delete, data: { confirm: 'Are you sure?'} do %>
+              <i class="glyphicon glyphicon-remove"></i>
+            <% end %>
+          </p>
+        <% end %>
+      <% end %>
     </div>
   </div>
 <% end %>

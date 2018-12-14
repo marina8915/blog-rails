@@ -6,6 +6,7 @@ Rails.application.routes.draw do
     resources :ratings, only: [:create]
   end
   post 'comment/likes' => 'likes#create', as: 'comment_likes'
+  delete 'comment/:comment_id/likes/:id' => 'likes#destroy', as: 'delete_like'
 
   get ':name/posts' => 'posts#index', as: 'user_posts'
   get ':name/posts/order/:by' => 'posts#index', as: 'order_user'
