@@ -34,7 +34,12 @@ class UsersController < ApplicationController
   end
 
   def update
-    if @user.update_attributes(user_params)
+    if current_user.role == 'admin'
+      data = params.require(:user).permit(:name, :email, :password, :access)
+    else
+      data = user_params
+    end
+    if @user.update_attributes(data)
       redirect_to current_user.role == 'admin' ? admin_users_path : user_path(current_user.id)
     else
       render 'edit'
@@ -53,6 +58,6 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:name, :email, :password, :access)
+    params.require(:user).permit(:name, :email, :password)
   end
 end
