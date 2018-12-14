@@ -48,10 +48,15 @@ class LikesController < ApplicationController
     if @like.nil?
       save_like
     else
-      change_like(@like.like, 'minus')
-      change_like(params[:like][:like], 'plus')
-      @like.update_columns(like: params[:like][:like])
-      redirect_to @post, notice: 'You mark changed.'
+      like = @like.like ? '1' : '0'
+      if like == params[:like][:like]
+        redirect_to @post, notice: 'Mark not changed.'
+      else
+        change_like(@like.like, 'minus')
+        change_like(params[:like][:like], 'plus')
+        @like.update_columns(like: params[:like][:like])
+        redirect_to @post, notice: 'Your mark changed.'
+      end
     end
   end
 
