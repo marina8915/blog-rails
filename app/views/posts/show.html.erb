@@ -43,7 +43,16 @@
   <%= render 'alert' %>
   <%= render 'notice' %>
 
-  <%= render partial: 'comments/comments', local: { commets: @comments.arrange(order: :created_at) } %>
+  <h5 id="comments">Comments</h5>
+  <%='No comments' if @comments.empty? %>
+  <div class="comments">
+    <%= render @comments %>
+  </div>
+
+  <div class="actions text-center">
+    <%= link_to 'Show more', '#', data: { behavior: 'show_more' }, class: 'btn btn-outline-primary' %>
+  </div>
+
   <h5>Add a comment:</h5>
   <%= render 'comments/form' %>
 </div>

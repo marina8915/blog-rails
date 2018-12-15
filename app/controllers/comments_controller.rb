@@ -61,7 +61,7 @@ class CommentsController < ApplicationController
   end
 
   def save_comment
-    @comment = @post.comments.create(params.require(:comment).permit(:commenter, :body, :user_id))
+    @comment = @post.comments.create(params.require(:comment).permit(:commenter, :body, :user_id, :parent_id))
     @comment[:plus] = @comment[:minus] = 0
     @comment.save ? (redirect_to @post, notice: 'Comment created.') : (render '_form')
   end
