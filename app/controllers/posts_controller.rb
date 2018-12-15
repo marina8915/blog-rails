@@ -44,6 +44,10 @@ class PostsController < ApplicationController
       @date = @post.created_at.strftime("%F %H:%M")
       @user = User.find(@post.user_id).name
       @comments = @post.comments.search(params[:page])
+      respond_to do |format|
+        format.html
+        format.js
+      end
       @comment = Comment.new
       @rating = Rating.new
       @video = @post.video.split('/').last

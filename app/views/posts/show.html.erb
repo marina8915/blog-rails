@@ -43,7 +43,7 @@
   <%= render 'alert' %>
   <%= render 'notice' %>
 
-  <%= render 'comments/comments' %>
+  <%= render partial: 'comments/comments', local: { commets: @comments.arrange(order: :created_at) } %>
   <h5>Add a comment:</h5>
   <%= render 'comments/form' %>
 </div>

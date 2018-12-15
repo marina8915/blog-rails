@@ -1,52 +1,59 @@
 <h5 id="comments">Comments</h5>
 
 <%='No comments' if @comments.empty? %>
+<div class="comments">
+  <% @comments.each do |comment| %>
+    <div class="border rounded comment shadow-sm p-3 mb-5 bg-white">
+      <% if check_access(comment) %>
+        <div class="action float-right">
+          <%= link_to edit_post_comment_path(comment.post, comment) do %>
+            <i class="glyphicon glyphicon-pencil"></i>
+          <% end %>
+          <%= link_to [comment.post, comment],
+                      method: :delete, data: { confirm: 'Are you sure?'} do %>
+            <i class="glyphicon glyphicon-remove"></i>
+          <% end %>
+        </div>
+      <% end %>
 
-<% @comments.each do |comment| %>
-  <div class="border rounded comment shadow-sm p-3 mb-5 bg-white">
-    <% if check_access(comment) %>
-      <div class="action float-right">
-        <%= link_to edit_post_comment_path(comment.post, comment) do %>
-          <i class="glyphicon glyphicon-pencil"></i>
+      <strong><%= comment.commenter %></strong>
+      <p class="date float-right"><%= comment.created_at.strftime("%F %H:%M") %></p>
+      <p><%= comment.body %></p>
+
+      <div class="like">
+        <%= form_with(model:  [ comment, comment.likes.build ], local: true) do |form| %>
+          <%= form.text_field :comment_id, type: 'hidden', value: comment.id  %>
+          <%= form.check_box :like, checked: true, style: 'display: none' %>
+          <%= form.submit '+', class: 'btn btn-outline-success' %>
         <% end %>
-        <%= link_to [comment.post, comment],
-                    method: :delete, data: { confirm: 'Are you sure?'} do %>
-          <i class="glyphicon glyphicon-remove"></i>
+
+        <%= render partial: 'comments/likes', locals: { comment: comment} %>
+
+        <%= form_with(model: [ comment, comment.likes.build ], local: true) do |form| %>
+          <%= form.text_field :comment_id, type: 'hidden', value: comment.id  %>
+          <%= form.check_box :like, checked: false, style: 'display: none' %>
+          <%= form.submit '-', class: 'btn btn-outline-danger' %>
+        <% end %>
+
+        <% if current_user %>
+          <% if @like = comment.likes.find_by_user_id(current_user.id) %>
+            <p class="user-mark">
+              You mark: <%= @like.like ? 1 : -1 %>
+              <%= link_to delete_like_path(comment.id, @like.id), method: :delete, data: { confirm: 'Are you sure?'} do %>
+                <i class="glyphicon glyphicon-remove"></i>
+              <% end %>
+            </p>
+          <% end %>
         <% end %>
       </div>
-    <% end %>
-
-    <strong><%= comment.commenter %></strong>
-    <p class="date float-right"><%= comment.created_at.strftime("%F %H:%M") %></p>
-    <p><%= comment.body %></p>
-
-    <div class="like">
-      <%= form_with(model:  [ @comment, @comment.likes.build ], local: true) do |form| %>
-        <%= form.text_field :comment_id, type: 'hidden', value: comment.id  %>
-        <%= form.check_box :like, checked: true, style: 'display: none' %>
-        <%= form.submit '+', class: 'btn btn-outline-success' %>
-      <% end %>
-
-      <%= render partial: 'comments/likes', locals: { comment: comment} %>
-
-      <%= form_with(model: [ @comment, @comment.likes.build ], local: true) do |form| %>
-        <%= form.text_field :comment_id, type: 'hidden', value: comment.id  %>
-        <%= form.check_box :like, checked: false, style: 'display: none' %>
-        <%= form.submit '-', class: 'btn btn-outline-danger' %>
-      <% end %>
-
-      <% if current_user %>
-        <% if @like = comment.likes.find_by_user_id(current_user.id) %>
-          <p class="user-mark">
-            You mark: <%= @like.like ? 1 : -1 %>
-            <%= link_to delete_like_path(comment.id, @like.id), method: :delete, data: { confirm: 'Are you sure?'} do %>
-              <i class="glyphicon glyphicon-remove"></i>
-            <% end %>
-          </p>
-        <% end %>
-      <% end %>
+      <div class="btn-reply">
+        <%= link_to 'Reply', new_post_comment_path(comment.post.id, parent_id: comment),
+                      class: 'btn btn-outline-primary'%>
+      </div>
     </div>
-  </div>
-<% end %>
+  <% end %>
+</div>
 
-<%= will_paginate @comments, list_classes: %w(pagination justify-content-center) %>
+<div class="actions text-center">
+  <%= link_to 'Show more', '#', data: { behavior: 'show_more' }, class: 'btn btn-outline-primary' %>
+</div>

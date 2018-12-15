@@ -1,0 +1,10 @@
+<h3>New comment</h3>
+<% if @comment.parent %>
+  <div class="border rounded comment shadow-sm p-3 mb-5 bg-white">
+    <strong><%= @comment.parent.commenter %></strong>
+    <p class="date float-right"><%= @comment.parent.created_at.strftime("%F %H:%M") %></p>
+    <p><%= @comment.parent.body %></p>
+  </div>
+<% end %>
+
+<%= render 'comments/form' %>

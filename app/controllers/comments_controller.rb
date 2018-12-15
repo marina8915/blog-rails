@@ -1,6 +1,10 @@
 class CommentsController < ApplicationController
-  before_action :find_post, only: [:create, :edit, :update, :destroy]
+  before_action :find_post, only: [:new, :create, :edit, :update, :destroy]
   before_action :find_comment, only: [:edit, :update]
+
+  def new
+    @comment = Comment.new(parent_id: params[:parent_id])
+  end
 
   def create
     if !current_user && check_commenter

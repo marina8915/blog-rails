@@ -9,6 +9,7 @@
       </ul>
     </div>
   <% end %>
+  <%= form.hidden_field :parent_id %>
   <p>
     <%= form.text_field :commenter, class: 'form-control',
                         type: ('hidden' if current_user), placeholder: 'Name' %>

@@ -86,6 +86,8 @@ main {
   .user-mark {
     padding-top: 5px;
     margin: 0;
+    display: flex;
+    justify-content: flex-end;
     a{
       vertical-align: middle;
       &:hover {
@@ -93,6 +95,12 @@ main {
       }
     }
   }
+}
+
+.btn-reply {
+  margin-top: 20px;
+  display: flex;
+  justify-content: flex-end;
 }
 
 /* LIKE */

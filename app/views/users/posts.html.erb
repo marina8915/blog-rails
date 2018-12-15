@@ -44,7 +44,7 @@
       <ul class="navbar-nav mr-auto post-info float-right">
         <li class="nav-item">
           <i class="glyphicon glyphicon-star"></i>
-          <%= post.rating %>
+          <%= post.rating %> / <%= post.ratings.size %>
         </li>
         <li class="nav-item">
           <%= link_to "#{post_path(post)}#comments" do %>

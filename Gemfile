@@ -30,8 +30,10 @@ gem 'mini_magick', '~> 4.8'
 
 # upload files
 gem 'carrierwave', '~> 1.0'
-#text redactor
+# text redactor
 gem 'tinymce-rails'
+# comment comments
+gem 'ancestry'
 # gem for pagination
 gem 'will_paginate', '>= 3.1'
 gem 'will_paginate-bootstrap4'
