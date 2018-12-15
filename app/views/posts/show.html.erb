@@ -22,7 +22,9 @@
             frameborder="0" allowfullscreen></iframe>
   <% end %>
 
-  <p>Tags: <%= @post.tag_list %></p>
+  <% if @post.tag_list %>
+    <p>Tags: <%= @post.tag_list %></p>
+  <% end %>
 
   <div class="row">
     <div class="col-auto"> Vote: <%= render 'ratings/form' %></div>

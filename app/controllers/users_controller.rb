@@ -3,7 +3,7 @@ class UsersController < ApplicationController
 
   def posts
     if current_user
-      @posts = current_user.posts.search(params[:page])
+      @posts = current_user.posts.pager(params[:page])
     else
       redirect_access(root_path)
     end
@@ -11,7 +11,7 @@ class UsersController < ApplicationController
 
   def comments
     if current_user
-      @comments = current_user.comments.search(params[:page])
+      @comments = current_user.comments.pager(params[:page])
     else
       redirect_access(root_path)
     end

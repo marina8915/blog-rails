@@ -8,10 +8,12 @@ class PostsController < ApplicationController
       @posts = Post.order(order_by)
     elsif params[:tag].present?
       @posts = Post.tagged_with(params[:tag])
+    elsif params[:search]
+      @posts = Post.search(params[:search])
     else
       @posts = Post.all
     end
-    @posts = @posts.search(params[:page]) if @posts
+    @posts = @posts.pager(params[:page]) if @posts
   end
 
   def new
