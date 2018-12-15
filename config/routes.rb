@@ -5,6 +5,7 @@ Rails.application.routes.draw do
     resources :comments, only: [:new, :create, :edit, :update, :destroy]
     resources :ratings, only: [:create, :destroy]
   end
+
   post 'comment/likes' => 'likes#create', as: 'comment_likes'
   delete 'comment/:comment_id/likes/:id' => 'likes#destroy', as: 'delete_like'
 
@@ -19,6 +20,8 @@ Rails.application.routes.draw do
       get 'comments'
     end
   end
+
+  get '/tagged', to: 'posts#index', as: :tagged
 
   resources :sessions, only: [:new, :create]
   delete 'logout' => 'sessions#destroy'

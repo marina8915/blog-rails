@@ -6,6 +6,8 @@ class PostsController < ApplicationController
       user_posts
     elsif params[:by]
       @posts = Post.order(order_by)
+    elsif params[:tag].present?
+      @posts = Post.tagged_with(params[:tag])
     else
       @posts = Post.all
     end
@@ -85,7 +87,8 @@ class PostsController < ApplicationController
   end
 
   def post_params
-    params.require(:post).permit(:title, :description, :body, :img, :publish, :video, :rating, :views)
+    params.require(:post).permit(:title, :description, :body, :img, :publish,
+                                 :video, :rating, :views, :tag_list)
   end
 
   def user_posts

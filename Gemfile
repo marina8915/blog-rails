@@ -34,6 +34,8 @@ gem 'carrierwave', '~> 1.0'
 gem 'tinymce-rails'
 # comment comments
 gem 'ancestry'
+# tag
+gem 'acts-as-taggable-on', '~> 6.0'
 # gem for pagination
 gem 'will_paginate', '>= 3.1'
 gem 'will_paginate-bootstrap4'
