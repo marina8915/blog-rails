@@ -35,7 +35,7 @@ class UsersController < ApplicationController
 
   def update
     if current_user.role == 'admin'
-      data = params.require(:user).permit(:name, :email, :password, :access)
+      data = admin_params
     else
       data = user_params
     end
@@ -59,5 +59,9 @@ class UsersController < ApplicationController
 
   def user_params
     params.require(:user).permit(:name, :email, :password)
+  end
+
+  def admin_params
+    params.require(:user).permit(:name, :email, :password, :access)
   end
 end

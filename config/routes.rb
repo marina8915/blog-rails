@@ -24,6 +24,7 @@ Rails.application.routes.draw do
   get '/tagged', to: 'posts#index', as: :tagged
 
   resources :sessions, only: [:new, :create]
+  resources :password_resets
   delete 'logout' => 'sessions#destroy'
   root 'posts#index'
 end

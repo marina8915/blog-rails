@@ -47,6 +47,17 @@ main {
       margin: 0 auto;
     }
   }
+  .input-group-text {
+    i {
+      line-height: 1;
+      text-align: center;
+    }
+  }
+  .field_with_errors {
+    input {
+      border-color: #721c24;
+    }
+  }
 }
 
 /* Posts */

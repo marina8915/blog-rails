@@ -12,17 +12,14 @@
     <% end %>
 
     <div class="form-group">
-      <%= f.label :name %><br />
-      <%= f.text_field :name, class: 'form-control' %>
+      <%= f.text_field :name, class: 'form-control', placeholder: 'Login' %>
     </div>
     <div class="form-group">
-      <%= f.label :email %><br />
-      <%= f.text_field :email, class: 'form-control' %>
+      <%= f.text_field :email, class: 'form-control',placeholder: 'Email' %>
     </div>
     <% if current_user.nil? || current_user.id == params[:id].to_i %>
       <div class="form-group">
-        <%= f.label :password %><br />
-        <%= f.password_field :password, class: 'form-control' %>
+        <%= f.password_field :password, class: 'form-control', placeholder: 'Password' %>
       </div>
     <% end %>
     <% if current_user %>
