@@ -32,14 +32,14 @@
       <% end %>
 
       <p>
-        <% post.tag_list.each do |tag| %>
-          <%= link_to tag, tagged_path(tag: tag) %>
-        <% end %>
+        <%= post.description.html_safe %>
+        <%= link_to 'more', post_path(post) %>
       </p>
 
       <p>
-        <%= post.description.html_safe %>
-        <%= link_to 'more', post_path(post) %>
+        <% post.tag_list.each do |tag| %>
+          <%= link_to tag, tagged_path(tag: tag), class: 'btn btn-outline-primary' %>
+        <% end %>
       </p>
 
       <ul class="clearfix post-info float-right navbar-nav">

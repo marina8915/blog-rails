@@ -6,7 +6,7 @@ class ApplicationRecord < ActiveRecord::Base
   end
 
   def self.search(search)
-    Post.where('title LIKE :search OR body LIKE :search OR description LIKE :search',
+    Post.where('title ILIKE :search OR body LIKE :search OR description LIKE :search',
                search: "%#{search}%")
   end
 end

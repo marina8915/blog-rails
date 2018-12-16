@@ -26,7 +26,7 @@
 
 /* Forms */
 main {
-  min-height: calc(100vh - 170px);
+  min-height: calc(100vh - 180px);
   i {
     vertical-align: middle;
     padding-right: 2px;
@@ -153,7 +153,12 @@ main {
 
 /* footer */
 footer {
-  a {
+  .github {
+    p {
+      display: inline-block;
+      vertical-align: middle;
+      margin-bottom: 0;
+    }
     &:hover {
       text-decoration: none;
     }
