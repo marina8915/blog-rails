@@ -12,8 +12,9 @@ class UserMailer < ApplicationMailer
     @user = user
     mg_client = Mailgun::Client.new API_KEY
     message_params = { from: 'admin@blog-ror-1.herokuapp.com',
-                        to:   user.email,
-                        subject: 'Reset password instructions',
+                       to: @user.email,
+                       subject: 'Reset password instructions',
+                       text: "To reset your password, click the URL below: #{edit_password_reset_path(@user.password_reset_token)}"
     }
     mg_client.send_message MAILGUN_DOMAIN, message_params
   end
