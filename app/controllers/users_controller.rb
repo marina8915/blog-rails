@@ -7,6 +7,7 @@ class UsersController < ApplicationController
     else
       redirect_access(root_path)
     end
+
   end
 
   def comments
@@ -55,6 +56,9 @@ class UsersController < ApplicationController
     else
       redirect_to root_path
     end
+
+  rescue ActiveRecord::RecordNotFound
+    redirect_to root_path
   end
 
   def user_params

@@ -59,6 +59,9 @@ class PostsController < ApplicationController
     else
       redirect_access(root_path)
     end
+
+  rescue ActiveRecord::RecordNotFound
+    redirect_to root_path, alert: 'Record not found.'
   end
 
   def destroy
@@ -86,6 +89,9 @@ class PostsController < ApplicationController
 
   def find_post
     @post = Post.find(params[:id])
+
+  rescue ActiveRecord::RecordNotFound
+    redirect_to root_path, alert: 'Post not found.'
   end
 
   def post_params
@@ -98,7 +104,7 @@ class PostsController < ApplicationController
       @posts = @user.posts
       @posts = @posts.order(order_by) if params[:by]
     else
-      redirect_to root_path, alert: 'User not found.'
+      redirect_to root_path
     end
   end
 end

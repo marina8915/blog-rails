@@ -26,12 +26,18 @@ class RatingsController < ApplicationController
     else
       redirect_access(@post)
     end
+
+  rescue ActiveRecord::RecordNotFound
+    redirect_to @post, alert: 'Mark not found.'
   end
 
   private
 
   def find_post
     @post = Post.find(params[:post_id])
+
+  rescue ActiveRecord::RecordNotFound
+    redirect_to root_path, alert: 'Post not found.'
   end
 
   def check_user

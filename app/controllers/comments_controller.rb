@@ -49,10 +49,16 @@ class CommentsController < ApplicationController
 
   def find_post
     @post = Post.find(params[:post_id])
+
+  rescue ActiveRecord::RecordNotFound
+    redirect_to root_path, alert: 'Post not found.'
   end
 
   def find_comment
     @comment = Comment.find(params[:id])
+
+  rescue ActiveRecord::RecordNotFound
+    redirect_to @post, alert: 'Comment not found.'
   end
 
   def check_commenter

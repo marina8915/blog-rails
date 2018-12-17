@@ -33,6 +33,9 @@ class LikesController < ApplicationController
 
   def find_post
     @post = Post.find(@comment.post_id)
+
+  rescue ActiveRecord::RecordNotFound
+    redirect_to root_path, alert: 'Post not found.'
   end
 
   def find_comment
@@ -41,6 +44,9 @@ class LikesController < ApplicationController
     else
       @comment = Comment.find(params[:comment_id])
     end
+
+  rescue ActiveRecord::RecordNotFound
+    redirect_to @post, alert: 'Comment not found.'
   end
 
   def check_user
@@ -58,6 +64,9 @@ class LikesController < ApplicationController
         redirect_to @post, notice: 'Your mark changed.'
       end
     end
+
+  rescue ActiveRecord::RecordNotFound
+    redirect_to @post, alert: 'Like not found.'
   end
 
   def save_like
