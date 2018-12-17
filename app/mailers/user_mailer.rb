@@ -1,5 +1,8 @@
 class UserMailer < ApplicationMailer
+  require 'mailgun-ruby'
 
+  API_KEY = ENV['MAILGUN_API_KEY']
+  MAILGUN_DOMAIN = ENV['MAILGUN_DOMAIN']
   # Subject can be set in your I18n file at config/locales/en.yml
   # with the following lookup:
   #
@@ -7,6 +10,11 @@ class UserMailer < ApplicationMailer
   #
   def reset_password(user)
     @user = user
-    mail to: user.email, subject: 'Reset password instructions'
+    mg_client = Mailgun::Client.new API_KEY
+    message_params = { from: 'admin@blog-ror-1.herokuapp.com',
+                        to:   user.email,
+                        subject: 'Reset password instructions',
+    }
+    mg_client.send_message MAILGUN_DOMAIN, message_params
   end
 end

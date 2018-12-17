@@ -40,6 +40,9 @@ gem 'acts-as-taggable-on', '~> 6.0'
 gem 'will_paginate', '>= 3.1'
 gem 'will_paginate-bootstrap4'
 
+# mailgun
+gem 'mailgun-ruby', '~>1.1.6'
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
