@@ -1,15 +1,15 @@
 <h3>Users</h3>
 
 <% @users.each do |user| %>
-  <div class="border-bottom post clearfix">
+  <div class="border-bottom users clearfix">
     <nav class="navbar navbar-expand-lg navbar-light">
       <h5><%= link_to user.name, user_path(user.id), class: 'navbar-brand' %></h5>
       <ul class="navbar-nav mr-auto">
         <li class="nav-item">
-          <%= link_to 'Edit', edit_user_path(user.id), class: 'nav-link' %>
+          <%= link_to 'Edit', edit_user_path(user.id) %>
         </li>
-        <li class="nav-item"><p class="padding">Posts: <%= user.posts.size %></p></li>
-        <li class="nav-item"><p class="padding">Comments: <%= user.comments.size %></p></li>
+        <li class="nav-item">Posts: <%= user.posts.size %></li>
+        <li class="nav-item">Comments: <%= user.comments.size %></li>
       </ul>
     </nav>
     <p><%= user.email %></p>
@@ -17,6 +17,4 @@
   </div>
 <% end %>
 
-<div class="text-center">
-  <%= will_paginate @users, container: false %>
-</div>
+<%= will_paginate @users, list_classes: %w(pagination justify-content-center) %>

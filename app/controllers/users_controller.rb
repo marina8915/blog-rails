@@ -1,30 +1,25 @@
 class UsersController < ApplicationController
+  before_action :find_user, only: [:show, :edit, :update]
+
   def posts
     if current_user
-      @posts = User.find(current_user.id).posts.search(params[:page])
+      @posts = current_user.posts.pager(params[:page])
     else
-      redirect_to root_path
+      redirect_access(root_path)
     end
+
   end
 
   def comments
     if current_user
-      @comments = User.find(current_user.id).comments.search(params[:page])
+      @comments = current_user.comments.pager(params[:page])
     else
-      redirect_to root_path
+      redirect_access(root_path)
     end
   end
 
   def new
     @user = User.new
-  end
-
-  def edit
-    find_user
-  end
-
-  def show
-    find_user
   end
 
   def create
@@ -33,15 +28,19 @@ class UsersController < ApplicationController
     @user.role = 'user'
     if @user.save
       session[:user_id] = @user.id
-      redirect_to root_path
+      redirect_to root_path, notice: "Welcome, #{current_user.name}"
     else
       render 'new'
     end
   end
 
   def update
-    find_user
-    if @user.update_attributes(user_params)
+    if current_user.role == 'admin'
+      data = admin_params
+    else
+      data = user_params
+    end
+    if @user.update_attributes(data)
       redirect_to current_user.role == 'admin' ? admin_users_path : user_path(current_user.id)
     else
       render 'edit'
@@ -57,9 +56,16 @@ class UsersController < ApplicationController
     else
       redirect_to root_path
     end
+
+  rescue ActiveRecord::RecordNotFound
+    redirect_to root_path
   end
 
   def user_params
-    params.require(:user).permit(:name, :email, :password, :access, :role)
+    params.require(:user).permit(:name, :email, :password)
+  end
+
+  def admin_params
+    params.require(:user).permit(:name, :email, :password, :access)
   end
 end

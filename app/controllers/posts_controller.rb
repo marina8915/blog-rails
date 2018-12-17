@@ -1,101 +1,112 @@
 class PostsController < ApplicationController
+  before_action :find_post, only: [:edit, :update, :show, :destroy]
+
   def index
     if params[:name]
-      @posts = User.find_by_name(params[:name]).posts
+      user_posts
     elsif params[:by]
-      order_by
+      @posts = Post.order(order_by)
+    elsif params[:tag].present?
+      @posts = Post.tagged_with(params[:tag])
+    elsif params[:search]
+      @posts = Post.search(params[:search])
     else
       @posts = Post.all
     end
-    @posts = @posts.search(params[:page])
+    @posts = @posts.pager(params[:page]) if @posts
   end
 
   def new
-    if current_user.access
-      @post = Post.new
-    else
-      redirect_to root_path
-    end
+    current_user.access ? @post = Post.new : redirect_access(root_path)
   end
 
   def edit
-    @post = find_post
-    redirect_to root_path unless (current_user.access && current_user.id == @post.user_id)
+    redirect_access(root_path) unless check_access(@post)
   end
 
   def create
     if current_user.access
       @post = Post.new(post_params)
       @post.user_id = current_user.id
-      @post.rating = 0
-      @post.views = 0
-
-      if @post.save
-        redirect_to @post
-      else
-        render 'new'
-      end
+      @post.rating = @post.views = 0
+      @post.save ? (redirect_to @post, notice: 'Post created.') : (render 'new')
     else
-      redirect_to root_path
+      redirect_access(root_path)
     end
   end
 
   def update
-    @post = find_post
-    if current_user.access && current_user.id == @post.user_id
-      if @post.update(post_params)
-        redirect_to @post
-      else
-        render 'edit'
-      end
+    if check_access(@post)
+      @post.update(post_params) ? (redirect_to @post, notice: 'Post update.') : (render 'edit')
     else
-      redirect_to root_path
+      redirect_access(root_path)
     end
   end
 
   def show
-    @post = find_post
     if @post.publish || @post.user_id == current_user.id
       @date = @post.created_at.strftime("%F %H:%M")
       @user = User.find(@post.user_id).name
-      @comments = @post.comments.search(params[:page])
+      @comments = @post.comments.pager(params[:page]).select { |comment| comment.parent_id.nil? }
+      respond_to do |format|
+        format.html
+        format.js
+      end
       @comment = Comment.new
       @rating = Rating.new
+      @user_rating = @post.ratings.find_by_user_id(current_user.id)
+
       @video = @post.video.split('/').last
       @views = @post.update_columns(views: @post.views + 1)
     else
-      redirect_to root_path
+      redirect_access(root_path)
     end
+
+  rescue ActiveRecord::RecordNotFound
+    redirect_to root_path, alert: 'Record not found.'
   end
 
   def destroy
-    if current_user.id == find_post.user_id
-      find_post.destroy
-      redirect_to posts_user_path(current_user.id)
+    if current_user.id == @post.user_id
+      @post.destroy
+      redirect_to posts_user_path(current_user.id), notice: 'Post deleted.'
     else
-      redirect_to root_path
+      redirect_access(root_path)
     end
   end
 
   def order_by
-    sort = case params[:by]
-           when 'last' then 'created_at DESC'
-           when 'old' then 'created_at'
-           when 'high' then 'rating DESC'
-           when 'low' then 'rating'
-           when 'many' then 'views DESC'
-           when 'less' then 'views'
-           end
-    @posts = Post.order(sort)
+    case params[:by]
+    when 'date_desc' then 'created_at DESC'
+    when 'date' then 'created_at'
+    when 'rating_desc' then 'rating DESC'
+    when 'rating' then 'rating'
+    when 'views_desc' then 'views DESC'
+    when 'views' then 'views'
+    else redirect_to root_path
+    end
   end
 
   private
 
   def find_post
-    Post.find(params[:id])
+    @post = Post.find(params[:id])
+
+  rescue ActiveRecord::RecordNotFound
+    redirect_to root_path, alert: 'Post not found.'
   end
 
   def post_params
-    params.require(:post).permit(:title, :description, :body, :img, :publish, :video, :rating, :views)
+    params.require(:post).permit(:title, :description, :body, :img, :publish,
+                                 :video, :rating, :views, :tag_list)
+  end
+
+  def user_posts
+    if @user = User.find_by_name(params[:name])
+      @posts = @user.posts
+      @posts = @posts.order(order_by) if params[:by]
+    else
+      redirect_to root_path
+    end
   end
 end

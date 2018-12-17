@@ -30,22 +30,29 @@ gem 'mini_magick', '~> 4.8'
 
 # upload files
 gem 'carrierwave', '~> 1.0'
-#text redactor
+# text redactor
 gem 'tinymce-rails'
+# comment comments
+gem 'ancestry'
+# tag
+gem 'acts-as-taggable-on', '~> 6.0'
 # gem for pagination
 gem 'will_paginate', '>= 3.1'
+gem 'will_paginate-bootstrap4'
+
+# mailgun
+gem 'mailgun-ruby', '~>1.1.6'
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
+gem 'bootstrap-glyphicons'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
-
-  # Use sqlite3 as the database for Active Record
-  gem 'sqlite3'
 end
 
 group :development do
@@ -64,6 +71,5 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'bootstrap', '~> 4.1.3'
 gem 'jquery-rails'
 
-group :production do
-  gem 'pg'
-end
+# database
+gem 'pg'

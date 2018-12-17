@@ -1,17 +1,62 @@
-<h3><%= @post.title %></h3>
+<div class="post">
+  <h3><%= @post.title %></h3>
+  <% if check_access(@post) %>
+    <div class="action">
+      <%= link_to edit_post_path(@post) do %>
+        <i class="glyphicon glyphicon-pencil"></i>
+      <% end %>
+      <%= link_to post_path(@post), method: :delete, data: { confirm: 'Are you sure?'} do %>
+        <i class="glyphicon glyphicon-remove"></i>
+      <% end %>
+    </div>
+  <% end %>
 
-<p><%= @date %> <%= link_to @user, user_posts_path(@user) %></p>
-<% if @post.img? %>
-  <%= image_tag @post.img.url, width:350, class: 'img-thumbnail' %>
-<% end %>
-<p class="font-weight-normal"><%= @post.body.html_safe %></p>
-<% if @post.video? %>
-  <iframe width="500" height="310" src="https://www.youtube.com/embed/<%= @video %>"
-          frameborder="0" allowfullscreen></iframe>
-<% end %>
-<%= render 'ratings/form' %>
-<p>Rating: <%= @post.rating %> / <%= @post.ratings.size - 1 %></p>
-<p>Views: <%= @post.views %></p>
-<%= render 'comments/comments' %>
-<h5>Add a comment:</h5>
-<%= render 'comments/form' %>
+  <p><%= @date %> <%= link_to @user, user_posts_path(@user) %></p>
+  <% if @post.img? %>
+    <%= image_tag @post.img.url, width:350, class: 'img-thumbnail' %>
+  <% end %>
+  <p class="font-weight-normal"><%= @post.body.html_safe %></p>
+
+  <% if @post.video? %>
+    <iframe width="500" height="310" src="https://www.youtube.com/embed/<%= @video %>"
+            frameborder="0" allowfullscreen></iframe>
+  <% end %>
+
+  <% if @post.tag_list %>
+    <p>Tags: <%= @post.tag_list %></p>
+  <% end %>
+
+  <div class="row">
+    <div class="col-auto"> Vote: <%= render 'ratings/form' %></div>
+    <div class="col-auto action">
+      <% if current_user %>
+        <% if @user_rating %>
+          <p class="user-mark">
+            You mark: <%= @user_rating.rating %>
+            <%= link_to [@post, @user_rating], method: :delete, data: { confirm: 'Are you sure?'} do %>
+              <i class="glyphicon glyphicon-remove"></i>
+            <% end %>
+          </p>
+        <% end %>
+      <% end %>
+    </div>
+    <div class="col-auto">Rating: <%= @post.rating %> / <%= @post.ratings.size - 1 %></div>
+    <div class="col-auto">Views: <%= @post.views %></div>
+  </div>
+
+  <%= render 'alert' %>
+  <%= render 'notice' %>
+
+  <h5 id="comments">Comments</h5>
+  <%='No comments' if @comments.empty? %>
+  <div class="comments">
+    <%= render @comments %>
+  </div>
+
+  <div class="actions text-center">
+    <%= link_to 'Show more', '#', data: { behavior: 'show_more' }, class: 'btn btn-outline-primary' %>
+  </div>
+
+  <h5>Add a comment:</h5>
+  <%= render 'comments/form' %>
+</div>

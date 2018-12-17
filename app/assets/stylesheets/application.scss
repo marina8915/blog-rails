@@ -1,4 +1,6 @@
 @import 'bootstrap';
+@import 'bootstrap/glyphicons';
+@import 'fontawesome-stars';
 
 /* header */
 .bg-header {
@@ -15,22 +17,67 @@
     margin-bottom: 10px;
   }
 }
+.navbar-nav {
+  flex-direction: row !important;
+  .nav-link {
+    padding-right: 10px !important;
+  }
+}
 
 /* Forms */
 main {
-  min-height: calc(100vh - 170px)
-}
-.form-group {
-  width: 50% !important;
-}
-
-.form-user {
-  width: 30% !important;
+  min-height: calc(100vh - 180px);
+  i {
+    vertical-align: middle;
+    padding-right: 2px;
+  }
+  .form-user {
+    width: 30% !important;
+  }
+  .order,
+  .action {
+    padding-left: 10px;
+    a:hover {
+      text-decoration: none;
+    }
+  }
+  .search {
+    .input-group {
+      width: 30%;
+      margin: 0 auto;
+    }
+  }
+  .input-group-text {
+    i {
+      line-height: 1;
+      text-align: center;
+    }
+  }
+  .field_with_errors {
+    input {
+      border-color: #721c24;
+    }
+  }
 }
 
 /* Posts */
-.post, .post-info {
+.post {
   margin-bottom: 0.5em;
+  h3,
+  .action {
+    display: inline-block;
+    vertical-align: middle;
+  }
+}
+
+.post-info {
+  margin-bottom: 0.5em;
+  li {
+    padding: 0.5em;
+    a:hover {
+      text-decoration: none;
+    }
+  }
 }
 
 .thumb {
@@ -42,22 +89,48 @@ main {
 .img-thumbnail {
   margin-bottom: 1em;
 }
-.padding {
-  padding: 0.5em;
-}
 
 /* Comments*/
 .comment {
   padding: 10px;
   margin-bottom: 20px !important;
+  li {
+    padding: 0.5em;
+  }
+  .date {
+    padding-right: 10px;
+  }
+  .user-mark {
+    padding-top: 5px;
+    margin: 0;
+    a{
+      vertical-align: middle;
+      &:hover {
+        text-decoration: none;
+      }
+    }
+  }
+}
+
+.reply-comment {
+  padding-left: 30px;
+}
+
+.reply-comment .reply-comment .reply-comment .reply-comment .reply-comment .reply-comment {
+  padding: 0;
+}
+
+.btn-reply {
+  margin-top: 20px;
+  display: flex;
+  justify-content: flex-end;
 }
 
 /* LIKE */
 .like {
   text-align: right;
-  form, span {
+  form {
     display: inline-block;
-    margin-right: 10px;
     vertical-align: middle;
     &:last-child {
       margin-right: 0;
@@ -66,5 +139,43 @@ main {
   .btn {
     min-width: 40px;
   }
+  div {
+    display: inline-block;
+  }
+}
 
+.likes {
+  width: 45px;
+  text-align: center;
+  display: inline-block;
+  .info {
+    display: none;
+  }
+  p {
+    display: inline-block;
+    margin: 0;
+  }
+}
+
+/* USERS */
+.users li {
+  padding: 0.5em;
+}
+
+/* footer */
+footer {
+  .github {
+    p {
+      display: inline-block;
+      vertical-align: middle;
+      margin-bottom: 0;
+    }
+    &:hover {
+      text-decoration: none;
+    }
+    .navbar-nav-svg {
+      width: 1rem;
+      height: 1rem;
+    }
+  }
 }

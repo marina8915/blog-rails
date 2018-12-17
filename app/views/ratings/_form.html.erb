@@ -1,4 +1,4 @@
-<%= form_with(model: [ @post, @post.ratings.build ], local: true, class: 'form-group form-row') do |form| %>
+<%= form_with(model: [ @post, @post.ratings.build ], local: true, class: 'form-star') do |form| %>
   <% if @rating.errors.any? %>
     <div id="error_explanation" class="alert alert-danger">
       <h4><%= pluralize(@rating.errors.count, 'error') %></h4>
@@ -9,10 +9,6 @@
       </ul>
     </div>
   <% end %>
-  <div class="col-1.5">
-    <%= form.select 'rating', options_for_select([1, 2, 3, 4, 5], 5), {}, {class: 'form-control'} %>
-  </div>
-  <div class="col-auto">
-    <%= form.submit 'vote', class: 'btn btn-outline-primary' %>
-  </div>
+  <%= form.select 'rating', options_for_select([1, 2, 3, 4, 5], 5), {},
+                  { id: 'rating', onchange: 'this.form.submit();', style: 'display: none;' } %>
 <% end %>
