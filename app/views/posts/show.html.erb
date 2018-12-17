@@ -30,10 +30,10 @@
     <div class="col-auto"> Vote: <%= render 'ratings/form' %></div>
     <div class="col-auto action">
       <% if current_user %>
-        <% if @rating = @post.ratings.find_by_user_id(current_user.id) %>
+        <% if @user_rating %>
           <p class="user-mark">
-            You mark: <%= @rating.rating %>
-            <%= link_to [@post, @rating], method: :delete, data: { confirm: 'Are you sure?'} do %>
+            You mark: <%= @user_rating.rating %>
+            <%= link_to [@post, @user_rating], method: :delete, data: { confirm: 'Are you sure?'} do %>
               <i class="glyphicon glyphicon-remove"></i>
             <% end %>
           </p>

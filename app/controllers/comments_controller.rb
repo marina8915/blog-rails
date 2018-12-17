@@ -4,6 +4,9 @@ class CommentsController < ApplicationController
 
   def new
     @comment = Comment.new(parent_id: params[:parent_id])
+
+  rescue ActiveRecord::RecordNotFound
+    redirect_to @post, alert: 'Comment not found.'
   end
 
   def create

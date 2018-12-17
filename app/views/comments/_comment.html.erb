@@ -30,10 +30,10 @@
     <% end %>
 
     <% if current_user %>
-      <% if @like = comment.likes.find_by_user_id(current_user.id) %>
+      <% if  @user_like = find_user_like(comment) %>
         <p class="user-mark">
-          You mark: <%= @like.like ? 1 : -1 %>
-          <%= link_to delete_like_path(comment.id, @like.id), method: :delete, data: { confirm: 'Are you sure?'} do %>
+          You mark: <b><%= @user_like.like ? '+' : '-' %></b>
+          <%= link_to delete_like_path(comment.id, @user_like.id), method: :delete, data: { confirm: 'Are you sure?'} do %>
             <i class="glyphicon glyphicon-remove"></i>
           <% end %>
         </p>

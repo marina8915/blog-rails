@@ -54,6 +54,8 @@ class PostsController < ApplicationController
       end
       @comment = Comment.new
       @rating = Rating.new
+      @user_rating = @post.ratings.find_by_user_id(current_user.id)
+
       @video = @post.video.split('/').last
       @views = @post.update_columns(views: @post.views + 1)
     else

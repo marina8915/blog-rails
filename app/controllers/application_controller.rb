@@ -13,11 +13,15 @@ class ApplicationController < ActionController::Base
 
   def check_access(item)
     if current_user
-      current_user.access && current_user.id == item.user_id
+      (current_user.access && current_user.id == item.user_id) || current_user.role == 'admin'
     else
       false
     end
   end
 
-  helper_method :current_user, :redirect_access, :check_access
+  def find_user_like(comment)
+    comment.likes.find_by_user_id(current_user.id)
+  end
+
+  helper_method :current_user, :redirect_access, :check_access, :find_user_like
 end
