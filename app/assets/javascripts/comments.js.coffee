@@ -2,10 +2,10 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
-$(document).on '[data-behavior=~show_more]', (event) ->
+$(document).on 'turbolinks:load', '[data-behavior=~show_more]', (event) ->
   $pager = $(event.currentTarget)
   currentPage = $pager.data('currentPage') || 0
   nextPage = currentPage + 1
 
-  $get "/comments?page=#{nextPage}"
+  $get "/show.js?page=#{nextPage}"
   $pager.data 'currentPage', nextPage
