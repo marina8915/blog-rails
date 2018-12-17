@@ -14,8 +14,7 @@ class UserMailer < ApplicationMailer
     message_params = { from: 'admin@blog-ror-1.herokuapp.com',
                        to: @user.email,
                        subject: 'Reset password instructions',
-                       text: "To reset your password, click the URL below: #{edit_password_reset_path(@user.password_reset_token)}"
-    }
+                       text: "To reset your password, click the URL below: https://blog-ror-1.herokuapp.com/password_resets/#{@user.password_reset_token}" }
     mg_client.send_message MAILGUN_DOMAIN, message_params
   end
 end
