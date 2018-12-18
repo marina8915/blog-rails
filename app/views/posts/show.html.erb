@@ -50,11 +50,12 @@
   <h5 id="comments">Comments</h5>
   <%='No comments' if @comments.empty? %>
   <div class="comments">
-    <%= render @comments %>
+    <%= nested_comments @comments.arrange %>
   </div>
 
-  <div class="actions text-center">
-    <%= link_to 'Show more', '#', data: { behavior: 'show_more' }, class: 'btn btn-outline-primary' %>
+  <div class="actions text-center" id="show_more">
+    <%# link_to 'Show more', '#', data: { behavior: 'show_more' }, class: 'btn btn-outline-primary' %>
+    <%= render 'comments/show_more_btn' %>
   </div>
 
   <h5>Add a comment:</h5>

@@ -1,6 +1,12 @@
 class CommentsController < ApplicationController
-  before_action :find_post, only: [:new, :create, :edit, :update, :destroy]
+  before_action :find_post, only: [:index, :new, :create, :edit, :update, :destroy]
   before_action :find_comment, only: [:edit, :update]
+
+
+  def index
+    @comments = @post.comments.paginate(page: params[:page], per_page: 5)
+    @page = params[:page] ? params[:page].to_i + 1 : 2
+  end
 
   def new
     @comment = Comment.new(parent_id: params[:parent_id])

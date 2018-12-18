@@ -47,7 +47,8 @@ class PostsController < ApplicationController
     if @post.publish || @post.user_id == current_user.id
       @date = @post.created_at.strftime("%F %H:%M")
       @user = User.find(@post.user_id).name
-      @comments = @post.comments.pager(params[:page]).select { |comment| comment.parent_id.nil? }
+
+      @comments = @post.comments.paginate(page: params[:page], per_page: 5)
       respond_to do |format|
         format.html
         format.js
