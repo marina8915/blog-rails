@@ -4,7 +4,7 @@ class CommentsController < ApplicationController
 
 
   def index
-    @comments = @post.comments.paginate(page: params[:page], per_page: 5)
+    @comments = @post.comments.pager(params[:page])
     @page = params[:page] ? params[:page].to_i + 1 : 2
   end
 

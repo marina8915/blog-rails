@@ -50,7 +50,7 @@
   <h5 id="comments">Comments</h5>
   <%='No comments' if @comments.empty? %>
   <div class="comments">
-    <%= nested_comments @comments.arrange %>
+    <%= nested_comments @comments %>
   </div>
 
   <div class="actions text-center" id="show_more">
