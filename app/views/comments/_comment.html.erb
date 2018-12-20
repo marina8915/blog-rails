@@ -1,7 +1,7 @@
 <div class="border rounded comment shadow-sm p-3 mb-5 bg-white">
   <% if check_access(comment) %>
     <div class="action float-right">
-      <%= link_to edit_post_comment_path(comment.post, comment) do %>
+      <%= link_to edit_post_comment_path(comment.post, comment), remote: true do %>
         <i class="glyphicon glyphicon-pencil"></i>
       <% end %>
       <%= link_to [comment.post, comment],
