@@ -48,7 +48,7 @@ class PostsController < ApplicationController
       @date = @post.created_at.strftime("%F %H:%M")
       @user = User.find(@post.user_id).name
 
-      @comments = @post.comments.pager(params[:page])
+      @comments = @post.comments.order('ancestry DESC').pager(params[:page])
       respond_to do |format|
         format.html
         format.js

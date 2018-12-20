@@ -4,7 +4,7 @@ class CommentsController < ApplicationController
 
 
   def index
-    @comments = @post.comments.pager(params[:page])
+    @comments = @post.comments.order('ancestry DESC').pager(params[:page])
     @page = params[:page] ? params[:page].to_i + 1 : 2
   end
 
