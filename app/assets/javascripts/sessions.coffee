@@ -1,4 +1,4 @@
-$ ->
+$(document).on 'turbolinks:load', ->
   $('.flp label').each ->
     sop = '<span class="ch">'
     #span opening

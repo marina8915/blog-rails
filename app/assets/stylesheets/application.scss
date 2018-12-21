@@ -226,4 +226,13 @@ footer {
   }
 }
 
-
+.tag-link a {
+  width: auto;
+  height: 10%;
+  z-index: 1;
+  cursor: pointer;
+  &:hover{
+    transform: scale(1.2);
+    z-index: 2;
+  }
+}
