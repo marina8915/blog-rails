@@ -179,3 +179,51 @@ footer {
     }
   }
 }
+
+/* FORM with JS */
+.flp {
+  padding: 0 50px;
+  .js-placeholder {
+    position: relative;
+    margin-bottom: 20px;
+    input,
+    label {
+      width: 400px;
+      display: block;
+      font: inherit;
+      font-size: 16px;
+      line-height: 24px;
+      height: 46px;
+      border: 1px solid #999;
+    }
+    input {
+      padding: 10px;
+      outline: none;
+      border-radius: 3px;
+    }
+    label {
+      position: absolute;
+      left: 0;
+      top: 0;
+      padding: 10px 8px;
+      border-color: transparent;
+      color: #666;
+      cursor: text;
+      /*label styles*/
+      .ch {
+        display: block; float: left;
+        position: relative;
+        background: white;
+      }
+      .ch:first-child {padding-left: 2px;}
+      .ch:last-child {padding-right: 2px;}
+
+      /*active input label*/
+      .focussed {
+        pointer-events: none;
+      }
+    }
+  }
+}
+
+
