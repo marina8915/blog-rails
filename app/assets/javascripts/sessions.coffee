@@ -1,17 +1,16 @@
 $(document).on 'turbolinks:load', ->
-  $('.flp label').each ->
-    sop = '<span class="ch">'
-    #span opening
-    scl = '</span>'
-    #span closing
-    #split the label into single letters and inject span tags around them
-    $(this).html sop + $(this).html().split('').join(scl + sop) + scl
-    #to prevent space-only spans from collapsing
-    $('.ch:contains(\' \')').html '&nbsp;'
-    return
-  d = undefined
+  spans = document.getElementsByTagName('span')
+  if spans.length == 0
+    $('.flp label').each ->
+      sop = '<span class="ch">'
+      #span opening
+      scl = '</span>'
+      $(this).html sop + $(this).html().split('').join(scl + sop) + scl
+      #to prevent space-only spans from collapsing
+      $('.ch:contains(\' \')').html '&nbsp;'
+      return
+    d = undefined
 
-  #animation time
   $('.flp input').focus ->
     `var tm`
     #calculate movement for .ch = half of input height
