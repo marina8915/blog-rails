@@ -1,0 +1,15 @@
+{
+  "dependencies": {
+    "@rails/webpacker": "3.5",
+    "bootstrap": "4.1.0",
+    "font-awesome": "^4.7.0",
+    "jquery": "^3.3.1",
+    "jquery-ui-dist": "^1.12.1",
+    "jquery-ujs": "^1.2.2",
+    "popper.js": "^1.14.6",
+    "tinymce": "4.7.13"
+  },
+  "devDependencies": {
+    "webpack-dev-server": "2.11.2"
+  }
+}

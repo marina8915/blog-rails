@@ -73,3 +73,5 @@ gem 'jquery-rails'
 
 # database
 gem 'pg'
+
+gem 'webpacker', '~> 3.5'
