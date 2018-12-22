@@ -1,32 +1,44 @@
 @import 'bootstrap';
 @import 'bootstrap/glyphicons';
 @import 'fontawesome-stars';
+@import url('https://fonts.googleapis.com/css?family=Aleo');
 
 /* header */
+
 .bg-header {
-  background-color: #2E6CDF;
-  height: 100px !important;
-  padding-top: 30px;
-  margin-bottom: 30px;
+  height: 60px;
+  padding-top: 15px;
+  font-size: 12px;
+  text-transform: uppercase;
 }
 
-.navbar {
-  padding: 0 !important;
-  ul {
-    height: 34px;
-    margin-bottom: 10px;
+.header-img {
+  width: 100%;
+  height: 300px;
+  overflow: hidden;
+  margin: 0 auto;
+  vertical-align: bottom;
+  margin-bottom: 30px;
+  img {
+    margin-top: -600px;
   }
 }
-.navbar-nav {
-  flex-direction: row !important;
+
+.nav {
   .nav-link {
-    padding-right: 10px !important;
+    color: #343a40;
+    &:hover {
+      color: #6c757d;
+    }
   }
 }
 
 /* Forms */
 main {
   min-height: calc(100vh - 180px);
+  h2, h3 {
+    font-family: 'Aleo', serif;
+  }
   i {
     vertical-align: middle;
     padding-right: 2px;
@@ -169,6 +181,21 @@ main {
 /* USERS */
 .users li {
   padding: 0.5em;
+}
+
+/* menu action user comments, posts*/
+.navbar {
+  padding: 0 !important;
+  ul {
+    height: 34px;
+    margin-bottom: 10px;
+  }
+}
+.navbar-nav {
+  flex-direction: row !important;
+  .nav-link {
+    padding-right: 10px !important;
+  }
 }
 
 /* footer */

@@ -62,4 +62,6 @@ Rails.application.configure do
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
   # Configure default URL for action mailer
   config.action_mailer.default_url_options = {:host =>'localhost:3000'}
+
+  config.webpacker.check_yarn_integrity = false
 end
