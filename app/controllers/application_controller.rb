@@ -1,7 +1,17 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
+  before_action :user_views
 
   private
+
+  # dialog in user session after 10 transitions
+  def user_views
+    session[:views] = if current_user
+                        session[:views].to_i == 10 ? 1 : session[:views].to_i + 1
+                      else
+                        0
+                      end
+  end
 
   def current_user
     @current_user ||= User.find(session[:user_id]) if session[:user_id]

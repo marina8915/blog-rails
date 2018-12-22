@@ -1,5 +1,5 @@
 $(document).on 'turbolinks:load', ->
-  spans = document.getElementsByTagName('span')
+  spans = document.getElementsByClassName('ch')
   if spans.length == 0
     $('.flp label').each ->
       sop = '<span class="ch">'
