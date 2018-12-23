@@ -1,8 +1,10 @@
 <div class="search">
-  <%= form_tag(posts_path, method: :get, class: 'input-group mb-3 ') do %>
-    <%= text_field_tag :search, params[:search], placeholder: 'Search', class: 'form-control rounded'%>
+  <%= form_tag(posts_path, method: :get, class: 'input-group') do %>
+    <%= text_field_tag :search, params[:search], placeholder: 'Search', class: 'form-control'%>
     <div class="input-group-append">
-      <%= submit_tag 'Search', class: 'btn btn-outline-primary' %>
+      <%= button_tag(type: 'submit', class: 'btn btn-outline-primary') do %>
+        <i class='glyphicon glyphicon-search'></i>
+      <% end %>
     </div>
   <% end %>
 </div>

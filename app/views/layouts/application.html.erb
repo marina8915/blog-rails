@@ -12,7 +12,12 @@
   <%= stylesheet_pack_tag 'stylesheets' %>
 </head>
 <body>
-<%= render 'layouts/nav' %>
+<div class="header text-center">
+  <h1 class="logo"><a href="/" title="Blog Rails">Blog Rails</a></h1>
+  <%= render 'layouts/nav' %>
+  <%= render 'posts/search' %>
+</div>
+
 <div class="header-img"><img src="<%= asset_pack_path 'images/header.jpg' %>" /></div>
 
 <main class="container">
