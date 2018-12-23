@@ -1,0 +1,22 @@
+/* USERS */
+.users li {
+  padding: 0.5em;
+}
+
+/* menu action user comments, posts*/
+.navbar {
+  padding: 0 !important;
+  ul {
+    height: 34px;
+    margin-bottom: 10px;
+  }
+}
+.navbar-nav {
+  flex-direction: row !important;
+  .nav-link {
+    padding-right: 10px !important;
+  }
+  i {
+    vertical-align: text-top;
+  }
+}

@@ -46,7 +46,7 @@ class CommentsController < ApplicationController
 
   def destroy
     @comment = @post.comments.find(params[:id])
-    if current_user.id == @comment.user_id
+    if check_access(@comment)
       @comment.destroy
       redirect_to comments_user_path(current_user.id), notice: 'Comment deleted.'
     else

@@ -68,7 +68,7 @@ class PostsController < ApplicationController
   end
 
   def destroy
-    if current_user.id == @post.user_id
+    if check_access(@post)
       @post.destroy
       redirect_to posts_user_path(current_user.id), notice: 'Post deleted.'
     else

@@ -7,5 +7,8 @@
 // To reference this file, add <%= javascript_pack_tag 'application' %> to the appropriate
 // layout file, like app/views/layouts/application.html.erb
 
-require.context('../images/', true, /\.(gif|jpg|png|svg)$/i)
+// bootstrap
+import 'bootstrap/dist/js/bootstrap';
 
+// images
+require.context('../images/', true, /\.(gif|jpg|png|svg)$/i)

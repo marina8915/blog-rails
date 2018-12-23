@@ -3,10 +3,10 @@
   <% if check_access(@post) %>
     <div class="action">
       <%= link_to edit_post_path(@post) do %>
-        <i class="glyphicon glyphicon-pencil"></i>
+        <i class="fa fa-pencil" aria-hidden="true"></i>
       <% end %>
       <%= link_to post_path(@post), method: :delete, data: { confirm: 'Are you sure?'} do %>
-        <i class="glyphicon glyphicon-remove"></i>
+        <i class="fa fa-times" aria-hidden="true"></i>
       <% end %>
     </div>
   <% end %>
@@ -34,7 +34,7 @@
           <p class="user-mark">
             You mark: <%= @user_rating.rating %>
             <%= link_to [@post, @user_rating], method: :delete, data: { confirm: 'Are you sure?'} do %>
-              <i class="glyphicon glyphicon-remove"></i>
+              <i class="fa fa-times" aria-hidden="true"></i>
             <% end %>
           </p>
         <% end %>

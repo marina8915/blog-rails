@@ -6,7 +6,9 @@
       <h5><%= link_to user.name, user_path(user.id), class: 'navbar-brand' %></h5>
       <ul class="navbar-nav mr-auto">
         <li class="nav-item">
-          <%= link_to 'Edit', edit_user_path(user.id) %>
+          <%= link_to edit_user_path(user.id) do %>
+            <i class="fa fa-pencil" aria-hidden="true"></i>
+          <% end %>
         </li>
         <li class="nav-item">Posts: <%= user.posts.size %></li>
         <li class="nav-item">Comments: <%= user.comments.size %></li>

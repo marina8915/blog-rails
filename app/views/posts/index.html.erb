@@ -13,10 +13,10 @@
         <% if check_access(post) %>
           <div class="navbar-nav mr-auto action">
             <%= link_to edit_post_path(post) do %>
-              <i class="glyphicon glyphicon-pencil"></i>
+              <i class="fa fa-pencil" aria-hidden="true"></i>
             <% end %>
             <%= link_to post_path(post), method: :delete, data: { confirm: 'Are you sure?'} do %>
-              <i class="glyphicon glyphicon-remove"></i>
+              <i class="fa fa-times" aria-hidden="true"></i>
             <% end %>
           </div>
         <% end %>
@@ -44,16 +44,16 @@
         <ul class="clearfix post-info float-right navbar-nav">
           <li>
             <%= link_to "#{post_path(post)}#comments" do %>
-              <i class="glyphicon glyphicon-comment"></i>
+              <i class="fa fa-comments" aria-hidden="true"></i>
               <%= post.comments.size %>
             <% end %>
           </li>
           <li>
-            <i class="glyphicon glyphicon-star"></i>
+            <i class="fa fa-star" aria-hidden="true"></i>
             <%= post.rating %> / <%= post.ratings.size %>
           </li>
           <li>
-            <i class="glyphicon glyphicon-eye-open"></i>
+            <i class="fa fa-eye" aria-hidden="true"></i>
             <%= post.views %>
           </li>
         </ul>
