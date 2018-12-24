@@ -1,6 +1,6 @@
 <div class="search">
   <%= form_tag(posts_path, method: :get, class: 'input-group') do %>
-    <%= text_field_tag :search, params[:search], placeholder: 'Search', class: 'form-control'%>
+    <%= text_field_tag :search, params[:search], placeholder: 'Search', class: 'rounded-left form-control'%>
     <div class="input-group-append">
       <%= button_tag(type: 'submit', class: 'btn btn-outline-primary') do %>
         <i class="fa fa-search" aria-hidden="true"></i>

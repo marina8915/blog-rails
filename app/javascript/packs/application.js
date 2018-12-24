@@ -11,4 +11,4 @@
 import 'bootstrap/dist/js/bootstrap';
 
 // images
-require.context('../images/', true, /\.(gif|jpg|png|svg)$/i)
+require.context('../src/images/', true, /\.(gif|jpg|png|svg)$/i)

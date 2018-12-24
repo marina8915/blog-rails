@@ -5,8 +5,6 @@
   <%= csrf_meta_tags %>
   <%= csp_meta_tag %>
 
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
-  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   <%= javascript_pack_tag 'application' %>
   <%= stylesheet_pack_tag 'stylesheets' %>
@@ -14,13 +12,16 @@
 <body>
 <div class="header text-center">
   <h1 class="logo">
-    <a href="/" title="Blog Rails">Blog Rails</a>
+    <a href="/" title="Blog Rails">
+      <i class="fa fa-diamond" aria-hidden="true"></i>
+      Blog Rails
+    </a>
   </h1>
   <%= render 'layouts/nav' %>
   <%= render 'posts/search' %>
 </div>
 
-<div class="header-img"><img src="<%= asset_pack_path 'images/header.jpg' %>" /></div>
+<div class="header-img"><img src="<%= asset_pack_path 'src/images/header.jpg' %>" /></div>
 
 <main class="container">
   <%= yield %>
