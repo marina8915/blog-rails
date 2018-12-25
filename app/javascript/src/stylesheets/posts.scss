@@ -11,6 +11,9 @@
     display: inline-block;
     vertical-align: top;
   }
+  .date {
+    color: #999;
+  }
 }
 
 .posts:hover .post:not(:hover){
@@ -46,6 +49,7 @@
   height: 10%;
   z-index: 1;
   cursor: pointer;
+  transition: transform .1s ease-in;
   &:hover{
     transform: scale(1.2);
     z-index: 2;

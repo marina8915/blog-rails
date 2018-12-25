@@ -11,7 +11,7 @@
     </div>
   <% end %>
 
-  <p><%= @date %> <%= link_to @user, user_posts_path(@user) %></p>
+  <p class="date"><%= @date %> <%= link_to @user, user_posts_path(@user) %></p>
   <% if @post.img? %>
     <%= image_tag @post.img.url, width:350, class: 'img-thumbnail' %>
   <% end %>
