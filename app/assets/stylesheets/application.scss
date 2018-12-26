@@ -308,6 +308,9 @@ main {
 /* USERS */
 .users li {
   padding: 0.5em;
+  a:hover {
+    text-decoration: none;
+  }
 }
 
 /* menu action user comments, posts*/
