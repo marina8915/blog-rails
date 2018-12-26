@@ -3,48 +3,48 @@
     <p class="text-center">
       Sort by Date:
       <%= link_to order_user_path(params[:name], 'date_desc') do %>
-        <i class="fa fa-sort-numeric-desc" aria-hidden="true"></i>
+        <i class="glyphicon glyphicon-arrow-down"></i>
       <% end %>
       <%= link_to order_user_path(params[:name], 'date') do %>
-        <i class="fa fa-sort-numeric-asc" aria-hidden="true"></i>
+        <i class="glyphicon glyphicon-arrow-up"></i>
       <% end %>
       by Rating:
       <%= link_to order_user_path(params[:name], 'rating_desc') do %>
-        <i class="fa fa-sort-numeric-desc" aria-hidden="true"></i>
+        <i class="glyphicon glyphicon-arrow-down"></i>
       <% end %>
       <%= link_to order_user_path(params[:name], 'rating') do %>
-        <i class="fa fa-sort-numeric-asc" aria-hidden="true"></i>
+        <i class="glyphicon glyphicon-arrow-up"></i>
       <% end %>
       by Views:
       <%= link_to order_user_path(params[:name],'views_desc') do %>
-        <i class="fa fa-sort-numeric-desc" aria-hidden="true"></i>
+        <i class="glyphicon glyphicon-arrow-down"></i>
       <% end %>
       <%= link_to order_user_path(params[:name], 'views') do %>
-        <i class="fa fa-sort-numeric-asc" aria-hidden="true"></i>
+        <i class="glyphicon glyphicon-arrow-up"></i>
       <% end %>
     </p>
   <% else %>
     <p class="text-center">
       Sort by Date:
       <%= link_to order_path('date_desc') do %>
-        <i class="fa fa-sort-numeric-desc" aria-hidden="true"></i>
+        <i class="glyphicon glyphicon-arrow-down"></i>
       <% end %>
       <%= link_to order_path('date') do %>
-        <i class="fa fa-sort-numeric-asc" aria-hidden="true"></i>
+        <i class="glyphicon glyphicon-arrow-up"></i>
       <% end %>
       by Rating:
       <%= link_to order_path('rating_desc') do %>
-        <i class="fa fa-sort-numeric-desc" aria-hidden="true"></i>
+        <i class="glyphicon glyphicon-arrow-down"></i>
       <% end %>
       <%= link_to order_path('rating') do %>
-        <i class="fa fa-sort-numeric-asc" aria-hidden="true"></i>
+        <i class="glyphicon glyphicon-arrow-up"></i>
       <% end %>
       by Views:
       <%= link_to order_path('views_desc') do %>
-        <i class="fa fa-sort-numeric-desc" aria-hidden="true"></i>
+        <i class="glyphicon glyphicon-arrow-down"></i>
       <% end %>
       <%= link_to order_path('views') do %>
-        <i class="fa fa-sort-numeric-asc" aria-hidden="true"></i>
+        <i class="glyphicon glyphicon-arrow-up"></i>
       <% end %>
     </p>
   <% end %>

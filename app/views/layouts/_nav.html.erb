@@ -4,34 +4,20 @@
     <% if current_user %>
       <li class="nav-item">
         <%= link_to new_post_path, class: 'nav-link' do %>
-          <i class="fa fa-plus" aria-hidden="true"></i> New post
+          <i class="glyphicon glyphicon-plus"></i> New post
         <% end %>
       </li>
       <li class="nav-item">
         <%= link_to user_path(current_user.id), class: 'nav-link' do %>
-          <i class="fa fa-user-o" aria-hidden="true"></i>
+          <i class="glyphicon glyphicon-user"></i>
           <%= current_user.name %>
         <% end %>
       </li>
-      <li class="nav-item">
-        <%= link_to logout_path, method: :delete, class: 'nav-link' do %>
-          <i class="fa fa-sign-out" aria-hidden="true"></i>
-          Exit
-        <% end %>
-      </li>
+      <li class="nav-item"><%= link_to 'Exit', logout_path, method: :delete,
+                                       class: 'nav-link' %></li>
     <% else %>
-      <li class="nav-item">
-        <%= link_to new_session_path, class: 'nav-link' do %>
-          <i class="fa fa-sign-in" aria-hidden="true"></i>
-          Log in
-        <% end %>
-      </li>
-      <li class="nav-item">
-        <%= link_to new_user_path, class: 'nav-link' do %>
-          <i class="fa fa-user-plus" aria-hidden="true"></i>
-          Sign up
-        <% end %>
-      </li>
+      <li class="nav-item"><%= link_to 'Log in', new_session_path, class: 'nav-link' %></li>
+      <li class="nav-item"><%= link_to 'Sign up', new_user_path, class: 'nav-link' %></li>
     <% end %>
   </ul>
 </div>

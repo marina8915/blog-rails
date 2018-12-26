@@ -2,11 +2,11 @@
   <% if check_access(comment) %>
     <div class="action float-right">
       <%= link_to edit_post_comment_path(comment.post, comment) do %>
-        <i class="fa fa-pencil" aria-hidden="true"></i>
+        <i class="glyphicon glyphicon-pencil"></i>
       <% end %>
       <%= link_to [comment.post, comment],
                   method: :delete, data: { confirm: 'Are you sure?'} do %>
-        <i class="fa fa-times" aria-hidden="true"></i>
+        <i class="glyphicon glyphicon-remove"></i>
       <% end %>
     </div>
   <% end %>
@@ -34,7 +34,7 @@
         <p class="user-mark">
           You mark: <b><%= @user_like.like ? '+' : '-' %></b>
           <%= link_to delete_like_path(comment.id, @user_like.id), method: :delete, data: { confirm: 'Are you sure?'} do %>
-            <i class="fa fa-times" aria-hidden="true"></i>
+            <i class="glyphicon glyphicon-remove"></i>
           <% end %>
         </p>
       <% end %>

@@ -12,17 +12,17 @@
       <ul class="navbar-nav mr-auto action">
         <li>
           <%= link_to edit_post_comment_path(comment.post, comment) do %>
-            <i class="fa fa-pencil" aria-hidden="true"></i>
+            <i class="glyphicon glyphicon-pencil"></i>
           <% end %>
         </li>
         <li class="nav-item">
           <%= link_to [comment.post, comment],
                       method: :delete, data: { confirm: 'Are you sure?'} do %>
-            <i class="fa fa-times" aria-hidden="true"></i>
+            <i class="glyphicon glyphicon-remove"></i>
           <% end %>
         </li>
         <li>
-          <i class="fa fa-heart" aria-hidden="true"></i>
+          <i class="glyphicon glyphicon-heart"></i>
           <%= render partial: 'comments/likes', locals: { comment: comment } %>
         </li>
       </ul>

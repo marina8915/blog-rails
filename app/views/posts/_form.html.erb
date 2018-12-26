@@ -17,11 +17,13 @@
 
     <div class="form-group">
       <%= form.label :description, 'Description:' %><br>
+      <%= tinymce %>
       <%= form.text_area :description, class: 'tinymce', rows: '2' %>
     </div>
 
     <div class="form-group">
       <%= form.label :body, 'Post:' %><br>
+      <%= tinymce %>
       <%= form.text_area :body, class: 'tinymce', rows: '5' %>
     </div>
 
@@ -33,7 +35,7 @@
     <div class="form-group">
       <div class="input-group" >
         <span class="input-group-prepend" >
-          <span class="input-group-text"><i class="fa fa-youtube-play" aria-hidden="true"></i></span>
+          <span class="input-group-text"><i class="glyphicon glyphicon-facetime-video"></i></span>
         </span>
         <%= form.text_field :video, class: 'form-control', placeholder: 'Share video from youtube' %>
       </div>
@@ -41,7 +43,7 @@
     <div class="form-group">
       <div class="input-group" >
         <span class="input-group-prepend" >
-          <span class="input-group-text"><i class="fa fa-tags" aria-hidden="true"></i></span>
+          <span class="input-group-text"><i class="glyphicon glyphicon-list"></i></span>
         </span>
         <%= form.text_field :tag_list, class: 'form-control', value: form.object.tag_list.to_s, placeholder: 'Tags'%>
       </div>
