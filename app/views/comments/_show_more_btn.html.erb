@@ -1,0 +1,3 @@
+<% unless @comments.total_pages == @comments.current_page %>
+<%= link_to 'Show more', post_comments_path(@post, page: @page || 2), class: 'btn btn-primary', remote: true %>
+<% end %>

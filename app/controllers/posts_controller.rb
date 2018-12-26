@@ -47,14 +47,15 @@ class PostsController < ApplicationController
     if @post.publish || @post.user_id == current_user.id
       @date = @post.created_at.strftime("%F %H:%M")
       @user = User.find(@post.user_id).name
-      @comments = @post.comments.pager(params[:page]).select { |comment| comment.parent_id.nil? }
+
+      @comments = @post.comments.order('ancestry DESC').pager(params[:page])
       respond_to do |format|
         format.html
         format.js
       end
       @comment = Comment.new
       @rating = Rating.new
-      @user_rating = @post.ratings.find_by_user_id(current_user.id)
+      @user_rating = @post.ratings.find_by_user_id(current_user.id) if current_user
 
       @video = @post.video.split('/').last
       @views = @post.update_columns(views: @post.views + 1)
@@ -67,7 +68,7 @@ class PostsController < ApplicationController
   end
 
   def destroy
-    if current_user.id == @post.user_id
+    if check_access(@post)
       @post.destroy
       redirect_to posts_user_path(current_user.id), notice: 'Post deleted.'
     else

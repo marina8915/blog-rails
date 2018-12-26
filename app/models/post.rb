@@ -12,6 +12,10 @@ class Post < ApplicationRecord
 
   before_save :change_data
 
+  def to_param
+    [id, title.parameterize].join("-")
+  end
+
   private
 
   def change_data

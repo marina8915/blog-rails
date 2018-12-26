@@ -1,3 +1,6 @@
-# Place all the behaviors and hooks related to the matching controller here.
-# All this logic will automatically be available in application.js.
-# You can use CoffeeScript in this file: http://coffeescript.org/
+$(document).on 'turbolinks:load', ->
+  # dialog in user session after 10 transitions
+  views = document.getElementById('views').value
+  if parseInt(views) == 10
+    $('#dialog').modal()
+  return

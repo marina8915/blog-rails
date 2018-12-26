@@ -1,65 +1,66 @@
-<h2 class="text-center">Blog Rails</h2>
 <h3 class="text-center"><%= params[:name] %></h3>
 
-<%= render 'search' %>
 <%= render 'order' %>
 <%= render 'alert' %>
 <%= render 'notice' %>
 
-<% @posts.each do |post| %>
-  <% if post.publish %>
-    <div class="post clearfix border-bottom">
-      <h3><%= link_to post.title, post_path(post) %></h3>
+<div class="posts">
+  <% @posts.each do |post| %>
+    <% if post.publish %>
+      <div class="post clearfix border-bottom">
+        <h3><%= link_to post.title, post_path(post) %></h3>
 
-      <% if check_access(post) %>
-        <div class="navbar-nav mr-auto action">
-          <%= link_to edit_post_path(post) do %>
-            <i class="glyphicon glyphicon-pencil"></i>
-          <% end %>
-          <%= link_to post_path(post), method: :delete, data: { confirm: 'Are you sure?'} do %>
-            <i class="glyphicon glyphicon-remove"></i>
-          <% end %>
-        </div>
-      <% end %>
-
-      <% if post.img? %>
-        <%= image_tag post.img.url(:thumb), class: 'img-thumbnail thumb'%>
-      <% elsif post.video? %>
-        <iframe width="250"
-                src="https://www.youtube.com/embed/<%= post.video.split('/').last %>"
-                class="thumb">
-        </iframe>
-      <% end %>
-
-      <p>
-        <%= post.description.html_safe %>
-        <%= link_to 'more', post_path(post) %>
-      </p>
-
-      <p>
-        <% post.tag_list.each do |tag| %>
-          <%= link_to tag, tagged_path(tag: tag), class: 'btn btn-outline-primary' %>
+        <% if check_access(post) %>
+          <div class="navbar-nav mr-auto action">
+            <%= link_to edit_post_path(post) do %>
+              <i class="glyphicon glyphicon-pencil"></i>
+            <% end %>
+            <%= link_to post_path(post), method: :delete, data: { confirm: 'Are you sure?'} do %>
+              <i class="glyphicon glyphicon-remove"></i>
+            <% end %>
+          </div>
         <% end %>
-      </p>
 
-      <ul class="clearfix post-info float-right navbar-nav">
-        <li>
-          <%= link_to "#{post_path(post)}#comments" do %>
-            <i class="glyphicon glyphicon-comment"></i>
-            <%= post.comments.size %>
+        <% if post.img? %>
+          <%= image_tag post.img.url(:thumb), class: 'img-thumbnail thumb'%>
+        <% elsif post.video? %>
+          <iframe width="250"
+                  src="https://www.youtube.com/embed/<%= post.video.split('/').last %>"
+                  class="thumb">
+          </iframe>
+        <% end %>
+
+        <p>
+          <%= post.description.html_safe %>
+          <%= link_to 'more', post_path(post) %>
+        </p>
+
+        <p class="tag-link">
+          <% post.tag_list.each do |tag| %>
+            <%= link_to tag, tagged_path(tag: tag), class: 'btn btn-outline-primary' %>
           <% end %>
-        </li>
-        <li>
-          <i class="glyphicon glyphicon-star"></i>
-          <%= post.rating %> / <%= post.ratings.size %>
-        </li>
-        <li>
-          <i class="glyphicon glyphicon-eye-open"></i>
-          <%= post.views %>
-        </li>
-      </ul>
-    </div>
+        </p>
+
+        <ul class="clearfix post-info float-right navbar-nav">
+          <li>
+            <%= link_to "#{post_path(post)}#comments" do %>
+              <i class="glyphicon glyphicon-comment"></i>
+              <%= post.comments.size %>
+            <% end %>
+          </li>
+          <li>
+            <i class="glyphicon glyphicon-star"></i>
+            <%= post.rating %> / <%= post.ratings.size %>
+          </li>
+          <li>
+            <i class="glyphicon glyphicon-eye-open"></i>
+            <%= post.views %>
+          </li>
+        </ul>
+      </div>
+    <% end %>
   <% end %>
-<% end %>
+</div>
+
 
 <%= will_paginate @posts, list_classes: %w(pagination justify-content-center) %>

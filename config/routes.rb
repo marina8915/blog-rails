@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   get 'admin/users'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   resources :posts do
-    resources :comments, only: [:new, :create, :edit, :update, :destroy]
+    resources :comments
     resources :ratings, only: [:create, :destroy]
   end
 

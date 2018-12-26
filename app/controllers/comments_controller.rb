@@ -1,6 +1,12 @@
 class CommentsController < ApplicationController
-  before_action :find_post, only: [:new, :create, :edit, :update, :destroy]
+  before_action :find_post, only: [:index, :new, :create, :edit, :update, :destroy]
   before_action :find_comment, only: [:edit, :update]
+
+
+  def index
+    @comments = @post.comments.order('ancestry DESC').pager(params[:page])
+    @page = params[:page] ? params[:page].to_i + 1 : 2
+  end
 
   def new
     @comment = Comment.new(parent_id: params[:parent_id])
@@ -40,7 +46,7 @@ class CommentsController < ApplicationController
 
   def destroy
     @comment = @post.comments.find(params[:id])
-    if current_user.id == @comment.user_id
+    if check_access(@comment)
       @comment.destroy
       redirect_to comments_user_path(current_user.id), notice: 'Comment deleted.'
     else
@@ -72,6 +78,14 @@ class CommentsController < ApplicationController
   def save_comment
     @comment = @post.comments.create(params.require(:comment).permit(:commenter, :body, :user_id, :parent_id))
     @comment[:plus] = @comment[:minus] = 0
-    @comment.save ? (redirect_to @post, notice: 'Comment created.') : (render '_form')
+    if @comment.save
+      respond_to do |format|
+        format.html { redirect_to @post, notice: 'Comment created.' }
+      end
+    else
+      respond_to do |format|
+        format.html { render '_form' }
+      end
+    end
   end
 end

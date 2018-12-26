@@ -31,3 +31,12 @@
 /config/master.key
 
 /.idea
+
+/node_modules
+/public/assets
+/webpack-assets.json
+/webpack-assets-deploy.json/public/packs
+/public/packs-test
+/node_modules
+yarn-debug.log*
+.yarn-integrity

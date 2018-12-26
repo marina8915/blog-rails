@@ -1,93 +1,86 @@
 @import 'bootstrap';
 @import 'bootstrap/glyphicons';
 @import 'fontawesome-stars';
+@import url('https://fonts.googleapis.com/css?family=B612|ZCOOL+XiaoWei|Aleo');
 
 /* header */
-.bg-header {
-  background-color: #2E6CDF;
-  height: 100px !important;
-  padding-top: 30px;
-  margin-bottom: 30px;
-}
-
-.navbar {
-  padding: 0 !important;
-  ul {
-    height: 34px;
-    margin-bottom: 10px;
-  }
-}
-.navbar-nav {
-  flex-direction: row !important;
-  .nav-link {
-    padding-right: 10px !important;
-  }
-}
-
-/* Forms */
-main {
-  min-height: calc(100vh - 180px);
-  i {
-    vertical-align: middle;
-    padding-right: 2px;
-  }
-  .form-user {
-    width: 30% !important;
-  }
-  .order,
-  .action {
-    padding-left: 10px;
-    a:hover {
-      text-decoration: none;
-    }
-  }
+.header {
+  display: flex;
+  height: 70px;
+  font-size: 12px;
+  text-transform: uppercase;
   .search {
-    .input-group {
+    margin: auto;
+    width: 260px;
+    .form-control,
+    .input-group-append {
       width: 30%;
       margin: 0 auto;
+      height: 30px;
+    }
+    .btn {
+      padding-top: 4px;
+      font-size: 1rem;
+    }
+    #search {
+      font-size: 12px;
+      text-transform: uppercase;
+      font-family: 'ZCOOL XiaoWei', serif;
     }
   }
-  .input-group-text {
-    i {
-      line-height: 1;
-      text-align: center;
-    }
-  }
-  .field_with_errors {
-    input {
-      border-color: #721c24;
-    }
-  }
-}
-
-/* Posts */
-.post {
-  margin-bottom: 0.5em;
-  h3,
-  .action {
-    display: inline-block;
-    vertical-align: middle;
-  }
-}
-
-.post-info {
-  margin-bottom: 0.5em;
-  li {
-    padding: 0.5em;
+  .logo {
+    margin: auto;
+    width: 260px;
+    font-family: 'ZCOOL XiaoWei', serif;
+    font-size: 35px;
+    text-transform: none;
     a:hover {
       text-decoration: none;
     }
   }
 }
 
-.thumb {
-  float: left;
-  margin-right: 1em;
-  margin-bottom: 0.5em !important;
+.header-img {
+  width: 100%;
+  height: 250px;
+  overflow: hidden;
+  margin: 0 auto;
+  vertical-align: bottom;
+  margin-bottom: 30px;
+  img {
+    margin-top: -600px;
+  }
+}
+.menu{
+  margin: auto;
+  .nav {
+    .nav-link {
+      color: #343a40;
+      &:hover {
+        color: #6c757d;
+      }
+    }
+  }
 }
 
-.img-thumbnail {
-  margin-bottom: 1em;
+/* footer */
+footer {
+  margin-bottom: 20px;
+  .github {
+    p {
+      display: inline-block;
+      vertical-align: middle;
+      margin-bottom: 0;
+    }
+    &:hover {
+      text-decoration: none;
+    }
+    .navbar-nav-svg {
+      width: 1rem;
+      height: 1rem;
+      vertical-align: text-bottom;
+    }
+  }
 }
 
 /* Comments*/
@@ -104,9 +97,12 @@ main {
     padding-top: 5px;
     margin: 0;
     a{
-      vertical-align: middle;
+      vertical-align: text-bottom;
       &:hover {
         text-decoration: none;
+      }
+      i {
+        vertical-align: top;
       }
     }
   }
@@ -137,7 +133,11 @@ main {
     }
   }
   .btn {
-    min-width: 40px;
+    width: 30px;
+    height: 30px;
+    padding: 0;
+    text-align: center;
+    vertical-align: middle;
   }
   div {
     display: inline-block;
@@ -157,25 +157,173 @@ main {
   }
 }
 
+/* Forms */
+main {
+  min-height: calc(100vh - 415px);
+  h2, h3 {
+    font-family: 'Aleo', serif;
+  }
+  i {
+    vertical-align: middle;
+    padding-right: 2px;
+  }
+  .form-user {
+    width: 30% !important;
+  }
+  .order,
+  .action {
+    padding-left: 10px;
+    a:hover {
+      text-decoration: none;
+    }
+  }
+  .input-group-text {
+    i {
+      line-height: 1;
+      text-align: center;
+    }
+  }
+  .field_with_errors {
+    input {
+      border-color: #721c24;
+    }
+  }
+  .btn {
+    line-height: 1 !important;
+  }
+}
+
+/* FORM with JS (login) */
+.login {
+  margin-bottom: 20px;
+  .flp {
+    padding: 0 50px;
+    .js-placeholder {
+      position: relative;
+      margin-bottom: 20px;
+      input,
+      label {
+        width: 400px;
+        display: block;
+        font: inherit;
+        font-size: 16px;
+        line-height: 24px;
+        height: 46px;
+        border: 1px solid #999;
+      }
+      input {
+        padding: 10px;
+        outline: none;
+        border-radius: 3px;
+      }
+      label {
+        position: absolute;
+        left: 0;
+        top: 0;
+        padding: 10px 8px;
+        border-color: transparent;
+        color: #666;
+        cursor: text;
+        /*label styles*/
+        .ch {
+          display: block;
+          float: left;
+          position: relative;
+          background: white;
+        }
+        .ch:first-child {
+          padding-left: 2px;
+        }
+        .ch:last-child {
+          padding-right: 2px;
+        }
+
+        /*active input label*/
+        .focussed {
+          pointer-events: none;
+        }
+      }
+    }
+  }
+}
+
+/* Posts */
+.post {
+  margin-bottom: 1em;
+  opacity: 1;
+  background: #FEFEFE;
+  padding: 15px;
+  padding-bottom: 5px;
+  cursor: pointer;
+  h3,
+  .action {
+    display: inline-block;
+    vertical-align: top;
+  }
+  .date {
+    color: #999;
+  }
+}
+
+.posts:hover .post:not(:hover){
+  opacity: 0.7;
+}
+
+.post-info {
+  margin-bottom: 0.5em;
+  li {
+    padding: 0.5em;
+    vertical-align: top;
+    a:hover {
+      text-decoration: none;
+    }
+    i {
+      vertical-align: text-top;
+    }
+  }
+}
+
+.thumb {
+  float: left;
+  margin-right: 1em;
+  margin-bottom: 0.5em !important;
+}
+
+.img-thumbnail {
+  margin-bottom: 1em;
+}
+
+.tag-link a {
+  width: auto;
+  height: 10%;
+  z-index: 1;
+  cursor: pointer;
+  transition: transform .1s ease-in;
+  &:hover{
+    transform: scale(1.2);
+    z-index: 2;
+  }
+}
+
 /* USERS */
 .users li {
   padding: 0.5em;
 }
 
-/* footer */
-footer {
-  .github {
-    p {
-      display: inline-block;
-      vertical-align: middle;
-      margin-bottom: 0;
-    }
-    &:hover {
-      text-decoration: none;
-    }
-    .navbar-nav-svg {
-      width: 1rem;
-      height: 1rem;
-    }
+/* menu action user comments, posts*/
+.navbar {
+  padding: 0 !important;
+  ul {
+    height: 34px;
+    margin-bottom: 10px;
+  }
+}
+.navbar-nav {
+  flex-direction: row !important;
+  .nav-link {
+    padding-right: 10px !important;
+  }
+  i {
+    vertical-align: text-top;
   }
 }
