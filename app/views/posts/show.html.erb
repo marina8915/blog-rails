@@ -28,18 +28,19 @@
 
   <div class="row">
     <div class="col-auto"> Vote: <%= render 'ratings/form' %></div>
-    <div class="col-auto action">
-      <% if current_user %>
-        <% if @user_rating %>
+    <% if current_user %>
+      <% if @user_rating %>
+        <div class="col-auto action">
           <p class="user-mark">
             You mark: <%= @user_rating.rating %>
             <%= link_to [@post, @user_rating], method: :delete, data: { confirm: 'Are you sure?'} do %>
               <i class="glyphicon glyphicon-remove"></i>
             <% end %>
           </p>
-        <% end %>
+        </div>
       <% end %>
-    </div>
+    <% end %>
+
     <div class="col-auto">Rating: <%= @post.rating %> / <%= @post.ratings.size - 1 %></div>
     <div class="col-auto">Views: <%= @post.views %></div>
   </div>
